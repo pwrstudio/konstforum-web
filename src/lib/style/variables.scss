@@ -1,0 +1,68 @@
+// COLORS
+$lime: rgb(234,253,175);
+$grey: rgb(242,242,242);
+$white: #ffffff;
+$black: #000000;
+
+// TYPOGRAPHY
+$ATLAS_STACK: "Atlas Grotesk", "helvetica", sans-serif;
+$BARBARA_STACK: "BT Barbara", "times new roman", serif;
+$SCALE_FACTOR: 1;
+$FONT_SIZE_XLARGE: 72px * $SCALE_FACTOR;
+$FONT_SIZE_SEMI_EXTRA: 32px * $SCALE_FACTOR;
+$FONT_SIZE_LARGE: 24px * $SCALE_FACTOR;
+$FONT_SIZE_MEDIUM: 15px * $SCALE_FACTOR;
+$FONT_SIZE_SMALL: 9px * $SCALE_FACTOR;
+
+// $PHONE_SCALE_FACTOR: 0.3;
+// $FONT_SIZE_LARGE_PHONE: 103px * $PHONE_SCALE_FACTOR;
+
+// SPACING
+$MARGIN: 15px;
+
+// TRANSITIONS
+$transition: cubic-bezier(0.23, 1, 0.32, 1);
+
+
+// RESPONSIVE
+$breakpoints: (
+  "small": (
+    max-width: 800px,
+  ),
+  "medium": (
+    max-width: 1000px,
+  ),
+  "large": (
+    max-width: 1600px,
+  ),
+  "short": (
+    max-height: 700px,
+  ),
+);
+
+/// Responsive manager.
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin screen-size($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == "string",
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. ' + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+@mixin hide-scroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+}
