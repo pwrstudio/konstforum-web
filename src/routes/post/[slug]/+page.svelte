@@ -1,7 +1,6 @@
 <script lang="ts">
-  import ProjectsSinglePage from "$lib/components/pages/ProjectsSinglePage.svelte"
   import { Language, type ProjectType } from "$lib/types"
-  export let data: { project: ProjectType }
+  export let data
 </script>
 
-<ProjectsSinglePage {data} language={Language.Swedish} />
+TODO: single post
