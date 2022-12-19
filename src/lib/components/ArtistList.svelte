@@ -38,7 +38,7 @@
     border-bottom: 1px solid $black;
     width: 100%;
     display: block;
-    font-family: $ATLAS_STACK;
+    font-family: $MONO_STACK;
     font-size: $FONT_SIZE_LARGE;
     color: $black;
     text-decoration: none;

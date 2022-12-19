@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Language, type ProjectType } from "$lib/types"
+  import { Language } from "$lib/types"
+  import SinglePost from "$lib/components/pages/SinglePost.svelte"
   export let data
 </script>
 
-TODO: single post
+<SinglePost {data} language={Language.Swedish} />

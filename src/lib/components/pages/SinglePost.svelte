@@ -38,10 +38,18 @@
   <X />
 </a>
 
-<div class="default-page">
+<div class="single-post">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="content">
-      <!-- CENTER -->
+      <!-- LEFT -->
+      <div class="column left">
+        {#if post.bildspel && post.bildspel.length > 0}
+          <SinglePostSlideshow slides={post.bildspel} {language} />
+        {:else}
+          <SinglePostImage {post} {language} />
+        {/if}
+      </div>
+      <!-- RIGHT -->
       <div class="column right">
         <h2>{title}</h2>
         <div>{@html renderBlockText(content)}</div>
@@ -53,7 +61,7 @@
 <style lang="scss">
   @import "src/lib/style/variables.scss";
 
-  .default-page {
+  .single-post {
     width: 100vw;
     background: $white;
     color: $black;

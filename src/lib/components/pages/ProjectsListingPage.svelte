@@ -49,6 +49,7 @@
 <Metadata title={"Projekt"} />
 
 {#if !$menuActive}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <span on:click={openMenu}>
     <Hamburger color={UIColor.White} />
   </span>
@@ -121,7 +122,7 @@
   .page {
     background: $black;
     color: $white;
-    font-family: $ATLAS_STACK;
+    font-family: $MONO_STACK;
     position: fixed;
     top: 0;
     left: 0;

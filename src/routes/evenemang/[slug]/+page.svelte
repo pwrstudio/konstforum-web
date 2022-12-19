@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ProjectsSinglePage from "$lib/components/pages/ProjectsSinglePage.svelte"
+  import ProjectsSinglePage from "$lib/components/pages/SinglePost.svelte"
   import { Language, type ProjectType } from "$lib/types"
   export let data: { project: ProjectType }
 </script>

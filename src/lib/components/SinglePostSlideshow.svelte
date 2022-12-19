@@ -36,7 +36,7 @@
   .inner {
     width: 100%;
     height: calc(100% - 20px);
-    font-family: $ATLAS_STACK;
+    font-family: $MONO_STACK;
     font-size: $FONT_SIZE_SMALL;
     display: flex;
     flex-direction: column;

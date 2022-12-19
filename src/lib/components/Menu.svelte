@@ -37,28 +37,6 @@
 </script>
 
 <div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
-  <!-- <div class="language-switch">
-    <span
-      class="language-option"
-      class:selected={$languageStore === Language.Swedish}
-      on:click={() => {
-        languageStore.set(Language.Swedish)
-      }}
-    >
-      SVE
-    </span>
-    <span class="slash">/</span>
-    <span
-      class="language-option"
-      class:selected={$languageStore === Language.English}
-      on:click={() => {
-        languageStore.set(Language.English)
-      }}
-    >
-      ENG
-    </span>
-  </div> -->
-
   <div class="inner">
     {#each activeMenuItems as item}
       <a href={item.link} data-sveltekit-preload-data>
@@ -104,7 +82,7 @@
   }
 
   .menu {
-    font-family: $BARBARA_STACK;
+    font-family: $COMPRESSED_STACK;
     position: fixed;
     top: 0;
     left: 0;
@@ -128,6 +106,8 @@
     .inner {
       width: calc(100vw - 360px);
       max-width: 95vw;
+      display: flex;
+      flex-direction: column;
 
       @include screen-size("small") {
         width: calc(100vw - 30px);
@@ -136,11 +116,13 @@
       a {
         font-size: $FONT_SIZE_XLARGE;
         line-height: 1em;
-        display: block;
+        display: inline-block;
         color: inherit;
         text-decoration: none;
+        text-transform: uppercase;
         padding: 10px 0;
         user-select: none;
+        border-bottom: 10px solid $white;
 
         @include screen-size("small") {
           font-size: 36px;

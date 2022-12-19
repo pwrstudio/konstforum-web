@@ -1,8 +1,7 @@
 <script lang="ts">
-  // import MainPage from "$lib/components/pages/MainPage.svelte"
-  import { Language, MainPageType } from "$lib/types"
-  export let data: any
-  const { about, faq, contact } = data
+  import DefaultPage from "$lib/components/pages/DefaultPage.svelte"
+  import { Language } from "$lib/types"
+  export let data
 </script>
 
-OM
+<DefaultPage {data} language={Language.Swedish} />

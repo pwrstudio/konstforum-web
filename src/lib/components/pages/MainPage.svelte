@@ -4,19 +4,23 @@
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
-  // import Slideshow from "$lib/components/Slideshow.svelte"
-  // import ArtistList from "$lib/components/ArtistList.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   // import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
   import { renderBlockText } from "$lib/modules/sanity"
   import { Language } from "$lib/types"
-  // import Image from "$lib/components/Image.svelte"
+  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
+  import Image from "$lib/components/Image.svelte"
 
   export let language: Language
   export let data
   const { posts } = data
 
   console.log(posts)
+
+  const tags =
+    language === Language.English
+      ? posts.flatMap(p => p.tags_eng).filter(t => t !== undefined)
+      : posts.flatMap(p => p.tags_sve).filter(t => t !== undefined)
 
   const openMenu = () => {
     menuActive.set(true)
@@ -40,28 +44,57 @@
 
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
-  <div>POSTER</div>
-  {#each posts as post}
-    <div>
-      <a
-        href={urlPrefix + "post/" + post.slug.current}
-        data-sveltekit-preload-data>{post.title}</a
-      >
-    </div>
-  {/each}
+  <!-- TAGS -->
+  <div class="tags">
+    {#each tags as tag}
+      <div class="tag">{tag}</div>
+    {/each}
+  </div>
+  <!-- POST LIST  -->
+  <div class="post-list">
+    <div class="counter">List of {posts.length}</div>
+    {#each posts as post}
+      <div class="post-item">
+        <div class="left">
+          <div class="post-title">
+            {post.title}
+          </div>
+          {#if post.tags_sve}
+            <div class="post-tags">
+              {#each post.tags_sve as tag}
+                {tag}
+              {/each}
+            </div>
+          {/if}
+        </div>
+        <div class="right">
+          <LargeArrowRight />
+        </div>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <!-- RIGHT -->
 <div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
-  <div>POSTER</div>
-  {#each posts as post}
-    <div>
+  <div class="masonry-container">
+    {#each posts as post}
       <a
+        class="tile"
         href={urlPrefix + "post/" + post.slug.current}
-        data-sveltekit-preload-data>{post.title}</a
+        data-sveltekit-preload-data
       >
-    </div>
-  {/each}
+        {#if post.mainImage}
+          <div class="tile-image">
+            <Image imageDyad={post.mainImage} caption={post.title} />
+          </div>
+        {/if}
+        <div class="tile-title">
+          <div>{post.title}</div>
+        </div>
+      </a>
+    {/each}
+  </div>
 </div>
 
 <style lang="scss">
@@ -107,5 +140,96 @@
         }
       }
     }
+  }
+
+  .tags {
+    margin-bottom: 20px;
+
+    .tag {
+      font-size: $FONT_SIZE_SMALL;
+      display: inline-block;
+      border: 1px solid $white;
+      padding: 5px;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+  }
+
+  .post-list {
+    width: 100%;
+    font-family: $MONO_STACK;
+
+    .counter {
+      font-size: $FONT_SIZE_SMALL;
+      border-bottom: 1px solid $white;
+    }
+
+    .post-item {
+      width: 100%;
+      border-bottom: 1px solid $white;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+
+      .right {
+        width: 30px;
+      }
+    }
+  }
+
+  .masonry-container {
+    column-count: 2;
+    column-gap: 10px;
+
+    .tile {
+      display: grid;
+      display: flex;
+      grid-template-rows: 1fr auto;
+      margin-bottom: 10px;
+      break-inside: avoid;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+
+      .tile-image {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .tile-title {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $black;
+        color: $white;
+        justify-content: center;
+        align-items: center;
+        font-family: $COMPRESSED_STACK;
+        font-size: $FONT_SIZE_XLARGE;
+        text-transform: uppercase;
+        opacity: 0;
+      }
+
+      &:hover {
+        .tile-title {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  :global(.tile-image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>

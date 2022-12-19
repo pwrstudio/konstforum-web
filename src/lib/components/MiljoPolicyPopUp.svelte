@@ -37,7 +37,7 @@
     left: 0;
     z-index: 999;
     width: calc(50vw - 45px);
-    font-family: $ATLAS_STACK;
+    font-family: $MONO_STACK;
     font-size: $FONT_SIZE_SMALL;
     min-height: 200px;
     display: flex;
@@ -55,7 +55,7 @@
       z-index: 10000;
       width: 400px;
       border-radius: 10px;
-      font-family: $ATLAS_STACK;
+      font-family: $MONO_STACK;
       font-size: $FONT_SIZE_SMALL;
       cursor: pointer;
 

@@ -5,8 +5,11 @@ $white: #ffffff;
 $black: #000000;
 
 // TYPOGRAPHY
-$ATLAS_STACK: "Atlas Grotesk", "helvetica", sans-serif;
-$BARBARA_STACK: "BT Barbara", "times new roman", serif;
+$MONO_STACK: "ABCDiatypeMono", monospace;
+$REGULAR_STACK: "ABCDiatype", helvetica, sans-serif;
+$COMPRESSED_STACK: "ABCDiatypeCompressed", helvetica, sans-serif;
+$EXPANDED_STACK: "ABCDiatypeExpanded", helvetica, sans-serif;
+
 $SCALE_FACTOR: 1;
 $FONT_SIZE_XLARGE: 72px * $SCALE_FACTOR;
 $FONT_SIZE_SEMI_EXTRA: 32px * $SCALE_FACTOR;

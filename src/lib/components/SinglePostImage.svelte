@@ -2,13 +2,13 @@
   import Image from "$lib/components/Image.svelte"
   import { Language } from "$lib/types"
   export let language: Language
-  export let project: any
-  const caption = Language.English ? project.title_eng : project.title
+  export let post: any
+  const caption = Language.English ? post.title_eng : post.title
 </script>
 
 <div class="inner">
   <div class="image">
-    <Image imageDyad={project.mainImage} {caption} />
+    <Image imageDyad={post.mainImage} {caption} />
   </div>
   <div class="caption">
     <div>{caption}</div>
@@ -21,7 +21,7 @@
   .inner {
     width: 100%;
     height: calc(100% - 20px);
-    font-family: $ATLAS_STACK;
+    font-family: $MONO_STACK;
     font-size: $FONT_SIZE_SMALL;
     display: flex;
     flex-direction: column;

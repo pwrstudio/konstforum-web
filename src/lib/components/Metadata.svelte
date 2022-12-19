@@ -5,9 +5,8 @@
   export let description = ""
   // let url = ""
 
-  const DEFAULT_DESCRIPTION =
-    "Plattform KcSyd arbetar for att stärka och bredda konsten och konstnärens roll i de offentliga rummen. Med konsten och samtalet som metod skapar Plattform KcSyd rum för nya perspektiv som berikar diskursen kring våra gemensamma rum, och bidrar till att hålla detta samtal aktivt, kreativt och relevant."
-  const DEFAULT_IMAGE = "https://plattform.kcsyd.se/"
+  const DEFAULT_DESCRIPTION = "konstforum"
+  const DEFAULT_IMAGE = "https://konstforum.se/"
 
   const t = (title.length > 0 ? title + " | " : "") + "Konstforum"
 
