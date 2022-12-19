@@ -3,6 +3,8 @@ import { loadData } from "$lib/modules/sanity.js"
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
-    // const splash = await loadData("*[_id == 'splash'][0]")
-    return {}
+    const posts = await loadData("*[_type == 'post'] | order(_createdAt desc)")
+    return {
+        posts
+    };
 }

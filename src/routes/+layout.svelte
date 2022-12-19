@@ -1,26 +1,28 @@
 <script lang="ts">
   import X from "$lib/components/X.svelte"
   import Menu from "$lib/components/Menu.svelte"
-  import { menuActive } from "$lib/stores"
-
+  import { menuActive, activeTypes, rawPosts } from "$lib/stores"
   export let data
+  const { posts } = data
+  rawPosts.set(posts)
+  activeTypes.set(["artist", "organization", "participant", "project"])
 
   const filterList = [
     {
       title: "Konstnärer",
-      category: "artist",
+      type: "artist",
     },
     {
       title: "Org",
-      category: "organization",
+      type: "organization",
     },
     {
       title: "Verksamma",
-      category: "participant",
+      type: "participant",
     },
     {
       title: "Projekt",
-      category: "project",
+      type: "project",
     },
   ]
 
@@ -31,12 +33,27 @@
 
 <nav class="top-bar">
   <!-- TITLE -->
-  <div class="title">Konstforum i Skåne</div>
+  <div class="title">
+    <a href="/" data-sveltekit-preload-data>Konstforum i Skåne</a>
+  </div>
   <!-- FILTER -->
   <div class="filter">
     {#each filterList as filterItem}
-      <div class="filter-item">
-        <div class="bullet" />
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="filter-item"
+        on:click={() => {
+          if ($activeTypes.indexOf(filterItem.type) === -1) {
+            activeTypes.set([...$activeTypes, filterItem.type])
+          } else {
+            activeTypes.set($activeTypes.filter(t => t !== filterItem.type))
+          }
+        }}
+      >
+        <div
+          class="bullet"
+          class:active={$activeTypes.includes(filterItem.type)}
+        />
         {filterItem.title}
       </div>
     {/each}
@@ -110,13 +127,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        user-select: none;
+        cursor: pointer;
 
         .bullet {
-          height: 10px;
-          width: 10px;
+          height: 12px;
+          width: 12px;
           border-radius: 10px;
-          background: $black;
+          background: transparent;
+          border: 1px solid $black;
           margin-right: 5px;
+
+          &.active {
+            background: $black;
+          }
         }
       }
     }

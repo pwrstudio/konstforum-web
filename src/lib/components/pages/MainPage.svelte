@@ -2,31 +2,25 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import {
+    menuActive,
+    filteredPosts,
+    activeTypeTags,
+    activeTags,
+    urlPrefix,
+  } from "$lib/stores"
   import { onMount } from "svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
-  // import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
   import { renderBlockText } from "$lib/modules/sanity"
-  import { Language } from "$lib/types"
+  import type { Language } from "$lib/types"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import Image from "$lib/components/Image.svelte"
 
   export let language: Language
-  export let data
-  const { posts } = data
-
-  console.log(posts)
-
-  const tags =
-    language === Language.English
-      ? posts.flatMap(p => p.tags_eng).filter(t => t !== undefined)
-      : posts.flatMap(p => p.tags_sve).filter(t => t !== undefined)
 
   const openMenu = () => {
     menuActive.set(true)
   }
-
-  const urlPrefix = language === Language.English ? "/en/" : "/"
 
   onMount(async () => {
     menuActive.set(false)
@@ -46,14 +40,27 @@
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   <!-- TAGS -->
   <div class="tags">
-    {#each tags as tag}
-      <div class="tag">{tag}</div>
+    {#each $activeTypeTags as tag}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="tag"
+        class:active={$activeTags.includes(tag)}
+        on:click={() => {
+          if ($activeTags.indexOf(tag) === -1) {
+            activeTags.set([...$activeTags, tag])
+          } else {
+            activeTags.set($activeTags.filter(t => t !== tag))
+          }
+        }}
+      >
+        {tag}
+      </div>
     {/each}
   </div>
   <!-- POST LIST  -->
   <div class="post-list">
-    <div class="counter">List of {posts.length}</div>
-    {#each posts as post}
+    <div class="counter">List of {$filteredPosts.length}</div>
+    {#each $filteredPosts as post (post._id)}
       <div class="post-item">
         <div class="left">
           <div class="post-title">
@@ -78,10 +85,10 @@
 <!-- RIGHT -->
 <div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
   <div class="masonry-container">
-    {#each posts as post}
+    {#each $filteredPosts as post (post._id)}
       <a
         class="tile"
-        href={urlPrefix + "post/" + post.slug.current}
+        href={$urlPrefix + "post/" + post.slug.current}
         data-sveltekit-preload-data
       >
         {#if post.mainImage}
@@ -152,6 +159,13 @@
       padding: 5px;
       border-radius: 5px;
       margin-right: 5px;
+      user-select: none;
+      cursor: pointer;
+
+      &.active {
+        background: $white;
+        color: $black;
+      }
     }
   }
 
