@@ -4,6 +4,8 @@ import { Language } from "$lib/types";
 // --- UI
 export const languageStore = writable(Language.Swedish);
 export const menuActive = writable(false);
+export const focusedPost = writable("");
+export const mapMode = writable(false);
 
 // --- TYPES
 export const activeTypes = writable([] as string[]);

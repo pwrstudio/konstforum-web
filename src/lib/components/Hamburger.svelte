@@ -13,7 +13,7 @@
 
   .menu-toggle {
     position: fixed;
-    top: 30px;
+    top: 25px;
     right: 15px;
     z-index: 10000;
     cursor: pointer;

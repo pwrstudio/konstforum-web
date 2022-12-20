@@ -1,7 +1,9 @@
 <script lang="ts">
   import X from "$lib/components/X.svelte"
   import Menu from "$lib/components/Menu.svelte"
-  import { menuActive, activeTypes, rawPosts } from "$lib/stores"
+  import FilterItem from "$lib/components/FilterItem.svelte"
+  import { Language } from "$lib/types"
+  import { menuActive, activeTypes, rawPosts, languageStore } from "$lib/stores"
   export let data
   const { posts } = data
   rawPosts.set(posts)
@@ -10,24 +12,36 @@
   const filterList = [
     {
       title: "Konstnärer",
+      englishTitle: "Artists",
       type: "artist",
     },
     {
       title: "Org",
+      englishTitle: "Org",
       type: "organization",
     },
     {
       title: "Verksamma",
+      englishTitle: "Participant",
       type: "participant",
     },
     {
       title: "Projekt",
+      englishTitle: "Project",
       type: "project",
     },
   ]
 
   const closeMenu = () => {
     menuActive.set(false)
+  }
+
+  const toggleLanguage = () => {
+    if ($languageStore === Language.English) {
+      languageStore.set(Language.Swedish)
+    } else {
+      languageStore.set(Language.English)
+    }
   }
 </script>
 
@@ -39,30 +53,21 @@
   <!-- FILTER -->
   <div class="filter">
     {#each filterList as filterItem}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        class="filter-item"
-        on:click={() => {
-          if ($activeTypes.indexOf(filterItem.type) === -1) {
-            activeTypes.set([...$activeTypes, filterItem.type])
-          } else {
-            activeTypes.set($activeTypes.filter(t => t !== filterItem.type))
-          }
-        }}
-      >
-        <div
-          class="bullet"
-          class:active={$activeTypes.includes(filterItem.type)}
-        />
-        {filterItem.title}
-      </div>
+      <FilterItem {filterItem} />
     {/each}
   </div>
   <!-- TOOLBAR -->
   <div class="toolbar">
     <div class="toolbar-item search">Sök</div>
     <div class="toolbar-item mode">Karta</div>
-    <div class="toolbar-item language">SV</div>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div
+      class="toolbar-item language"
+      class:english={$languageStore === Language.English}
+      on:click={toggleLanguage}
+    >
+      EN
+    </div>
   </div>
 </nav>
 
@@ -74,35 +79,13 @@
   <Menu />
 {/if}
 
-<!-- <div class="language-switch">
-    <span
-      class="language-option"
-      class:selected={$languageStore === Language.Swedish}
-      on:click={() => {
-        languageStore.set(Language.Swedish)
-      }}
-    >
-      SVE
-    </span>
-    <span class="slash">/</span>
-    <span
-      class="language-option"
-      class:selected={$languageStore === Language.English}
-      on:click={() => {
-        languageStore.set(Language.English)
-      }}
-    >
-      ENG
-    </span>
-  </div> -->
-
 <slot />
 
 <style lang="scss" global>
   @import "src/lib/style/variables.scss";
 
   .top-bar {
-    height: 60px;
+    height: 70px;
     top: 0;
     left: 0;
     width: 100vw;
@@ -112,54 +95,57 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 70px 0 35px;
     font-family: $EXPANDED_STACK;
+    font-size: $FONT_SIZE_NORMAL;
+
+    .title {
+      a {
+        text-decoration: none;
+      }
+    }
 
     .filter {
       display: flex;
-
-      .filter-item {
-        text-transform: uppercase;
-        border: 1px solid $black;
-        margin-right: 10px;
-        padding: 10px;
-        border-radius: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        user-select: none;
-        cursor: pointer;
-
-        .bullet {
-          height: 12px;
-          width: 12px;
-          border-radius: 10px;
-          background: transparent;
-          border: 1px solid $black;
-          margin-right: 5px;
-
-          &.active {
-            background: $black;
-          }
-        }
-      }
     }
 
     .toolbar {
       display: flex;
+      justify-content: center;
+      align-items: center;
 
       .toolbar-item {
         border: 1px solid $black;
-        border-radius: 5px;
-        padding: 5px;
+        border-radius: 20px;
+        padding: 10px;
         margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.search {
+          opacity: 0.6;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
 
         &.mode {
           font-size: $FONT_SIZE_SMALL;
         }
 
         &.language {
-          font-size: $FONT_SIZE_SMALL;
+          font-size: $FONT_SIZE_XSMALL;
+          user-select: none;
+          cursor: pointer;
+          padding: unset;
+          height: 25px;
+          width: 25px;
+          border-radius: 100%;
+
+          &.english {
+            background: $black;
+            color: $white;
+          }
         }
       }
     }
