@@ -92,9 +92,9 @@
     mapMode.set(!$mapMode)
   }
 
-  const aboutPages = ["/om", "/om/[slug]"]
-  const postPages = ["/"]
-  const eventPages = ["/evenemang"]
+  const aboutPages = ["/om", "/om/[slug]", "/en/om", "/en/om/[slug]"]
+  const postPages = ["/", "/en"]
+  const eventPages = ["/evenemang", "/en/evenemang"]
 </script>
 
 {#if aboutPages.includes($page.route?.id)}

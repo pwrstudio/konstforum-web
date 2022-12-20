@@ -6,4 +6,4 @@
   export let data
 </script>
 
-<DefaultPage {data} language={Language.English} />
+<DefaultPage {data} />

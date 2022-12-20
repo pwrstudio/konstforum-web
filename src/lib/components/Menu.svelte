@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte"
   import X from "$lib/components/X.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { languageStore, menuActive } from "$lib/stores"
+  import { languageStore, menuActive, urlPrefix } from "$lib/stores"
   import { Language, type MenuItem, UIColor } from "$lib/types"
 
   const menuItems: {
@@ -13,21 +12,21 @@
     sve: [
       {
         title: "Evenemang och Projekt",
-        link: "/evenemang",
+        link: "evenemang",
       },
       {
         title: "Om Konstforum",
-        link: "/om",
+        link: "om",
       },
     ],
     eng: [
       {
         title: "Events and Projects",
-        link: "/evenemang",
+        link: "evenemang",
       },
       {
         title: "About Konstforum",
-        link: "/om",
+        link: "om",
       },
     ],
   }
@@ -48,7 +47,7 @@
   <div class="inner">
     {#each activeMenuItems as item}
       <div>
-        <a href={item.link} data-sveltekit-preload-data>
+        <a href={$urlPrefix + item.link} data-sveltekit-preload-data>
           {item.title}
         </a>
       </div>

@@ -11,6 +11,7 @@
     urlPrefix,
   } from "$lib/stores"
   import { onMount } from "svelte"
+  import Calendar from "$lib/components/Calendar.svelte"
   import EventItem from "$lib/components/EventItem.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   import type { Language } from "$lib/types"
@@ -37,7 +38,7 @@
 
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
-  CALENDAR
+  <Calendar />
 </div>
 
 <!-- RIGHT -->

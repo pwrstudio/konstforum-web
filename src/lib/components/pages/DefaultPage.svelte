@@ -1,25 +1,28 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive, languageStore } from "$lib/stores"
   import { onMount } from "svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language } from "$lib/types"
-  export let language: Language
   export let data
   const { post } = data
 
-  const title = language === Language.English ? post.title_eng : post.title
+  let title: string
+  let content: string
+  let description: string
 
-  const content =
-    language === Language.English
+  $: title = $languageStore === Language.English ? post.title_eng : post.title
+
+  $: content =
+    $languageStore === Language.English
       ? post.content_eng.content
       : post.content_sve.content
 
-  const description =
-    language === Language.English
+  $: description =
+    $languageStore === Language.English
       ? toPlainText(post.content_eng.content)
       : toPlainText(post.content_sve.content)
 
