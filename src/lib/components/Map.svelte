@@ -1,6 +1,7 @@
 <script lang="ts">
   // import { PUBLIC_GOOGLE } from "$env/static/public"
-  import { filteredPosts } from "$lib/stores"
+  import { goto } from "$app/navigation"
+  import { filteredPosts, urlPrefix } from "$lib/stores"
   import { onMount } from "svelte"
   import mapboxgl from "mapbox-gl"
   import "mapbox-gl/dist/mapbox-gl.css"
@@ -50,11 +51,21 @@
       if (p.locationText_sve) {
         geocodeAddress(p.locationText_sve, GOOGLE_API_KEY)
           .then(coordinates => {
-            console.log(coordinates)
-            // Create a new MapboxMarker object
-            let marker: mapboxgl.Marker = new mapboxgl.Marker()
+            let el = document.createElement("div")
+            el.className = "marker"
 
-            marker.setLngLat(coordinates)
+            console.log(coordinates)
+
+            new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map)
+
+            el.addEventListener("click", function () {
+              goto($urlPrefix + "post/" + p.slug?.current)
+            })
+
+            // Create a new MapboxMarker object
+            // let marker: mapboxgl.Marker = new mapboxgl.Marker(el)
+
+            // marker.setLngLat(coordinates)
 
             // // Set the marker's size
             // marker.setPaintProperty("circle-radius", 10)
@@ -62,8 +73,15 @@
             // // Set the marker's color
             // marker.setPaintProperty("circle-color", "red")
 
+            // Attach a click event listener to the marker
+            // marker.on("click", function () {
+            //   window.alert(p.title)
+            //   // Do something when the marker is clicked
+            //   console.log("Marker clicked!")
+            // })
+
             // Add the marker to the map
-            marker.addTo(map)
+            // marker.addTo(map)
           })
           .catch(error => {
             console.error(error)
@@ -73,14 +91,22 @@
   })
 </script>
 
-<!-- on:recentre={e => console.log(e.detail.center.lat, e.detail.center.lng) }  -->
-
 <div class="map" id="map" />
 
 <style lang="scss">
+  @import "src/lib/style/variables.scss";
+
   .map {
     mix-blend-mode: multiply;
     height: 100%;
     width: 100%;
+  }
+
+  :global(.marker) {
+    width: 30px;
+    height: 30px;
+    background: $black;
+    border-radius: 50%;
+    cursor: pointer;
   }
 </style>
