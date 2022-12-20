@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/stores"
   import X from "$lib/components/X.svelte"
   import Menu from "$lib/components/Menu.svelte"
   import FilterItem from "$lib/components/FilterItem.svelte"
@@ -8,6 +9,8 @@
   const { posts } = data
   rawPosts.set(posts)
   activeTypes.set(["artist", "organization", "participant", "project"])
+
+  $: console.log($page)
 
   const filterList = [
     {
@@ -45,31 +48,33 @@
   }
 </script>
 
-<nav class="top-bar">
-  <!-- TITLE -->
-  <div class="title">
-    <a href="/" data-sveltekit-preload-data>Konstforum i Skåne</a>
-  </div>
-  <!-- FILTER -->
-  <div class="filter">
-    {#each filterList as filterItem}
-      <FilterItem {filterItem} />
-    {/each}
-  </div>
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <div class="toolbar-item search">Sök</div>
-    <div class="toolbar-item mode">Karta</div>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="toolbar-item language"
-      class:english={$languageStore === Language.English}
-      on:click={toggleLanguage}
-    >
-      EN
+{#if $page.route?.id != "/post/[slug]"}
+  <nav class="top-bar">
+    <!-- TITLE -->
+    <div class="title">
+      <a href="/" data-sveltekit-preload-data>Konstforum i Skåne</a>
     </div>
-  </div>
-</nav>
+    <!-- FILTER -->
+    <div class="filter">
+      {#each filterList as filterItem}
+        <FilterItem {filterItem} />
+      {/each}
+    </div>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-item search">Sök</div>
+      <div class="toolbar-item mode">Karta</div>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="toolbar-item language"
+        class:english={$languageStore === Language.English}
+        on:click={toggleLanguage}
+      >
+        EN
+      </div>
+    </div>
+  </nav>
+{/if}
 
 {#if $menuActive}
   <!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import { menuActive, urlPrefix } from "$lib/stores"
   import { onMount } from "svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import X from "$lib/components/X.svelte"
@@ -17,15 +17,13 @@
 
   const content =
     language === Language.English
-      ? post.content_eng.content
-      : post.content_sve.content
+      ? post.content_eng?.content
+      : post.content_sve?.content
 
   const description =
     language === Language.English
-      ? toPlainText(post.content_eng.content)
-      : toPlainText(post.content_sve.content)
-
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+      ? toPlainText(post.content_eng?.content)
+      : toPlainText(post.content_sve?.content)
 
   onMount(async () => {
     menuActive.set(false)
@@ -34,7 +32,7 @@
 
 <Metadata {title} {description} />
 
-<a href={urlPrefix} data-sveltekit-preload-data>
+<a href={$urlPrefix} data-sveltekit-preload-data>
   <X />
 </a>
 
@@ -52,7 +50,9 @@
       <!-- RIGHT -->
       <div class="column right">
         <h2>{title}</h2>
-        <div>{@html renderBlockText(content)}</div>
+        {#if content}
+          <div>{@html renderBlockText(content)}</div>
+        {/if}
       </div>
     </div>
   </div>
@@ -67,7 +67,6 @@
     color: $black;
     height: 100vh;
     font-family: $REGULAR_STACK;
-    font-size: $FONT_SIZE_LARGE;
 
     @include screen-size("small") {
       overflow-y: auto;
@@ -79,6 +78,7 @@
       padding-top: 60px;
 
       h2 {
+        font-size: $FONT_SIZE_MEDIUM;
         font-family: $COMPRESSED_STACK;
         text-transform: uppercase;
       }
@@ -113,7 +113,9 @@
           &.right {
             width: 33.333333%;
 
-            font-size: $FONT_SIZE_MEDIUM;
+            font-size: $FONT_SIZE_NORMAL;
+            font-family: $REGULAR_STACK;
+            line-height: 1em;
             padding-left: 15px;
             overflow-y: auto;
             padding-bottom: 40px;
