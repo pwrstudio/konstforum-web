@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { urlPrefix, languageStore, focusedPost } from "$lib/stores"
@@ -8,13 +7,26 @@
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import Image from "$lib/components/Image.svelte"
 
-  export let language: Language
   export let post
 
   let extended = false
   const toggleExtended = () => {
     extended = !extended
   }
+
+  let title: string
+  let content: string
+  let tags: string[]
+
+  $: tags =
+    ($languageStore === Language.English ? post.tags_eng : post.tags_sve) || []
+
+  $: title = $languageStore === Language.English ? post.title_eng : post.title
+
+  $: content =
+    $languageStore === Language.English
+      ? post.shortText_eng?.content
+      : post.shortText_sve?.content
 
   const setFocus = () => {
     focusedPost.set(post._id)
@@ -23,9 +35,6 @@
   const unsetFocus = () => {
     focusedPost.set("")
   }
-
-  const tags =
-    $languageStore === Language.English ? post.tags_eng : post.tags_sve
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -33,7 +42,7 @@
   <div class="post-item-header" on:click={toggleExtended}>
     <div class="left">
       <div class="post-title">
-        {post.title}
+        {title}
       </div>
       <div class="post-tags">
         {tags.join(",")}
@@ -50,9 +59,13 @@
         <Image imageDyad={post.mainImage} width={300} />
       </div>
       <div class="text">
-        {#if post.shortText_sve?.content}
-          {@html renderBlockText(post.shortText_sve.content)}
-          <div class="read-more">Läs vidare</div>
+        {#if content}
+          {@html renderBlockText(content)}
+          <a
+            href={$urlPrefix + "post/" + post.slug?.current}
+            data-sveltekit-preload-data
+            class="read-more">Läs vidare</a
+          >
         {/if}
       </div>
     </div>

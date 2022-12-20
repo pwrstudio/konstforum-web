@@ -53,3 +53,7 @@ export const activeTypeTags: Readable<string[]> = derived([activeTypePosts], ([$
 export const activeTypeEvents = derived([rawEvents, activeEventTypes], ([$rawEvents, $activeEventTypes]) => {
     return $rawEvents.filter(e => $activeEventTypes.includes(e.type))
 })
+
+export const filteredEvents = derived([rawEvents, activeEventTypes], ([$rawEvents, $activeEventTypes]) => {
+    return $rawEvents
+})

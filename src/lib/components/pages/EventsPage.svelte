@@ -2,27 +2,24 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive } from "$lib/stores"
+  import {
+    mapMode,
+    menuActive,
+    filteredPosts,
+    filteredEvents,
+    activeTypeTags,
+    urlPrefix,
+  } from "$lib/stores"
   import { onMount } from "svelte"
-  // import Slideshow from "$lib/components/Slideshow.svelte"
-  // import ArtistList from "$lib/components/ArtistList.svelte"
+  import EventItem from "$lib/components/EventItem.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
-  // import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import { renderBlockText } from "$lib/modules/sanity"
-  import { Language } from "$lib/types"
-  // import Image from "$lib/components/Image.svelte"
+  import type { Language } from "$lib/types"
 
   export let language: Language
-  export let data
-  const { events } = data
-
-  console.log(events)
 
   const openMenu = () => {
     menuActive.set(true)
   }
-
-  const urlPrefix = language === Language.English ? "/en/" : "/"
 
   onMount(async () => {
     menuActive.set(false)
@@ -40,28 +37,18 @@
 
 <!-- LEFT -->
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
-  <div>EVENEMANG</div>
-  {#each events as post}
-    <div>
-      <a
-        href={urlPrefix + "post/" + post.slug.current}
-        data-sveltekit-preload-data>{post.title}</a
-      >
-    </div>
-  {/each}
+  CALENDAR
 </div>
 
 <!-- RIGHT -->
 <div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
-  <div>EVENEMANG</div>
-  {#each events as post}
-    <div>
-      <a
-        href={urlPrefix + "post/" + post.slug.current}
-        data-sveltekit-preload-data>{post.title}</a
-      >
-    </div>
-  {/each}
+  <!-- EVENT LIST  -->
+  <div class="post-list">
+    <div class="counter">List of {$filteredEvents.length}</div>
+    {#each $filteredEvents as event (event._id)}
+      <EventItem {event} />
+    {/each}
+  </div>
 </div>
 
 <style lang="scss">
@@ -71,7 +58,6 @@
     height: 100vh;
     position: fixed;
     top: 60px;
-    padding: 10px;
 
     @include screen-size("small") {
       height: auto;
@@ -79,32 +65,52 @@
     }
 
     &.left {
+      padding: 10px;
       left: 0;
-      width: 33.333333333%;
-      background: $black;
+      width: 66.666666666%;
+      background: $white;
       overflow-y: auto;
-      color: $white;
+      color: $black;
+      padding-left: 35px;
+      padding-right: 15px;
+      padding-top: 20px;
 
       @include screen-size("small") {
         left: unset;
         width: 100%;
       }
+
+      .tags {
+        margin-bottom: 20px;
+      }
+
+      .post-list {
+        width: 100%;
+        font-family: $MONO_STACK;
+
+        .counter {
+          font-size: $FONT_SIZE_SMALL;
+          border-bottom: 1px solid $white;
+          padding-bottom: 10px;
+        }
+      }
     }
 
     &.right {
-      left: 33.333333333%;
-      width: 66.666666666%;
+      left: 66.666666666%;
+      width: 33.333333333%;
       display: flex;
       flex-direction: column;
-      background: $lime;
+      padding-top: 100px;
 
       @include screen-size("small") {
         display: none;
-        &.landing {
-          display: flex;
-          left: unset;
-          width: 100%;
-        }
+      }
+
+      .masonry-container {
+        column-count: 2;
+        column-gap: 20px;
+        padding: 10px;
       }
     }
   }

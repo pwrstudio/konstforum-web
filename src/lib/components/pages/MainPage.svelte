@@ -49,7 +49,7 @@
   <div class="post-list">
     <div class="counter">List of {$filteredPosts.length}</div>
     {#each $filteredPosts as post (post._id)}
-      <PostItem {post} {language} />
+      <PostItem {post} />
     {/each}
   </div>
 </div>
