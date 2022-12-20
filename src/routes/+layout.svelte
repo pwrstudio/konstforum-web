@@ -63,7 +63,8 @@
     <!-- TOOLBAR -->
     <div class="toolbar">
       <div class="toolbar-item search">Sök</div>
-      <div class="toolbar-item mode">Karta</div>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div class="toolbar-item map-mode">Karta</div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="toolbar-item language"
@@ -134,8 +135,10 @@
           padding-right: 20px;
         }
 
-        &.mode {
+        &.map-mode {
           font-size: $FONT_SIZE_SMALL;
+          user-select: none;
+          cursor: pointer;
         }
 
         &.language {

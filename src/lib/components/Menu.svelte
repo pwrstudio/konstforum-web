@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte"
+  import X from "$lib/components/X.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { languageStore } from "$lib/stores"
-  import { Language, type MenuItem } from "$lib/types"
+  import { languageStore, menuActive } from "$lib/stores"
+  import { Language, type MenuItem, UIColor } from "$lib/types"
 
   const menuItems: {
     sve: MenuItem[]
@@ -31,17 +32,26 @@
     ],
   }
 
+  const closeMenu = () => {
+    menuActive.set(false)
+  }
+
   let activeMenuItems: MenuItem[]
   $: activeMenuItems =
     $languageStore === Language.English ? menuItems.eng : menuItems.sve
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="close" on:click={closeMenu}><X color={UIColor.White} /></div>
+
 <div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
   <div class="inner">
     {#each activeMenuItems as item}
-      <a href={item.link} data-sveltekit-preload-data>
-        {item.title}
-      </a>
+      <div>
+        <a href={item.link} data-sveltekit-preload-data>
+          {item.title}
+        </a>
+      </div>
     {/each}
   </div>
 </div>
@@ -49,36 +59,11 @@
 <style lang="scss">
   @import "src/lib/style/variables.scss";
 
-  .language-switch {
-    position: absolute;
-    top: 30px;
-    left: 180px;
-    font-size: $FONT_SIZE_LARGE;
-    user-select: none;
-    cursor: pointer;
-
-    @include screen-size("small") {
-      font-size: $FONT_SIZE_MEDIUM;
-      left: 15px;
-      top: 15px;
-    }
-
-    .language-option {
-      &.selected {
-        border-bottom: 1px solid black;
-      }
-    }
-
-    .slash {
-      display: inline-block;
-      padding-left: 3px;
-      padding-right: 3px;
-
-      @include screen-size("small") {
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-    }
+  .close {
+    z-index: 100001;
+    position: fixed;
+    top: 25px;
+    right: 15px;
   }
 
   .menu {
@@ -120,7 +105,8 @@
         color: inherit;
         text-decoration: none;
         text-transform: uppercase;
-        padding: 10px 0;
+        line-height: 0.8em;
+        margin-bottom: 20px;
         user-select: none;
         border-bottom: 10px solid $white;
 
