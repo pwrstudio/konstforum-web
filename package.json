@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0",
 		"@sveltejs/kit": "^1.0.1",
+		"@types/mapbox-gl": "^2.7.10",
 		"node-sass": "^8.0.0",
 		"sass": "^1.57.0",
 		"svelte": "^3.44.0",
@@ -23,11 +24,14 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@beyonk/svelte-mapbox": "^8.2.0",
+		"@mapbox/mapbox-sdk": "^0.14.0",
 		"@sanity/block-content-to-html": "^2.0.0",
 		"@sanity/client": "^3.4.1",
 		"@sanity/image-url": "^1.0.1",
 		"get-video-id": "^3.6.5",
 		"lodash": "^4.17.21",
+		"mapbox-gl": "^2.11.1",
 		"swiper": "^8.4.5"
 	}
 }

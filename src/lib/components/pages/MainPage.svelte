@@ -3,18 +3,19 @@
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import {
+    mapMode,
     menuActive,
     filteredPosts,
     activeTypeTags,
     urlPrefix,
   } from "$lib/stores"
   import { onMount } from "svelte"
+  import Map from "$lib/components/Map.svelte"
   import PostItem from "$lib/components/PostItem.svelte"
   import Tag from "$lib/components/Tag.svelte"
   import Tile from "$lib/components/Tile.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   import type { Language } from "$lib/types"
-  import Image from "$lib/components/Image.svelte"
 
   export let language: Language
 
@@ -55,11 +56,15 @@
 
 <!-- RIGHT -->
 <div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
-  <div class="masonry-container">
-    {#each $filteredPosts as post (post._id)}
-      <Tile {post} {language} />
-    {/each}
-  </div>
+  {#if $mapMode}
+    <Map />
+  {:else}
+    <div class="masonry-container">
+      {#each $filteredPosts as post (post._id)}
+        <Tile {post} {language} />
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -69,7 +74,6 @@
     height: 100vh;
     position: fixed;
     top: 60px;
-    padding: 10px;
 
     @include screen-size("small") {
       height: auto;
@@ -77,6 +81,7 @@
     }
 
     &.left {
+      padding: 10px;
       left: 0;
       width: 33.333333333%;
       background: $black;
@@ -121,6 +126,7 @@
       .masonry-container {
         column-count: 2;
         column-gap: 20px;
+        padding: 10px;
       }
     }
   }

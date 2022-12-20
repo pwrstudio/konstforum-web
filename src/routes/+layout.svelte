@@ -6,6 +6,7 @@
   import SubPageItem from "$lib/components/SubPageItem.svelte"
   import { Language } from "$lib/types"
   import {
+    mapMode,
     menuActive,
     activeTypes,
     rawPosts,
@@ -87,6 +88,10 @@
     }
   }
 
+  const toggleMapMode = () => {
+    mapMode.set(!$mapMode)
+  }
+
   const aboutPages = ["/om", "/om/[slug]"]
   const postPages = ["/"]
   const eventPages = ["/evenemang"]
@@ -135,7 +140,13 @@
     <div class="toolbar">
       <div class="toolbar-item search">Sök</div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div class="toolbar-item map-mode">Karta</div>
+      <div
+        class="toolbar-item map-mode"
+        class:active={$mapMode}
+        on:click={toggleMapMode}
+      >
+        Karta
+      </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="toolbar-item language"
@@ -236,6 +247,11 @@
           font-size: $FONT_SIZE_SMALL;
           user-select: none;
           cursor: pointer;
+
+          &.active {
+            background: $black;
+            color: $white;
+          }
         }
 
         &.language {
