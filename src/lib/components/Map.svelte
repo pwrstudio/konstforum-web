@@ -1,4 +1,6 @@
 <script lang="ts">
+  // import { PUBLIC_GOOGLE } from "$env/static/public"
+  import { filteredPosts } from "$lib/stores"
   import { onMount } from "svelte"
   import mapboxgl from "mapbox-gl"
   import "mapbox-gl/dist/mapbox-gl.css"
@@ -7,36 +9,33 @@
   const center = { lat: 55.8725675, lon: 13.5645621 }
   let map
 
+  const GOOGLE_API_KEY = "AIzaSyDSzr2hrtfnGyoMrSVk8g7ReY6-t8_1mk8"
+
   mapboxgl.accessToken =
     "pk.eyJ1IjoicHdyc3R1ZGlvIiwiYSI6ImNsYnc5NmQzOTB2MWQzcW55ZzAyODRucG8ifQ.6RvyoY4e0kM10ABYxicjBg"
 
-  //   const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken })
-
-  //   console.log(mapboxClient)
-
-  //   mapboxClient.geocoding
-  //     .forwardGeocode({
-  //       query: "Malmö",
-  //       autocomplete: false,
-  //       limit: 1,
-  //     })
-  //     .send()
-  //     .then(response => {
-  //       if (
-  //         !response ||
-  //         !response.body ||
-  //         !response.body.features ||
-  //         !response.body.features.length
-  //       ) {
-  //         console.error("Invalid response:")
-  //         console.error(response)
-  //         return
-  //       }
-  //       const feature = response.body.features[0]
-  //       console.log(feature)
-  //     })
-
-  // Create a marker and add it to the map.
+  function geocodeAddress(
+    address: string,
+    apiKey: string
+  ): Promise<{ lat: number; lng: number }> {
+    // Make a request to the Geocoding API to convert the address to coordinates
+    const requestUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      address
+    )}&key=${apiKey}`
+    return fetch(requestUrl)
+      .then(response => response.json())
+      .then(data => {
+        console.log("data", data)
+        // Check if the request was successful
+        if (data.status === "OK") {
+          // Extract the coordinates from the response
+          const coordinates = data.results[0].geometry.location
+          return coordinates
+        } else {
+          throw new Error(data.error_message)
+        }
+      })
+  }
 
   onMount(async () => {
     map = new mapboxgl.Map({
@@ -46,7 +45,31 @@
       style: "mapbox://styles/mapbox/light-v11",
     })
 
-    // new mapboxgl.Marker().setLngLat(center).addTo(map)
+    $filteredPosts.forEach(p => {
+      console.log(p)
+      if (p.locationText_sve) {
+        geocodeAddress(p.locationText_sve, GOOGLE_API_KEY)
+          .then(coordinates => {
+            console.log(coordinates)
+            // Create a new MapboxMarker object
+            let marker: mapboxgl.Marker = new mapboxgl.Marker()
+
+            marker.setLngLat(coordinates)
+
+            // // Set the marker's size
+            // marker.setPaintProperty("circle-radius", 10)
+
+            // // Set the marker's color
+            // marker.setPaintProperty("circle-color", "red")
+
+            // Add the marker to the map
+            marker.addTo(map)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+    })
   })
 </script>
 
