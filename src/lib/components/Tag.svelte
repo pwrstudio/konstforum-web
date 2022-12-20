@@ -27,6 +27,7 @@
     padding: 5px 10px;
     border-radius: 10px;
     margin-right: 5px;
+    margin-bottom: 5px;
     user-select: none;
     cursor: pointer;
 

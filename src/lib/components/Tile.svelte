@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { urlPrefix } from "$lib/stores"
+  import { urlPrefix, focusedPost } from "$lib/stores"
   import type { Language } from "$lib/types"
   import Image from "$lib/components/Image.svelte"
 
@@ -19,7 +19,7 @@
       <Image imageDyad={post.mainImage} caption={post.title} />
     </div>
   {/if}
-  <div class="tile-title">
+  <div class="tile-title" class:focused={$focusedPost === post._id}>
     <div>{post.title}</div>
   </div>
 </a>
@@ -61,10 +61,14 @@
       justify-content: center;
       align-items: center;
       font-family: $COMPRESSED_STACK;
-      font-size: $FONT_SIZE_XLARGE;
+      font-size: $FONT_SIZE_LARGE;
       line-height: 1em;
       text-transform: uppercase;
       opacity: 0;
+
+      &.focused {
+        opacity: 1;
+      }
     }
 
     &:hover {
