@@ -16,7 +16,7 @@
     z-index: 1001;
     cursor: pointer;
 
-    top: 25px;
+    top: 20px;
     right: 20px;
 
     @include screen-size("small") {

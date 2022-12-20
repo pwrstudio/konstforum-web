@@ -101,6 +101,7 @@
             width: 66.666666%;
             border-right: 1px solid $white;
             overflow-y: auto;
+            padding-left: 35px;
 
             @include screen-size("small") {
               border-right: unset;
@@ -119,6 +120,7 @@
             padding-left: 15px;
             overflow-y: auto;
             padding-bottom: 40px;
+            padding-right: 35px;
 
             @include screen-size("small") {
               padding-left: unset;

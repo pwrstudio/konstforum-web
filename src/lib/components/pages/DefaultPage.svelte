@@ -3,10 +3,8 @@
   import { quadOut } from "svelte/easing"
   import { menuActive } from "$lib/stores"
   import { onMount } from "svelte"
+  import Hamburger from "$lib/components/Hamburger.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
-  import X from "$lib/components/X.svelte"
-  import SinglePostSlideshow from "$lib/components/SinglePostSlideshow.svelte"
-  import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language } from "$lib/types"
   export let language: Language
@@ -25,7 +23,9 @@
       ? toPlainText(post.content_eng.content)
       : toPlainText(post.content_sve.content)
 
-  const urlPrefix = language === Language.English ? "/en/" : "/"
+  const openMenu = () => {
+    menuActive.set(true)
+  }
 
   onMount(async () => {
     menuActive.set(false)
@@ -34,15 +34,18 @@
 
 <Metadata {title} {description} />
 
-<a href={urlPrefix} data-sveltekit-preload-data>
-  <X />
-</a>
+{#if !$menuActive}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <span on:click={openMenu}>
+    <Hamburger />
+  </span>
+{/if}
 
 <div class="default-page">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="content">
       <!-- CENTER -->
-      <div class="column right">
+      <div class="center">
         <h2>{title}</h2>
         <div>{@html renderBlockText(content)}</div>
       </div>
@@ -72,6 +75,7 @@
 
       h2 {
         font-family: $COMPRESSED_STACK;
+        font-size: $FONT_SIZE_SEMI;
         text-transform: uppercase;
       }
 
@@ -79,41 +83,13 @@
         height: calc(100vh - 85px);
         overflow-y: auto;
 
-        .column {
-          float: left;
-          height: calc(100vh - 85px);
-          padding-right: 15px;
-
-          @include screen-size("small") {
-            height: auto;
-            width: 100%;
-          }
-
-          &.left {
-            width: 66.666666%;
-            border-right: 1px solid $white;
-            overflow-y: auto;
-
-            @include screen-size("small") {
-              border-right: unset;
-              border-bottom: 1px solid $white;
-              padding-bottom: 15px;
-              margin-bottom: 15px;
-            }
-          }
-
-          &.right {
-            width: 33.333333%;
-
-            font-size: $FONT_SIZE_MEDIUM;
-            padding-left: 15px;
-            overflow-y: auto;
-            padding-bottom: 40px;
-
-            @include screen-size("small") {
-              padding-left: unset;
-            }
-          }
+        .center {
+          font-family: $REGULAR_STACK;
+          font-size: $FONT_SIZE_MEDIUM;
+          width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1em;
         }
       }
     }
