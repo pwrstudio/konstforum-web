@@ -37,6 +37,11 @@
     overflow: hidden;
     position: relative;
     text-align: center;
+    user-select: none;
+
+    // &:nth-child(2) {
+    //   margin-top: 100px;
+    // }
 
     .tile-image {
       width: 100%;

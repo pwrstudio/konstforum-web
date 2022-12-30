@@ -3,6 +3,7 @@
   import { quadOut } from "svelte/easing"
   import { urlPrefix, languageStore } from "$lib/stores"
   import { renderBlockText } from "$lib/modules/sanity"
+  import { format } from "date-fns"
   import { Language } from "$lib/types"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import Image from "$lib/components/Image.svelte"
@@ -36,13 +37,13 @@
       <div class="event-title">
         {title}
       </div>
-      <!-- TIME -->
-      <div class="event-date">
-        {event.time}
-      </div>
       <!-- LOCATION -->
       <div class="event-location">
         {location}
+      </div>
+      <!-- TIME -->
+      <div class="event-date">
+        {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
       </div>
       <!-- IMAGE -->
       {#if event.mainImage}
@@ -64,8 +65,8 @@
     font-family: $MONO_STACK;
     font-size: $FONT_SIZE_NORMAL;
     padding-top: 5px;
-    width: 100%;
-    border-bottom: 1px solid $black;
+    width: 90%;
+    border-top: 1px solid $black;
     cursor: pointer;
     user-select: none;
     padding-bottom: 10px;
@@ -88,6 +89,8 @@
       .image {
         width: 50%;
         padding-right: 10px;
+        border-radius: 10px;
+        overflow: hidden;
       }
 
       .text {
@@ -99,5 +102,11 @@
 
   :global(.text p:first-child) {
     margin-top: 0;
+  }
+
+  :global(.image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>

@@ -5,7 +5,6 @@
   import { onMount } from "svelte"
   import mapboxgl from "mapbox-gl"
   import "mapbox-gl/dist/mapbox-gl.css"
-  //   import mapboxSdk from "@mapbox/mapbox-sdk"
 
   const center = { lat: 55.8725675, lon: 13.5645621 }
   let map
