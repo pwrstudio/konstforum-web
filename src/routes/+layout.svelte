@@ -19,8 +19,6 @@
   rawEvents.set(events)
   activeTypes.set(["artist", "organization", "participant", "project"])
 
-  $: console.log($page)
-
   const aboutSubPages = [
     {
       title: "Om",

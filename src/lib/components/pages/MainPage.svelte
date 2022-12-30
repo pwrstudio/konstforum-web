@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PostForm from "$lib/components/PostForm.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
@@ -15,12 +16,20 @@
   import Tag from "$lib/components/Tag.svelte"
   import Tile from "$lib/components/Tile.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
+  import X from "$lib/graphics/X.svelte"
+  import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
   import type { Language } from "$lib/types"
 
   export let language: Language
 
+  let formActive = false
+
   const openMenu = () => {
     menuActive.set(true)
+  }
+
+  const toggleForm = () => {
+    formActive = !formActive
   }
 
   onMount(async () => {
@@ -66,6 +75,22 @@
     </div>
   {/if}
 </div>
+
+{#if formActive}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="close-form" on:click={toggleForm}>
+    <X />
+  </div>
+  <div class="post-form">
+    <PostForm />
+  </div>
+{:else}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="post-form-banner" on:click={toggleForm}>
+    <div class="text">Var med på Konstforum?</div>
+    <div class="arrow"><LargeArrowDown /></div>
+  </div>
+{/if}
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
@@ -129,5 +154,44 @@
         padding: 10px;
       }
     }
+  }
+
+  .post-form {
+    position: fixed;
+    left: 66.666666666%;
+    width: 33.333333333%;
+    height: calc(100vh - 70px);
+    padding-bottom: 40px;
+    top: 70px;
+    z-index: 1000;
+    background: $white;
+    overflow-y: auto;
+  }
+
+  .post-form-banner {
+    position: fixed;
+    left: 66.666666666%;
+    width: 33.333333333%;
+    padding: 20px 20px;
+    top: 70px;
+    z-index: 1000;
+    background: $white;
+    display: flex;
+    justify-content: space-between;
+    font-size: $FONT_SIZE_MEDIUM;
+    font-family: $COMPRESSED_STACK;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .close-form {
+    position: fixed;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    top: 90px;
+    z-index: 1001;
+    background: $white;
+    cursor: pointer;
   }
 </style>
