@@ -1,6 +1,11 @@
+<script lang="ts">
+  export let black = false
+</script>
+
 <svg
   id="Layer_2"
   data-name="Layer 2"
+  class:black
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 42.96 22.01"
@@ -17,7 +22,13 @@
 
   .cls-2 {
     fill: transparent;
-    stroke: $black;
+    stroke: $white;
     stroke-width: 0.75px;
+  }
+
+  .black {
+    .cls-2 {
+      stroke: $black;
+    }
   }
 </style>

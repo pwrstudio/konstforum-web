@@ -38,6 +38,19 @@ export const filteredPosts = derived([activeTypePosts, activeTags], ([$activeTyp
     if ($activeTags.length === 0) return $activeTypePosts
     return $activeTypePosts.filter(p => intersection($activeTags, p.tags_sve))
 })
+export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
+    let splitPosts = { evens: [], odds: [] }
+    for (let i = 0; i < $filteredPosts.length; i++) {
+        if (i % 2 === 0) {
+            splitPosts.evens.push($filteredPosts[i]);
+        } else {
+            splitPosts.odds.push($filteredPosts[i]);
+        }
+    }
+    return splitPosts;
+})
+
+
 
 // --- DERIVED: TAG
 export const allTags: Readable<string[]> = derived([rawPosts], ([$rawPosts]) => {

@@ -1,22 +1,24 @@
 <script lang="ts">
+  import EventForm from "$lib/components/EventForm.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import {
-    mapMode,
-    menuActive,
-    filteredPosts,
-    filteredEvents,
-    activeTypeTags,
-    urlPrefix,
-  } from "$lib/stores"
+  import { menuActive, filteredEvents } from "$lib/stores"
   import { onMount } from "svelte"
   import Calendar from "$lib/components/Calendar.svelte"
   import EventItem from "$lib/components/EventItem.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
-  import type { Language } from "$lib/types"
+  import X from "$lib/graphics/X.svelte"
+  import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
+  import { type Language, UIColor } from "$lib/types"
 
   export let language: Language
+
+  let formActive = false
+
+  const toggleForm = () => {
+    formActive = !formActive
+  }
 
   const openMenu = () => {
     menuActive.set(true)
@@ -51,6 +53,22 @@
     {/each}
   </div>
 </div>
+
+{#if formActive}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="close-form" on:click={toggleForm}>
+    <X color={UIColor.White} />
+  </div>
+  <div class="event-form">
+    <EventForm />
+  </div>
+{:else}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="event-form-banner" on:click={toggleForm}>
+    <div class="text">NYTT EVENEMANG?</div>
+    <div class="arrow"><LargeArrowDown /></div>
+  </div>
+{/if}
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
@@ -114,5 +132,47 @@
         padding: 10px;
       }
     }
+  }
+
+  .event-form {
+    position: fixed;
+    left: 66.666666666%;
+    width: 33.333333333%;
+    height: calc(100vh - 70px);
+    padding-bottom: 40px;
+    top: 70px;
+    z-index: 1000;
+    background: $black;
+    color: $white;
+    overflow-y: auto;
+  }
+
+  .event-form-banner {
+    position: fixed;
+    left: 66.666666666%;
+    width: 33.333333333%;
+    padding: 20px 20px;
+    height: 70px;
+    top: 70px;
+    z-index: 1000;
+    background: $black;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    font-size: $FONT_SIZE_MEDIUM;
+    font-family: $COMPRESSED_STACK;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .close-form {
+    position: fixed;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    top: 90px;
+    z-index: 1001;
+    cursor: pointer;
   }
 </style>

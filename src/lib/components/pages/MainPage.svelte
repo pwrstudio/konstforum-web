@@ -7,6 +7,7 @@
     mapMode,
     menuActive,
     filteredPosts,
+    splitPosts,
     activeTypeTags,
     urlPrefix,
   } from "$lib/stores"
@@ -68,8 +69,13 @@
   {#if $mapMode}
     <Map />
   {:else}
-    <div class="masonry-container">
-      {#each $filteredPosts as post (post._id)}
+    <div class="inner evens">
+      {#each $splitPosts.evens as post (post._id)}
+        <Tile {post} {language} />
+      {/each}
+    </div>
+    <div class="inner odds">
+      {#each $splitPosts.odds as post (post._id)}
         <Tile {post} {language} />
       {/each}
     </div>
@@ -88,7 +94,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="post-form-banner" on:click={toggleForm}>
     <div class="text">Var med på Konstforum?</div>
-    <div class="arrow"><LargeArrowDown /></div>
+    <div class="arrow"><LargeArrowDown black={true} /></div>
   </div>
 {/if}
 
@@ -96,7 +102,7 @@
   @import "src/lib/style/variables.scss";
 
   .column {
-    height: 100vh;
+    height: calc(100vh - 60px);
     position: fixed;
     top: 60px;
 
@@ -141,17 +147,22 @@
       left: 33.333333333%;
       width: 66.666666666%;
       display: flex;
-      flex-direction: column;
       background: $lime;
+      overflow-y: auto;
 
       @include screen-size("small") {
         display: none;
       }
 
-      .masonry-container {
-        column-count: 2;
-        column-gap: 20px;
-        padding: 10px;
+      .inner {
+        width: 50%;
+        padding: 15px;
+        padding-bottom: 40px;
+        height: fit-content;
+
+        &.odds {
+          margin-top: 85px;
+        }
       }
     }
   }
@@ -173,6 +184,7 @@
     left: 66.666666666%;
     width: 33.333333333%;
     padding: 20px 20px;
+    height: 70px;
     top: 70px;
     z-index: 1000;
     background: $white;
@@ -182,6 +194,7 @@
     font-family: $COMPRESSED_STACK;
     text-transform: uppercase;
     cursor: pointer;
+    user-select: none;
   }
 
   .close-form {

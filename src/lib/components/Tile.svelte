@@ -38,6 +38,7 @@
     position: relative;
     text-align: center;
     user-select: none;
+    line-height: 0;
 
     // &:nth-child(2) {
     //   margin-top: 100px;
