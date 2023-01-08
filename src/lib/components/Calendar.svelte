@@ -205,7 +205,7 @@
         &.today {
           .number {
             background: $lime;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 50%;
           }
         }

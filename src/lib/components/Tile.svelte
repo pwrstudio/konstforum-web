@@ -40,10 +40,6 @@
     user-select: none;
     line-height: 0;
 
-    // &:nth-child(2) {
-    //   margin-top: 100px;
-    // }
-
     .tile-image {
       width: 100%;
       height: 100%;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PostForm from "$lib/components/PostForm.svelte"
+  import PostForm from "$lib/components/forms/PostForm.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
@@ -205,11 +205,10 @@
   .close-form {
     position: fixed;
     right: 20px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     top: 90px;
     z-index: 1001;
-    background: $white;
     cursor: pointer;
   }
 </style>

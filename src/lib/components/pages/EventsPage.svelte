@@ -1,5 +1,5 @@
 <script lang="ts">
-  import EventForm from "$lib/components/EventForm.svelte"
+  import EventForm from "$lib/components/forms/EventForm.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"

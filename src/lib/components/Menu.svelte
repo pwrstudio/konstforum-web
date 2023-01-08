@@ -1,5 +1,5 @@
 <script lang="ts">
-  import X from "$lib/components/X.svelte"
+  import X from "$lib/graphics/X.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { languageStore, menuActive, urlPrefix } from "$lib/stores"
@@ -61,8 +61,10 @@
   .close {
     z-index: 100001;
     position: fixed;
-    top: 25px;
-    right: 15px;
+    top: 20px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
   }
 
   .menu {

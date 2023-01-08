@@ -4,7 +4,7 @@
   import { menuActive, urlPrefix, languageStore } from "$lib/stores"
   import { onMount } from "svelte"
   import Metadata from "$lib/components/Metadata.svelte"
-  import X from "$lib/components/X.svelte"
+  import X from "$lib/graphics/X.svelte"
   import SinglePostSlideshow from "$lib/components/SinglePostSlideshow.svelte"
   import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
@@ -36,7 +36,7 @@
 
 <Metadata {title} {description} />
 
-<a href={$urlPrefix} data-sveltekit-preload-data>
+<a href={$urlPrefix} class="close" data-sveltekit-preload-data>
   <X />
 </a>
 
@@ -146,5 +146,14 @@
         }
       }
     }
+  }
+
+  .close {
+    z-index: 100001;
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
   }
 </style>

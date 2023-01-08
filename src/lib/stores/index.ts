@@ -6,6 +6,8 @@ export const menuActive = writable(false);
 export const focusedPost = writable("");
 export const mapMode = writable(false);
 export const searchInputActive = writable(false);
+export const isSearch = writable(false);
+export const searchTerm = writable("");
 
 // --- LANGUAGE
 export const languageStore = writable(Language.Swedish);
