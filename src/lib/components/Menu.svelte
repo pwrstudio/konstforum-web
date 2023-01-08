@@ -95,12 +95,7 @@
       display: flex;
       flex-direction: column;
 
-      @include screen-size("small") {
-        width: calc(100vw - 30px);
-      }
-
       a {
-        font-size: $FONT_SIZE_XLARGE;
         line-height: 1em;
         display: inline-block;
         color: inherit;
@@ -110,10 +105,22 @@
         margin-bottom: 20px;
         user-select: none;
         border-bottom: 10px solid $white;
+        font-size: $FONT_SIZE_XLARGE;
 
-        @include screen-size("small") {
-          font-size: 36px;
-        }
+        // @include screen-size("small") {
+        //   font-family: $COMPRESSED_STACK;
+        //   font-size: $FONT_SIZE_XLARGE;
+        // }
+
+        // @include screen-size("medium") {
+        //   font-family: $REGULAR_STACK;
+        //   font-size: $FONT_SIZE_LARGE;
+        // }
+
+        // @include screen-size("large") {
+        //   font-family: $EXPANDED_STACK;
+        //   font-size: $FONT_SIZE_LARGE;
+        // }
       }
     }
   }

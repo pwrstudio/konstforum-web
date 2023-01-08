@@ -59,6 +59,10 @@
     font-family: $EXPANDED_STACK;
     font-size: $FONT_SIZE_NORMAL;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_XSMALL;
+    }
+
     input[type="text"] {
       border: unset;
       border-bottom: 1px solid $black;
@@ -66,6 +70,10 @@
       outline: unset;
       font-family: $EXPANDED_STACK;
       font-size: $FONT_SIZE_NORMAL;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_XSMALL;
+      }
     }
 
     &.search {

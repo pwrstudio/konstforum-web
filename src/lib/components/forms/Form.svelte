@@ -130,7 +130,7 @@
   form {
     margin-left: 20px;
     margin-right: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 
     .divider {
       margin-top: 15px;
@@ -248,7 +248,14 @@
       border-radius: 10px;
       cursor: pointer;
       margin-top: 20px;
-      border: 1px solid currentColor;
+      border: 1px solid $black;
+      background: $white;
+      color: $black;
+
+      &:hover {
+        background: $black;
+        color: $white;
+      }
     }
 
     .upload-container {
@@ -274,7 +281,7 @@
         cursor: pointer;
 
         &.disabled {
-          opacity: 0.5;
+          opacity: 0.3;
           pointer-events: none;
         }
 
@@ -286,9 +293,21 @@
 
     &.inverted {
       color: $white;
+
       input[type="text"] {
         background: $black;
         color: $white;
+      }
+
+      button[type="submit"] {
+        border: 1px solid $white;
+        background: $black;
+        color: $white;
+
+        &:hover {
+          background: $white;
+          color: $black;
+        }
       }
 
       textarea {

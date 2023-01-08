@@ -129,6 +129,7 @@
       @include screen-size("small") {
         left: unset;
         width: 100%;
+        display: none;
       }
 
       .tags {
@@ -155,7 +156,9 @@
       overflow-y: auto;
 
       @include screen-size("small") {
-        display: none;
+        left: unset;
+        width: 100%;
+        min-height: 100vh;
       }
 
       .inner {
@@ -200,6 +203,10 @@
     text-transform: uppercase;
     cursor: pointer;
     user-select: none;
+
+    @include screen-size("small") {
+      display: none;
+    }
   }
 
   .close-form {

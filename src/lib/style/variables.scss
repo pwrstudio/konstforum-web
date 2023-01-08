@@ -35,10 +35,10 @@ $breakpoints: (
     max-width: 800px,
   ),
   "medium": (
-    max-width: 1000px,
+    min-width: 1000px,
   ),
   "large": (
-    max-width: 1600px,
+    min-width: 1600px,
   ),
   "short": (
     max-height: 700px,

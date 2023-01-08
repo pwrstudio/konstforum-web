@@ -22,9 +22,5 @@
       top: 25px;
       right: 20px;
     }
-
-    @include screen-size("small") {
-      top: 80px;
-    }
   }
 </style>

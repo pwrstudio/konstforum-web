@@ -222,6 +222,11 @@
     font-family: $EXPANDED_STACK;
     font-size: $FONT_SIZE_NORMAL;
 
+    @include screen-size("small") {
+      flex-wrap: wrap;
+      padding: 0 70px 0 20px;
+    }
+
     &.post {
       background: $lime;
     }
@@ -230,16 +235,35 @@
       a {
         text-decoration: none;
       }
+      order: 1;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_SMALL;
+      }
     }
 
     .filter {
       display: flex;
+
+      order: 2;
+
+      @include screen-size("small") {
+        order: 3;
+        width: 100%;
+        font-size: $FONT_SIZE_SMALL;
+      }
     }
 
     .toolbar {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      order: 3;
+
+      @include screen-size("small") {
+        order: 2;
+      }
 
       .toolbar-item {
         border: 1px solid $black;
