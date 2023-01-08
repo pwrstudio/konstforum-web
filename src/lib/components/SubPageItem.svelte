@@ -6,11 +6,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<a
-  href={$urlPrefix + subpage.url}
-  data-sveltekit-preload-data
-  class="subpage-item"
->
+<a href={$urlPrefix + subpage.url} data-sveltekit-reload class="subpage-item">
   <div class="bullet" class:active={true} />
   {$languageStore === Language.English ? subpage.englishTitle : subpage.title}
 </a>
