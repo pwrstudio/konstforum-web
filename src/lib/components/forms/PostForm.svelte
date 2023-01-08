@@ -16,7 +16,7 @@
       required: true,
     },
     {
-      type: FieldType.Text,
+      type: FieldType.Email,
       name: "email",
       label: {
         se: "Epost",
@@ -52,7 +52,7 @@
       required: false,
     },
     {
-      type: FieldType.Text,
+      type: FieldType.Url,
       name: "website",
       label: {
         se: "Hemsida",

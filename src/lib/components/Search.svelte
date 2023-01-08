@@ -27,7 +27,7 @@
 <div class="search" class:active={$searchInputActive}>
   {#if $searchInputActive}
     <input
-      type="text"
+      type="search"
       bind:value={term}
       bind:this={inputEl}
       on:keydown={e => {
@@ -63,7 +63,7 @@
       font-size: $FONT_SIZE_XSMALL;
     }
 
-    input[type="text"] {
+    input[type="search"] {
       border: unset;
       border-bottom: 1px solid $black;
       background: transparent;

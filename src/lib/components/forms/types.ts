@@ -1,6 +1,9 @@
 export const enum FieldType {
     Text,
+    Email,
     TextArea,
+    Url,
+    DateTime
 }
 
 export type Field = {

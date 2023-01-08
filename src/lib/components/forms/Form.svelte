@@ -12,10 +12,10 @@
 
   const FORMSPARK_ACTION_URL = "https://submit-form.com/" + formId
 
-  let uploads: UploadType[] = []
+  let uploads: number[] = []
 
   for (let i = 0; i < maxImages; i++) {
-    uploads.push({ file: "image-" + (i + 1), caption: "caption-" + (i + 1) })
+    uploads.push(i + 1)
   }
 
   const addUploadField = () => {
@@ -71,6 +71,27 @@
           name={field.name}
           required={field.required}
         />
+      {:else if field.type === FieldType.Email}
+        <input
+          type="email"
+          id={field.name}
+          name={field.name}
+          required={field.required}
+        />
+      {:else if field.type === FieldType.Url}
+        <input
+          type="url"
+          id={field.name}
+          name={field.name}
+          required={field.required}
+        />
+      {:else if field.type === FieldType.DateTime}
+        <input
+          type="datetime-local"
+          id={field.name}
+          name={field.name}
+          required={field.required}
+        />
       {:else if field.type === FieldType.TextArea}
         <textarea id={field.name} name={field.name} required={field.required} />
       {/if}
@@ -82,18 +103,24 @@
   {#each uploads as upload, i}
     <div class="upload-container" class:visible={i < visibleImages}>
       <div class="form-section">
-        <label for={upload.file}>Bild #{i + 1}</label>
+        <label for={`upload-${upload}-file`}>Bild #{i + 1}</label>
         <!-- svelte-ignore a11y-unknown-role -->
         <input
           type="hidden"
-          id={upload.file}
-          name={upload.file}
+          id={`upload-${upload}-file`}
+          name={`upload[${upload}].file`}
           role="uploadcare-uploader"
           data-public-key="cc687b96511581c9f7b5"
         />
         <div class="form-section">
-          <label for={upload.caption}>Bildtext för bild #{i + 1}</label>
-          <input type="text" id={upload.caption} name={upload.caption} />
+          <label for={`upload-${upload}-caption`}>
+            Bildtext för bild #{i + 1}
+          </label>
+          <input
+            type="text"
+            id={`upload-${upload}-caption`}
+            name={`upload[${upload}].caption`}
+          />
         </div>
       </div>
     </div>
@@ -215,7 +242,7 @@
       margin-top: 15px;
     }
 
-    input[type="text"] {
+    input {
       width: 100%;
       line-height: 1.5em;
       font-size: $FONT_SIZE_MEDIUM;
@@ -294,9 +321,10 @@
     &.inverted {
       color: $white;
 
-      input[type="text"] {
+      input {
         background: $black;
         color: $white;
+        color-scheme: dark;
       }
 
       button[type="submit"] {

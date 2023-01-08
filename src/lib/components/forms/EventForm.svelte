@@ -16,7 +16,7 @@
       required: true,
     },
     {
-      type: FieldType.Text,
+      type: FieldType.Email,
       name: "email",
       label: {
         se: "Epost (kontaktperson)",
@@ -34,7 +34,7 @@
       required: true,
     },
     {
-      type: FieldType.Text,
+      type: FieldType.DateTime,
       name: "dateTime",
       label: {
         se: "Datum och tid",
@@ -52,7 +52,7 @@
       required: true,
     },
     {
-      type: FieldType.Text,
+      type: FieldType.Url,
       name: "website",
       label: {
         se: "Hemsida",
