@@ -4,7 +4,8 @@
   import { urlPrefix, languageStore, focusedPost } from "$lib/stores"
   import { renderBlockText } from "$lib/modules/sanity"
   import { Language } from "$lib/types"
-  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
+  import MidArrowRight from "$lib/graphics/MidArrowRight.svelte"
+  import MidArrowLeft from "$lib/graphics/MidArrowLeft.svelte"
   import Image from "$lib/components/Image.svelte"
 
   export let post
@@ -49,26 +50,33 @@
       </div>
     </div>
     <div class="right">
-      <LargeArrowRight />
+      {#if extended}
+        <MidArrowLeft />
+      {:else}
+        <MidArrowRight />
+      {/if}
     </div>
   </div>
 
   {#if extended}
-    <div class="post-item-body">
+    <a
+      href={$urlPrefix + "post/" + post.slug?.current}
+      data-sveltekit-preload-data
+      class="post-item-body"
+    >
       <div class="image">
         <Image imageDyad={post.mainImage} width={300} />
       </div>
       <div class="text">
         {#if content}
           {@html renderBlockText(content)}
-          <a
-            href={$urlPrefix + "post/" + post.slug?.current}
-            data-sveltekit-preload-data
-            class="read-more">Läs vidare</a
-          >
         {/if}
+        <div class="read-more">
+          <div>Läs vidare</div>
+          <MidArrowRight />
+        </div>
       </div>
-    </div>
+    </a>
   {/if}
 </div>
 
@@ -90,23 +98,32 @@
       justify-content: space-between;
 
       .right {
-        width: 30px;
-        opacity: 0;
+        display: flex;
+        align-items: center;
+        padding-bottom: 5px;
       }
     }
 
     .post-item-body {
       display: flex;
       padding-bottom: 20px;
+      text-decoration: none;
 
       .image {
         width: 50%;
         padding-right: 10px;
+        border-radius: 10px;
       }
 
       .text {
         font-size: $FONT_SIZE_SMALL;
         width: 50%;
+
+        .read-more {
+          div {
+            margin-bottom: 3px;
+          }
+        }
       }
     }
 
@@ -117,5 +134,9 @@
 
   :global(.text p:first-child) {
     margin-top: 0;
+  }
+
+  :global(.image img) {
+    border-radius: 10px;
   }
 </style>

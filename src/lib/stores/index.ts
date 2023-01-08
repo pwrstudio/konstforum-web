@@ -5,6 +5,7 @@ import { Language } from "$lib/types";
 export const menuActive = writable(false);
 export const focusedPost = writable("");
 export const mapMode = writable(false);
+export const searchInputActive = writable(false);
 
 // --- LANGUAGE
 export const languageStore = writable(Language.Swedish);

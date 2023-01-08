@@ -57,6 +57,9 @@
         {#if content}
           <div>{@html renderBlockText(content)}</div>
         {/if}
+        <div class="contact">
+          {$languageStore === Language.English ? "CONTACT" : "KONTAKTA"}
+        </div>
       </div>
     </div>
   </div>
@@ -128,6 +131,16 @@
 
             @include screen-size("small") {
               padding-left: unset;
+            }
+
+            .contact {
+              padding: 5px 10px;
+              border: 1px solid $black;
+              border-radius: 10px;
+              font-family: $EXPANDED_STACK;
+              font-size: $FONT_SIZE_XSMALL;
+              display: inline-block;
+              cursor: pointer;
             }
           }
         }

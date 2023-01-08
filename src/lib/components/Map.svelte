@@ -107,5 +107,9 @@
     background: $black;
     border-radius: 50%;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 </style>

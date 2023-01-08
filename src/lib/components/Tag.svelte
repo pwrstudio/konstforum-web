@@ -21,13 +21,15 @@
   @import "src/lib/style/variables.scss";
 
   .tag {
+    font-family: $EXPANDED_STACK;
+    text-transform: uppercase;
     font-size: $FONT_SIZE_SMALL;
     display: inline-block;
     border: 1px solid $white;
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     user-select: none;
     cursor: pointer;
 

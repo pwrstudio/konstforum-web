@@ -47,6 +47,7 @@
     .tile-image {
       width: 100%;
       height: 100%;
+      mix-blend-mode: multiply;
 
       img {
         width: 100%;
@@ -62,8 +63,9 @@
       position: absolute;
       top: 0;
       left: 0;
+      padding: 10px;
       background: $black;
-      color: $white;
+      color: $lime;
       justify-content: center;
       align-items: center;
       font-family: $COMPRESSED_STACK;

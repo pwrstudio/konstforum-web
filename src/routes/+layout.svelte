@@ -3,6 +3,7 @@
   import Menu from "$lib/components/Menu.svelte"
   import FilterItem from "$lib/components/FilterItem.svelte"
   import EventFilterItem from "$lib/components/EventFilterItem.svelte"
+  import Search from "$lib/components/Search.svelte"
   import SubPageItem from "$lib/components/SubPageItem.svelte"
   import { Language } from "$lib/types"
   import {
@@ -12,6 +13,7 @@
     rawPosts,
     languageStore,
     rawEvents,
+    searchInputActive,
   } from "$lib/stores"
   export let data
   const { posts, events } = data
@@ -91,7 +93,14 @@
   }
 
   const aboutPages = ["/om", "/om/[slug]", "/en/om", "/en/om/[slug]"]
-  const postPages = ["/", "/en"]
+  const postPages = [
+    "/",
+    "/en",
+    "/search",
+    "/search/[slug]",
+    "/en/search",
+    "/en/search/[slug]",
+  ]
   const eventPages = ["/evenemang", "/en/evenemang"]
 </script>
 
@@ -102,14 +111,16 @@
       <a href="/" data-sveltekit-preload-data>Konstforum i Skåne</a>
     </div>
     <!-- FILTER -->
-    <div class="filter">
-      {#each aboutSubPages as subpage}
-        <SubPageItem {subpage} />
-      {/each}
-    </div>
+    {#if !$searchInputActive}
+      <div class="filter">
+        {#each aboutSubPages as subpage}
+          <SubPageItem {subpage} />
+        {/each}
+      </div>
+    {/if}
     <!-- TOOLBAR -->
     <div class="toolbar">
-      <div class="toolbar-item search">Sök</div>
+      <Search />
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="toolbar-item language"
@@ -130,20 +141,22 @@
     </div>
     <!-- FILTER -->
     <div class="filter">
-      {#each filterList as filterItem}
-        <FilterItem {filterItem} />
-      {/each}
+      {#if !$searchInputActive}
+        {#each filterList as filterItem}
+          <FilterItem {filterItem} />
+        {/each}
+      {/if}
     </div>
     <!-- TOOLBAR -->
     <div class="toolbar">
-      <div class="toolbar-item search">Sök</div>
+      <Search />
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="toolbar-item map-mode"
         class:active={$mapMode}
         on:click={toggleMapMode}
       >
-        Karta
+        {$languageStore === Language.English ? "MAP" : "KARTA"}
       </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
@@ -165,13 +178,15 @@
     </div>
     <!-- FILTER -->
     <div class="filter">
-      {#each eventFilterList as filterItem}
-        <EventFilterItem {filterItem} />
-      {/each}
+      {#if !$searchInputActive}
+        {#each eventFilterList as filterItem}
+          <EventFilterItem {filterItem} />
+        {/each}
+      {/if}
     </div>
     <!-- TOOLBAR -->
     <div class="toolbar">
-      <div class="toolbar-item search">Sök</div>
+      <Search />
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="toolbar-item language"
@@ -235,14 +250,8 @@
         justify-content: center;
         align-items: center;
 
-        &.search {
-          opacity: 0.6;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-
         &.map-mode {
-          font-size: $FONT_SIZE_SMALL;
+          font-size: $FONT_SIZE_XSMALL;
           user-select: none;
           cursor: pointer;
 

@@ -22,6 +22,8 @@
   import type { Language } from "$lib/types"
 
   export let language: Language
+  export let isSearch = false
+  export let data
 
   let formActive = false
 
@@ -57,8 +59,10 @@
   </div>
   <!-- POST LIST  -->
   <div class="post-list">
-    <div class="counter">List of {$filteredPosts.length}</div>
-    {#each $filteredPosts as post (post._id)}
+    <div class="counter">
+      List of {isSearch ? data.posts.length : $filteredPosts.length}
+    </div>
+    {#each isSearch ? data.posts : $filteredPosts as post (post._id)}
       <PostItem {post} />
     {/each}
   </div>
@@ -70,12 +74,12 @@
     <Map />
   {:else}
     <div class="inner evens">
-      {#each $splitPosts.evens as post (post._id)}
+      {#each isSearch ? data.posts : $splitPosts.evens as post (post._id)}
         <Tile {post} {language} />
       {/each}
     </div>
     <div class="inner odds">
-      {#each $splitPosts.odds as post (post._id)}
+      {#each isSearch ? data.posts : $splitPosts.odds as post (post._id)}
         <Tile {post} {language} />
       {/each}
     </div>
@@ -104,7 +108,7 @@
   .column {
     height: calc(100vh - 60px);
     position: fixed;
-    top: 60px;
+    top: 70px;
 
     @include screen-size("small") {
       height: auto;
@@ -119,8 +123,8 @@
       overflow-y: auto;
       color: $white;
       padding-left: 35px;
-      padding-right: 15px;
-      padding-top: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
 
       @include screen-size("small") {
         left: unset;
@@ -128,7 +132,7 @@
       }
 
       .tags {
-        margin-bottom: 20px;
+        margin-bottom: 5px;
       }
 
       .post-list {
@@ -157,6 +161,7 @@
       .inner {
         width: 50%;
         padding: 15px;
+        padding-top: 0;
         padding-bottom: 40px;
         height: fit-content;
 
