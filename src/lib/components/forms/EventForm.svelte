@@ -52,6 +52,15 @@
       required: true,
     },
     {
+      type: FieldType.TextArea,
+      name: "about-english",
+      label: {
+        se: "Om evenemanget (engelska)",
+        en: "About the event (English)",
+      },
+      required: true,
+    },
+    {
       type: FieldType.Url,
       name: "website",
       label: {
@@ -71,6 +80,65 @@
     },
   ]
 
+  const tags = [
+    {
+      label: {
+        sve: "Open call",
+        eng: "Open call",
+      },
+      value: "open-call",
+    },
+    {
+      label: {
+        sve: "Vernissage",
+        eng: "Opening",
+      },
+      value: "vernissage",
+    },
+    {
+      label: {
+        sve: "Finissage",
+        eng: "closing event",
+      },
+      value: "finissage",
+    },
+    {
+      label: {
+        sve: "Performance",
+        eng: "Performance",
+      },
+      value: "performance",
+    },
+    {
+      label: {
+        sve: "Workshop",
+        eng: "Workshop",
+      },
+      value: "Workshop",
+    },
+    {
+      label: {
+        sve: "Läsning",
+        eng: "Reading",
+      },
+      value: "läsning",
+    },
+    {
+      label: {
+        sve: "Föreläsning",
+        eng: "Lecture",
+      },
+      value: "föreläsning",
+    },
+    {
+      label: {
+        sve: "Konstnärssamtal",
+        eng: "Artist Talk",
+      },
+      value: "konstnärssamtal",
+    },
+  ]
+
   const title = "Nytt evenemang?"
 
   const maxImages = 5
@@ -78,4 +146,4 @@
   const inverted = true
 </script>
 
-<Form {formId} {fields} {title} {maxImages} {inverted} />
+<Form {formId} {fields} {tags} {title} {maxImages} {inverted} />

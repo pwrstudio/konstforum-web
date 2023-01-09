@@ -1,9 +1,12 @@
 <script lang="ts">
-  import type { Field, PostType, UploadType } from "./types"
+  import { languageStore } from "$lib/stores"
+  import { Language } from "$lib/types"
+  import type { Field, PostType, Tag } from "./types"
   import { FieldType } from "./types"
   export let formId: string
   export let postTypes: PostType[] = []
   export let fields: Field[]
+  export let tags: Tag[]
   export let title: string
   export let maxImages = 5
   export let inverted = false
@@ -51,7 +54,11 @@
               value={type.name}
               checked={i === 0}
             />
-            <label for={type.name}>{type.label.se}</label>
+            <label for={type.name}>
+              {$languageStore === Language.English
+                ? type.label.en
+                : type.label.se}
+            </label>
           </div>
         {/each}
       </fieldset>
@@ -62,8 +69,11 @@
   <!-- FIELDS -->
   {#each fields as field}
     <div class="form-section">
-      <label for={field.name}>{field.label.se}{field.required ? "*" : ""}</label
-      >
+      <label for={field.name}>
+        {$languageStore === Language.English
+          ? field.label.en
+          : field.label.se}{field.required ? "*" : ""}
+      </label>
       {#if field.type === FieldType.Text}
         <input
           type="text"
@@ -99,11 +109,34 @@
   {/each}
   <!-------------------------------------->
   <div class="divider" />
+  <!-- TAGS-->
+  {#if tags && tags.length > 0}
+    <div class="form-section">
+      <fieldset>
+        {#each tags as tag, i}
+          <div class="checkbox-container">
+            <input type="checkbox" name={tag.id} value={tag.id} />
+            <label for={tag.id}>
+              {$languageStore === Language.English
+                ? tag.label.eng
+                : tag.label.sve}
+            </label>
+          </div>
+        {/each}
+      </fieldset>
+    </div>
+    <!-------------------------------------->
+    <div class="divider" />
+  {/if}
   <!-- UPLOADS -->
   {#each uploads as upload, i}
     <div class="upload-container" class:visible={i < visibleImages}>
       <div class="form-section">
-        <label for={`upload-${upload}-file`}>Bild #{i + 1}</label>
+        <label for={`upload-${upload}-file`}>
+          {$languageStore === Language.English
+            ? "Image " + (i + 1)
+            : "Bild " + (i + 1)}
+        </label>
         <!-- svelte-ignore a11y-unknown-role -->
         <input
           type="hidden"
@@ -114,7 +147,9 @@
         />
         <div class="form-section">
           <label for={`upload-${upload}-caption`}>
-            Bildtext för bild #{i + 1}
+            {$languageStore === Language.English
+              ? "Caption for image " + (i + 1)
+              : "Bildtext för bild " + (i + 1)}
           </label>
           <input
             type="text"
@@ -132,7 +167,7 @@
       class:disabled={visibleImages === 1}
       on:click={removeUploadField}
     >
-      - Bild
+      {$languageStore === Language.English ? "- Image " : "- Bild "}
     </div>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
@@ -140,7 +175,7 @@
       class:disabled={visibleImages === maxImages}
       on:click={addUploadField}
     >
-      + Bild
+      {$languageStore === Language.English ? "+ Image " : "+ Bild "}
     </div>
   </div>
   <!-------------------------------------->
@@ -190,6 +225,54 @@
       margin: 0;
 
       .radio-container {
+        display: grid;
+        grid-template-columns: 1em auto;
+        gap: 0.5em;
+
+        input[type="radio"] {
+          /* Add if not using autoprefixer */
+          -webkit-appearance: none;
+          appearance: none;
+          /* For iOS < 15 to remove gradient background */
+          background-color: #fff;
+          /* Not removed via appearance */
+          margin: 0;
+          font: inherit;
+          color: currentColor;
+          width: 1.15em;
+          height: 1.15em;
+          border: 0.15em solid currentColor;
+          border-radius: 50%;
+          transform: translateY(0.3em);
+          display: grid;
+          place-content: center;
+        }
+
+        input[type="radio"]::before {
+          content: "";
+          width: 0.65em;
+          height: 0.65em;
+          border-radius: 50%;
+          transform: scale(0);
+          box-shadow: inset 1em 1em $black;
+        }
+
+        input[type="radio"]:checked::before {
+          transform: scale(1);
+        }
+
+        // input[type="radio"]:focus {
+        //   outline: max(2px, 0.15em) solid currentColor;
+        //   outline-offset: max(2px, 0.15em);
+        // }
+
+        label {
+          display: inline;
+          user-select: none;
+        }
+      }
+
+      .checkbox-container {
         display: grid;
         grid-template-columns: 1em auto;
         gap: 0.5em;

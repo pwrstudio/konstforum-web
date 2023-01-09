@@ -74,4 +74,3 @@ export interface MenuItem {
     title: { sve: string, eng: string }
     link: string
 }
-

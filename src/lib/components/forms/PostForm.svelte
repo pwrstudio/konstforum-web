@@ -43,6 +43,15 @@
       required: true,
     },
     {
+      type: FieldType.TextArea,
+      name: "bio-english",
+      label: {
+        se: "Biografi (engelska)",
+        en: "Biography (english)",
+      },
+      required: true,
+    },
+    {
       type: FieldType.Text,
       name: "tags",
       label: {

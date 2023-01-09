@@ -24,7 +24,10 @@ export type PostType = {
     }
 }
 
-export type UploadType = {
-    file: string
-    caption: string
+export type Tag = {
+    label: {
+        sve: string
+        eng: string
+    }
+    id: string
 }
