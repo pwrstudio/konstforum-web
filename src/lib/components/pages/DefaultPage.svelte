@@ -8,23 +8,24 @@
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language } from "$lib/types"
   export let data
-  const { post } = data
+  const { posts } = data
 
   let title: string
   let content: string
   let description: string
 
-  $: title = $languageStore === Language.English ? post.title_eng : post.title
+  $: title =
+    $languageStore === Language.English ? "About Konstforum" : "Om Konstforum"
 
   $: content =
     $languageStore === Language.English
-      ? post.content_eng.content
-      : post.content_sve.content
+      ? posts[0].content_eng.content
+      : posts[0].content_sve.content
 
   $: description =
     $languageStore === Language.English
-      ? toPlainText(post.content_eng.content)
-      : toPlainText(post.content_sve.content)
+      ? toPlainText(posts[0].content_eng.content)
+      : toPlainText(posts[0].content_sve.content)
 
   const openMenu = () => {
     menuActive.set(true)
@@ -47,11 +48,21 @@
 <div class="default-page">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="content">
-      <!-- CENTER -->
-      <div class="center">
-        <h2>{title}</h2>
-        <div>{@html renderBlockText(content)}</div>
-      </div>
+      {#each posts as post}
+        <!-- CENTER -->
+        <div class="center" id={post._id}>
+          <h2>
+            {$languageStore === Language.English ? post.title_eng : post.title}
+          </h2>
+          <div>
+            {@html renderBlockText(
+              $languageStore === Language.English
+                ? post.content_eng.content
+                : post.content_sve.content
+            )}
+          </div>
+        </div>
+      {/each}
     </div>
   </div>
 </div>
@@ -93,6 +104,12 @@
           margin-left: auto;
           margin-right: auto;
           line-height: 1em;
+          height: fit-content;
+          margin-top: 40px;
+
+          h2 {
+            padding-top: 20px;
+          }
         }
       }
     }

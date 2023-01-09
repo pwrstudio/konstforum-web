@@ -24,17 +24,17 @@
     {
       title: "Om",
       englishTitle: "About",
-      url: "om",
+      id: "#about",
     },
     {
       title: "FAQ",
       englishTitle: "FAQ",
-      url: "om/faq",
+      id: "#faq",
     },
     {
       title: "Kontakt",
       englishTitle: "Contact",
-      url: "om/kontakt",
+      id: "#kontakt",
     },
   ]
 
@@ -231,5 +231,9 @@
   body,
   html {
     font-family: $REGULAR_STACK;
+  }
+
+  * {
+    scroll-behavior: smooth;
   }
 </style>
