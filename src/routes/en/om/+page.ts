@@ -3,8 +3,9 @@ import { loadData } from "$lib/modules/sanity.js"
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
-    const post = await loadData("*[_id == 'about'][0]")
+    const posts = await loadData("*[_id in ['about', 'faq', 'kontakt']]")
+    console.log(posts)
     return {
-        post
+        posts
     };
 }
