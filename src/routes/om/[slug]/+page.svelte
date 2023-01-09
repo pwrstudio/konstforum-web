@@ -6,4 +6,6 @@
   export let data
 </script>
 
-<DefaultPage {data} />
+{#key data}
+  <DefaultPage {data} />
+{/key}

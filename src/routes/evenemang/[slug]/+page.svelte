@@ -4,4 +4,6 @@
   export let data: { project: ProjectType }
 </script>
 
-<ProjectsSinglePage {data} language={Language.Swedish} />
+{#key data}
+  <ProjectsSinglePage {data} language={Language.Swedish} />
+{/key}

@@ -6,4 +6,6 @@
   export let data: any
 </script>
 
-<MainPage {data} language={Language.Swedish} isSearch={true} />
+{#key data}
+  <MainPage {data} language={Language.Swedish} isSearch={true} />
+{/key}

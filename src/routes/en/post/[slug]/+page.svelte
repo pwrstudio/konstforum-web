@@ -6,4 +6,6 @@
   export let data
 </script>
 
-<SinglePost {data} language={Language.English} />
+{#key data}
+  <SinglePost {data} language={Language.English} />
+{/key}
