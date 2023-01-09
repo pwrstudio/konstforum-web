@@ -5,50 +5,51 @@
   import { languageStore, menuActive, urlPrefix } from "$lib/stores"
   import { Language, type MenuItem, UIColor } from "$lib/types"
 
-  const menuItems: {
-    sve: MenuItem[]
-    eng: MenuItem[]
-  } = {
-    sve: [
-      {
-        title: "Evenemang och Projekt",
-        link: "evenemang",
+  const menuItems: MenuItem[] = [
+    {
+      title: {
+        sve: "Verksamma",
+        eng: "Participants",
       },
-      {
-        title: "Om Konstforum",
-        link: "om",
+      link: "post",
+    },
+    {
+      title: {
+        sve: "Evenemang",
+        eng: "Events",
       },
-    ],
-    eng: [
-      {
-        title: "Events and Projects",
-        link: "evenemang",
+      link: "evenemang",
+    },
+    {
+      title: {
+        sve: "Om Konstforum",
+        eng: "About Konstforum",
       },
-      {
-        title: "About Konstforum",
-        link: "om",
-      },
-    ],
-  }
+      link: "om",
+    },
+  ]
 
   const closeMenu = () => {
     menuActive.set(false)
   }
-
-  let activeMenuItems: MenuItem[]
-  $: activeMenuItems =
-    $languageStore === Language.English ? menuItems.eng : menuItems.sve
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="close" on:click={closeMenu}><X color={UIColor.White} /></div>
 
-<div class="menu" in:fade={{ easing: quadOut, duration: 400 }}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+  class="menu"
+  on:click={closeMenu}
+  in:fade={{ easing: quadOut, duration: 400 }}
+>
   <div class="inner">
-    {#each activeMenuItems as item}
+    {#each menuItems as item}
       <div>
         <a href={$urlPrefix + item.link} data-sveltekit-preload-data>
-          {item.title}
+          {$languageStore === Language.English
+            ? item.title.eng
+            : item.title.sve}
         </a>
       </div>
     {/each}
@@ -96,7 +97,7 @@
       flex-direction: column;
 
       a {
-        line-height: 1em;
+        line-height: 1.2em;
         display: inline-block;
         color: inherit;
         text-decoration: none;
@@ -106,6 +107,7 @@
         user-select: none;
         border-bottom: 10px solid $white;
         font-size: $FONT_SIZE_XLARGE;
+        word-spacing: 0.05em;
 
         // @include screen-size("small") {
         //   font-family: $COMPRESSED_STACK;

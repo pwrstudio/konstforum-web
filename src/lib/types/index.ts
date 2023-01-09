@@ -71,7 +71,7 @@ export interface ArtistsType {
 }
 
 export interface MenuItem {
-    title: string
+    title: { sve: string, eng: string }
     link: string
 }
 

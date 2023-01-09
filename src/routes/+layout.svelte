@@ -95,6 +95,8 @@
   const aboutPages = ["/om", "/om/[slug]", "/en/om", "/en/om/[slug]"]
   const postPages = [
     "/",
+    "/post",
+    "/en/post",
     "/en",
     "/search",
     "/search/[slug]",
