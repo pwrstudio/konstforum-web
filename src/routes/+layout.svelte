@@ -5,13 +5,12 @@
   import EventFilterItem from "$lib/components/EventFilterItem.svelte"
   import Search from "$lib/components/Search.svelte"
   import SubPageItem from "$lib/components/SubPageItem.svelte"
-  import { Language } from "$lib/types"
+  import LanguageSwitch from "$lib/components/LanguageSwitch.svelte"
+  import MapModeSwitch from "$lib/components/MapModeSwitch.svelte"
   import {
-    mapMode,
     menuActive,
     activeTypes,
     rawPosts,
-    languageStore,
     rawEvents,
     searchInputActive,
   } from "$lib/stores"
@@ -80,18 +79,6 @@
     },
   ]
 
-  const toggleLanguage = () => {
-    if ($languageStore === Language.English) {
-      languageStore.set(Language.Swedish)
-    } else {
-      languageStore.set(Language.English)
-    }
-  }
-
-  const toggleMapMode = () => {
-    mapMode.set(!$mapMode)
-  }
-
   const aboutPages = ["/om", "/om/[slug]", "/en/om", "/en/om/[slug]"]
   const postPages = [
     "/",
@@ -123,14 +110,7 @@
     <!-- TOOLBAR -->
     <div class="toolbar">
       <Search />
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        class="toolbar-item language"
-        class:english={$languageStore === Language.English}
-        on:click={toggleLanguage}
-      >
-        EN
-      </div>
+      <LanguageSwitch />
     </div>
   </nav>
 {/if}
@@ -152,22 +132,8 @@
     <!-- TOOLBAR -->
     <div class="toolbar">
       <Search />
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        class="toolbar-item map-mode"
-        class:active={$mapMode}
-        on:click={toggleMapMode}
-      >
-        {$languageStore === Language.English ? "MAP" : "KARTA"}
-      </div>
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        class="toolbar-item language"
-        class:english={$languageStore === Language.English}
-        on:click={toggleLanguage}
-      >
-        EN
-      </div>
+      <MapModeSwitch />
+      <LanguageSwitch />
     </div>
   </nav>
 {/if}
@@ -189,14 +155,7 @@
     <!-- TOOLBAR -->
     <div class="toolbar">
       <Search />
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div
-        class="toolbar-item language"
-        class:english={$languageStore === Language.English}
-        on:click={toggleLanguage}
-      >
-        EN
-      </div>
+      <LanguageSwitch />
     </div>
   </nav>
 {/if}
@@ -265,42 +224,6 @@
 
       @include screen-size("small") {
         order: 2;
-      }
-
-      .toolbar-item {
-        border: 1px solid $black;
-        border-radius: 20px;
-        padding: 10px;
-        margin-right: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &.map-mode {
-          font-size: $FONT_SIZE_XSMALL;
-          user-select: none;
-          cursor: pointer;
-
-          &.active {
-            background: $black;
-            color: $white;
-          }
-        }
-
-        &.language {
-          font-size: $FONT_SIZE_XSMALL;
-          user-select: none;
-          cursor: pointer;
-          padding: unset;
-          height: 25px;
-          width: 25px;
-          border-radius: 100%;
-
-          &.english {
-            background: $black;
-            color: $white;
-          }
-        }
       }
     }
   }
