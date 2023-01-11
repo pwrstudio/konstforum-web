@@ -50,14 +50,12 @@
   }
 
   const makeDate = (monthObject: Month, day: number) => {
-    console.log(`${monthObject.year}-${pad(monthObject.index + 1)}-${day}`)
     return Date.parse(
       `${monthObject.year}-${pad(monthObject.index + 1)}-${day}`
     )
   }
 
   const makeMonth = (d: number) => {
-    console.log(d)
     let monthObject: Month = {
       index: getMonth(d),
       name: format(d, "MMMM"),
@@ -83,7 +81,6 @@
       newDay.today = isSameDay(new Date(), newDay.date)
       monthObject.days.push(newDay)
     }
-    console.log(monthObject)
     return monthObject
   }
 

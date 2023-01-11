@@ -4,4 +4,6 @@
   export let data
 </script>
 
-<EventsPage {data} language={Language.Swedish} />
+{#key data}
+  <EventsPage {data} language={Language.Swedish} />
+{/key}

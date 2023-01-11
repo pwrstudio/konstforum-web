@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { languageStore } from "$lib/stores"
+  import { languageStore, categories } from "$lib/stores"
   import { Language } from "$lib/types"
   import type { Field, PostType, Tag } from "./types"
   import { FieldType } from "./types"
   export let formId: string
   export let postTypes: PostType[] = []
   export let fields: Field[]
-  export let tags: Tag[]
   export let title: string
   export let maxImages = 5
   export let inverted = false
 
   let visibleImages = 1
+  let activePostType = "artist"
 
   const FORMSPARK_ACTION_URL = "https://submit-form.com/" + formId
 
@@ -32,6 +32,10 @@
       visibleImages--
     }
   }
+
+  let tags: Tag[] = []
+  $: tags =
+    postTypes.length === 0 ? $categories["event"] : $categories[activePostType]
 </script>
 
 <!-- <form on:submit|preventDefault={onSubmit}> -->
@@ -48,6 +52,7 @@
         {#each postTypes as type, i}
           <div class="radio-container">
             <input
+              bind:group={activePostType}
               type="radio"
               name="type"
               id={type.name}
@@ -68,44 +73,50 @@
   {/if}
   <!-- FIELDS -->
   {#each fields as field}
-    <div class="form-section">
-      <label for={field.name}>
-        {$languageStore === Language.English
-          ? field.label.en
-          : field.label.se}{field.required ? "*" : ""}
-      </label>
-      {#if field.type === FieldType.Text}
-        <input
-          type="text"
-          id={field.name}
-          name={field.name}
-          required={field.required}
-        />
-      {:else if field.type === FieldType.Email}
-        <input
-          type="email"
-          id={field.name}
-          name={field.name}
-          required={field.required}
-        />
-      {:else if field.type === FieldType.Url}
-        <input
-          type="url"
-          id={field.name}
-          name={field.name}
-          required={field.required}
-        />
-      {:else if field.type === FieldType.DateTime}
-        <input
-          type="datetime-local"
-          id={field.name}
-          name={field.name}
-          required={field.required}
-        />
-      {:else if field.type === FieldType.TextArea}
-        <textarea id={field.name} name={field.name} required={field.required} />
-      {/if}
-    </div>
+    {#if field.exclusiveTo === undefined || field.exclusiveTo === activePostType}
+      <div class="form-section">
+        <label for={field.name}>
+          {$languageStore === Language.English
+            ? field.label.en
+            : field.label.se}{field.required ? "*" : ""}
+        </label>
+        {#if field.type === FieldType.Text}
+          <input
+            type="text"
+            id={field.name}
+            name={field.name}
+            required={field.required}
+          />
+        {:else if field.type === FieldType.Email}
+          <input
+            type="email"
+            id={field.name}
+            name={field.name}
+            required={field.required}
+          />
+        {:else if field.type === FieldType.Url}
+          <input
+            type="url"
+            id={field.name}
+            name={field.name}
+            required={field.required}
+          />
+        {:else if field.type === FieldType.DateTime}
+          <input
+            type="datetime-local"
+            id={field.name}
+            name={field.name}
+            required={field.required}
+          />
+        {:else if field.type === FieldType.TextArea}
+          <textarea
+            id={field.name}
+            name={field.name}
+            required={field.required}
+          />
+        {/if}
+      </div>
+    {/if}
   {/each}
   <!-------------------------------------->
   <div class="divider" />

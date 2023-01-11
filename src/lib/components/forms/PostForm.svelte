@@ -34,6 +34,16 @@
       required: true,
     },
     {
+      type: FieldType.DateTime,
+      name: "dateTime",
+      label: {
+        se: "Datum och tid",
+        en: "Date and time",
+      },
+      required: true,
+      exclusiveTo: "project",
+    },
+    {
       type: FieldType.TextArea,
       name: "bio",
       label: {
@@ -53,12 +63,13 @@
     },
     {
       type: FieldType.Text,
-      name: "tags",
+      name: "openingHours",
       label: {
-        se: "Taggar",
-        en: "Tags",
+        se: "Öppettider",
+        en: "Opening hours",
       },
       required: false,
+      exclusiveTo: "organisation",
     },
     {
       type: FieldType.Url,

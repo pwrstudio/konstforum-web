@@ -13,7 +13,8 @@ export type Field = {
         se: string
         en: string
     },
-    required: boolean
+    required: boolean,
+    exclusiveTo?: string
 }
 
 export type PostType = {
@@ -28,6 +29,10 @@ export type Tag = {
     label: {
         sve: string
         eng: string
-    }
+    },
     id: string
+}
+
+export type TagsList = {
+    [id: string]: Tag[];
 }

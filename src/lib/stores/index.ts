@@ -8,6 +8,7 @@ export const mapMode = writable(false);
 export const searchInputActive = writable(false);
 export const isSearch = writable(false);
 export const searchTerm = writable("");
+export const categories = writable({})
 
 // --- LANGUAGE
 export const languageStore = writable(Language.Swedish);
@@ -52,8 +53,6 @@ export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
     }
     return splitPosts;
 })
-
-
 
 // --- DERIVED: TAG
 export const allTags: Readable<string[]> = derived([rawPosts], ([$rawPosts]) => {

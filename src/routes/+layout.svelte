@@ -13,12 +13,38 @@
     rawPosts,
     rawEvents,
     searchInputActive,
+    categories,
   } from "$lib/stores"
   export let data
-  const { posts, events } = data
+  const {
+    posts,
+    events,
+    categoriesEvent,
+    categoriesArtist,
+    categoriesOrganisation,
+    categoriesParticipant,
+    categoriesProject,
+  } = data
   rawPosts.set(posts)
   rawEvents.set(events)
   activeTypes.set(["artist", "organization", "participant", "project"])
+  categories.set({
+    event: categoriesEvent.categories.map(c => {
+      return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
+    }),
+    artist: categoriesArtist.categories.map(c => {
+      return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
+    }),
+    organisation: categoriesOrganisation.categories.map(c => {
+      return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
+    }),
+    participant: categoriesParticipant.categories.map(c => {
+      return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
+    }),
+    project: categoriesProject.categories.map(c => {
+      return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
+    }),
+  })
 
   const aboutSubPages = [
     {
