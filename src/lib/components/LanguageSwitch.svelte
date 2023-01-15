@@ -28,6 +28,11 @@
     justify-content: center;
     align-items: center;
 
+    @include screen-size("small") {
+      padding: 5px;
+      margin-right: 5px;
+    }
+
     &.language {
       font-size: $FONT_SIZE_XSMALL;
       user-select: none;

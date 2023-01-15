@@ -39,6 +39,12 @@
     user-select: none;
     cursor: pointer;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_XSMALL;
+      padding: 6px 8px;
+      margin-right: 5px;
+    }
+
     .bullet {
       height: 13px;
       width: 13px;
@@ -46,6 +52,11 @@
       background: transparent;
       border: 1px solid $black;
       margin-right: 5px;
+
+      @include screen-size("small") {
+        height: 7px;
+        width: 7px;
+      }
 
       &.active {
         background: $black;

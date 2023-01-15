@@ -113,6 +113,7 @@
     @include screen-size("small") {
       height: auto;
       position: static;
+      padding-top: 75px;
     }
 
     &.left {
@@ -168,8 +169,16 @@
         padding-bottom: 40px;
         height: fit-content;
 
+        @include screen-size("small") {
+          padding: 10px;
+        }
+
         &.odds {
           margin-top: 85px;
+
+          @include screen-size("small") {
+            margin-top: unset;
+          }
         }
       }
     }
@@ -185,6 +194,14 @@
     z-index: 1000;
     background: $white;
     overflow-y: auto;
+
+    @include screen-size("small") {
+      left: 0;
+      width: 100vw;
+      padding: 10px 10px;
+      height: calc(100vh - 70px);
+      top: 70px;
+    }
   }
 
   .post-form-banner {
@@ -205,7 +222,12 @@
     user-select: none;
 
     @include screen-size("small") {
-      display: none;
+      left: 0;
+      width: 100vw;
+      padding: 20px 20px;
+      height: 70px;
+      top: unset;
+      bottom: 0;
     }
   }
 

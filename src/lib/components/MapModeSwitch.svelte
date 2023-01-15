@@ -32,6 +32,11 @@
     justify-content: center;
     align-items: center;
 
+    @include screen-size("small") {
+      padding: 5px;
+      margin-right: 5px;
+    }
+
     &.map-mode {
       font-size: $FONT_SIZE_XSMALL;
       user-select: none;

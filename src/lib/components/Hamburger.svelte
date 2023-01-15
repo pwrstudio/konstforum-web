@@ -18,9 +18,9 @@
     z-index: 10000;
     cursor: pointer;
 
-    &.x {
-      top: 25px;
-      right: 20px;
+    @include screen-size("small") {
+      top: 10px;
+      right: 5px;
     }
   }
 </style>

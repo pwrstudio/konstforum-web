@@ -211,7 +211,7 @@
 
     @include screen-size("small") {
       flex-wrap: wrap;
-      padding: 0 70px 0 20px;
+      padding: 0 30px 0 10px;
     }
 
     &.post {
@@ -226,6 +226,7 @@
 
       @include screen-size("small") {
         font-size: $FONT_SIZE_SMALL;
+        width: 40%;
       }
     }
 
@@ -250,6 +251,7 @@
 
       @include screen-size("small") {
         order: 2;
+        width: 60%;
       }
     }
   }

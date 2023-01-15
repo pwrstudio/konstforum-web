@@ -70,6 +70,10 @@
       text-transform: uppercase;
       opacity: 0;
 
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_MEDIUM;
+      }
+
       &.focused {
         opacity: 1;
       }

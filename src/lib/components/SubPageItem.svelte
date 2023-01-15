@@ -25,6 +25,12 @@
     cursor: pointer;
     text-decoration: none;
 
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_XSMALL;
+      padding: 6px 8px;
+      margin-right: 5px;
+    }
+
     &:hover {
       background: $black;
       color: $white;

@@ -66,6 +66,11 @@
     right: 25px;
     width: 30px;
     height: 30px;
+
+    @include screen-size("small") {
+      top: 10px;
+      right: 5px;
+    }
   }
 
   .menu {
@@ -83,18 +88,15 @@
     color: $white;
     text-align: center;
 
-    @include screen-size("small") {
-      align-items: flex-start;
-      top: 70px;
-      height: calc(100vh - 70px);
-      padding-top: 70px;
-    }
-
     .inner {
       width: calc(100vw - 360px);
       max-width: 95vw;
       display: flex;
       flex-direction: column;
+
+      @include screen-size("small") {
+        width: 100%;
+      }
 
       a {
         line-height: 1.2em;
@@ -108,6 +110,11 @@
         border-bottom: 10px solid $white;
         font-size: $FONT_SIZE_XLARGE;
         word-spacing: 0.05em;
+
+        @include screen-size("small") {
+          font-size: $FONT_SIZE_LARGE;
+          border-bottom: 7px solid $white;
+        }
 
         // @include screen-size("small") {
         //   font-family: $COMPRESSED_STACK;

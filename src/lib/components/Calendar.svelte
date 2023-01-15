@@ -160,9 +160,18 @@
     position: relative;
     min-height: 600px;
 
+    @include screen-size("small") {
+      margin-top: 75px;
+      min-height: unset;
+    }
+
     .calendar-header {
       text-transform: uppercase;
       user-select: none;
+
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_XSMALL;
+      }
     }
   }
 
@@ -186,8 +195,16 @@
       font-size: $FONT_SIZE_MEDIUM;
       user-select: none;
 
+      @include screen-size("small") {
+        font-size: $FONT_SIZE_SMALL;
+        height: 40px;
+      }
+
       &.weekday-header {
         font-size: $FONT_SIZE_NORMAL;
+        @include screen-size("small") {
+          font-size: $FONT_SIZE_SMALL;
+        }
       }
 
       &.day {
@@ -202,8 +219,12 @@
         &.today {
           .number {
             background: $lime;
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 50%;
+
+            @include screen-size("small") {
+              padding: 10px;
+            }
           }
         }
 
@@ -215,6 +236,10 @@
           position: absolute;
           bottom: 10px;
           left: calc(50% - 5px);
+
+          @include screen-size("small") {
+            bottom: 2px;
+          }
         }
       }
     }
@@ -227,6 +252,11 @@
     width: 40px;
     z-index: 1000;
     cursor: pointer;
+
+    @include screen-size("small") {
+      height: 10px;
+      width: 10px;
+    }
 
     &.left {
       left: 10px;

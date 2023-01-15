@@ -96,7 +96,9 @@
 
       @include screen-size("small") {
         left: unset;
-        width: 100%;
+        width: 100vw;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       .tags {
@@ -123,13 +125,14 @@
       padding-top: 100px;
 
       @include screen-size("small") {
-        display: none;
-      }
-
-      .masonry-container {
-        column-count: 2;
-        column-gap: 20px;
-        padding: 10px;
+        display: inline-flex;
+        left: unset;
+        width: 100vw;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 20px;
+        padding-bottom: 100px;
+        height: fit-content;
       }
     }
   }
@@ -145,6 +148,14 @@
     background: $black;
     color: $white;
     overflow-y: auto;
+
+    @include screen-size("small") {
+      left: 0;
+      width: 100vw;
+      padding: 10px 10px;
+      height: calc(100vh - 70px);
+      top: 70px;
+    }
   }
 
   .event-form-banner {
@@ -164,6 +175,15 @@
     text-transform: uppercase;
     cursor: pointer;
     user-select: none;
+
+    @include screen-size("small") {
+      left: 0;
+      width: 100vw;
+      padding: 20px 20px;
+      height: 70px;
+      top: unset;
+      bottom: 0;
+    }
   }
 
   .close-form {

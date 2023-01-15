@@ -205,6 +205,11 @@
     margin-right: 20px;
     padding-bottom: 10px;
 
+    @include screen-size("small") {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
     .divider {
       margin-top: 15px;
       height: 1px;

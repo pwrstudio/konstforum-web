@@ -103,12 +103,21 @@
           width: 800px;
           margin-left: auto;
           margin-right: auto;
-          line-height: 1em;
+          line-height: 1.2em;
           height: fit-content;
           margin-top: 40px;
 
+          @include screen-size("small") {
+            width: 90%;
+            font-size: $FONT_SIZE_NORMAL;
+          }
+
           h2 {
             padding-top: 20px;
+
+            @include screen-size("small") {
+              font-size: $FONT_SIZE_NORMAL;
+            }
           }
         }
       }

@@ -77,6 +77,7 @@
 
     @include screen-size("small") {
       overflow-y: auto;
+      height: auto;
     }
 
     .inner {
@@ -93,6 +94,10 @@
       .content {
         height: calc(100vh - 85px);
         overflow-y: auto;
+
+        @include screen-size("small") {
+          height: auto;
+        }
 
         .column {
           float: left;
@@ -113,8 +118,11 @@
             @include screen-size("small") {
               border-right: unset;
               border-bottom: 1px solid $white;
-              padding-bottom: 15px;
-              margin-bottom: 15px;
+              padding-bottom: 0;
+              margin-bottom: 0;
+              padding-left: 10px;
+              padding-right: 10px;
+              width: 100%;
             }
           }
 
@@ -130,7 +138,9 @@
             padding-right: 35px;
 
             @include screen-size("small") {
-              padding-left: unset;
+              padding-left: 10px;
+              padding-right: 10px;
+              width: 100%;
             }
 
             .contact {
@@ -155,5 +165,10 @@
     right: 25px;
     width: 30px;
     height: 30px;
+
+    @include screen-size("small") {
+      top: 10px;
+      right: 15px;
+    }
   }
 </style>

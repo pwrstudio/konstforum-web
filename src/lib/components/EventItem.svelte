@@ -65,11 +65,15 @@
     font-family: $MONO_STACK;
     font-size: $FONT_SIZE_NORMAL;
     padding-top: 5px;
-    width: 90%;
+    width: calc(100% - 5px);
     border-top: 1px solid $black;
     cursor: pointer;
     user-select: none;
     padding-bottom: 10px;
+
+    @include screen-size("small") {
+      width: 100%;
+    }
 
     .event-item-header {
       height: 55px;
@@ -79,6 +83,9 @@
       .right {
         width: 30px;
         opacity: 0;
+        @include screen-size("small") {
+          display: none;
+        }
       }
     }
 
