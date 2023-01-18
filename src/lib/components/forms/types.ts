@@ -13,6 +13,10 @@ export type Field = {
         se: string
         en: string
     },
+    placeholder?: {
+        se: string
+        en: string
+    },
     required: boolean,
     exclusiveTo?: string
 }

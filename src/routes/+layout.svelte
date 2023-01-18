@@ -128,7 +128,7 @@
     <!-- FILTER -->
     {#if !$searchInputActive}
       <div class="filter">
-        {#each aboutSubPages as subpage}
+        {#each aboutSubPages as subpage (subpage._id)}
           <SubPageItem {subpage} />
         {/each}
       </div>
@@ -150,7 +150,7 @@
     <!-- FILTER -->
     <div class="filter">
       {#if !$searchInputActive}
-        {#each filterList as filterItem}
+        {#each filterList as filterItem (filterItem.type)}
           <FilterItem {filterItem} />
         {/each}
       {/if}
@@ -173,7 +173,7 @@
     <!-- FILTER -->
     <div class="filter">
       {#if !$searchInputActive}
-        {#each eventFilterList as filterItem}
+        {#each eventFilterList as filterItem (filterItem.type)}
           <EventFilterItem {filterItem} />
         {/each}
       {/if}
@@ -256,12 +256,11 @@
     }
   }
 
-  body,
-  html {
+  :global(body) {
     font-family: $REGULAR_STACK;
   }
 
-  * {
+  :global(*) {
     scroll-behavior: smooth;
   }
 </style>

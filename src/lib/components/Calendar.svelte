@@ -219,8 +219,13 @@
         &.today {
           .number {
             background: $lime;
-            padding: 10px;
             border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             @include screen-size("small") {
               padding: 10px;

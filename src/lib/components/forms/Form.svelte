@@ -44,6 +44,14 @@
     {title}
   </div>
   <!-------------------------------------->
+  <div class="faq">
+    {#if $languageStore === Language.English}
+      For questions see <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
+    {:else}
+      Vid frågor se <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
+    {/if}
+  </div>
+  <!-------------------------------------->
   <div class="divider" />
   <!-- TYP -->
   {#if postTypes && postTypes.length > 0}
@@ -72,7 +80,7 @@
     <div class="divider" />
   {/if}
   <!-- FIELDS -->
-  {#each fields as field}
+  {#each fields as field (field.name)}
     {#if field.exclusiveTo === undefined || field.exclusiveTo === activePostType}
       <div class="form-section">
         <label for={field.name}>
@@ -86,6 +94,11 @@
             id={field.name}
             name={field.name}
             required={field.required}
+            placeholder={field.placeholder
+              ? $languageStore === Language.English
+                ? field.placeholder.en
+                : field.placeholder.se
+              : ""}
           />
         {:else if field.type === FieldType.Email}
           <input
@@ -113,6 +126,11 @@
             id={field.name}
             name={field.name}
             required={field.required}
+            placeholder={field.placeholder
+              ? $languageStore === Language.English
+                ? field.placeholder.en
+                : field.placeholder.se
+              : ""}
           />
         {/if}
       </div>
@@ -124,7 +142,7 @@
   {#if tags && tags.length > 0}
     <div class="form-section">
       <fieldset>
-        {#each tags as tag, i}
+        {#each tags as tag, i (tag.id)}
           <div class="checkbox-container">
             <input type="checkbox" name={tag.id} value={tag.id} />
             <label for={tag.id}>
@@ -140,7 +158,7 @@
     <div class="divider" />
   {/if}
   <!-- UPLOADS -->
-  {#each uploads as upload, i}
+  {#each uploads as upload, i (upload)}
     <div class="upload-container" class:visible={i < visibleImages}>
       <div class="form-section">
         <label for={`upload-${upload}-file`}>
@@ -233,6 +251,12 @@
       display: flex;
       align-items: center;
       user-select: none;
+    }
+
+    .faq {
+      font-family: $COMPRESSED_STACK;
+      font-size: $FONT_SIZE_MEDIUM;
+      padding-bottom: 10px;
     }
 
     fieldset {
@@ -405,6 +429,9 @@
         color: $white;
         user-select: none;
         cursor: pointer;
+        font-family: $COMPRESSED_STACK;
+        font-size: $FONT_SIZE_MEDIUM;
+        text-transform: uppercase;
 
         &.disabled {
           opacity: 0.3;

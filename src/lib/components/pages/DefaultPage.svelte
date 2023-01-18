@@ -48,7 +48,7 @@
 <div class="default-page">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="content">
-      {#each posts as post}
+      {#each posts as post (post.id)}
         <!-- CENTER -->
         <div class="center" id={post._id}>
           <h2>
@@ -94,7 +94,7 @@
       }
 
       .content {
-        height: calc(100vh - 85px);
+        height: calc(100vh - 60px);
         overflow-y: auto;
 
         .center {
@@ -103,9 +103,9 @@
           width: 800px;
           margin-left: auto;
           margin-right: auto;
-          line-height: 1.2em;
           height: fit-content;
           margin-top: 40px;
+          line-height: 1.4em;
 
           @include screen-size("small") {
             width: 90%;

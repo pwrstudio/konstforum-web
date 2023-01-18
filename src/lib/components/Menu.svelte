@@ -8,17 +8,17 @@
   const menuItems: MenuItem[] = [
     {
       title: {
-        sve: "Verksamma",
-        eng: "Participants",
-      },
-      link: "post",
-    },
-    {
-      title: {
         sve: "Evenemang",
         eng: "Events",
       },
       link: "evenemang",
+    },
+    {
+      title: {
+        sve: "Verksamma",
+        eng: "Participants",
+      },
+      link: "post",
     },
     {
       title: {
@@ -44,7 +44,7 @@
   in:fade={{ easing: quadOut, duration: 400 }}
 >
   <div class="inner">
-    {#each menuItems as item}
+    {#each menuItems as item (item.link)}
       <div>
         <a href={$urlPrefix + item.link} data-sveltekit-preload-data>
           {$languageStore === Language.English
@@ -99,7 +99,6 @@
       }
 
       a {
-        line-height: 1.2em;
         display: inline-block;
         color: inherit;
         text-decoration: none;

@@ -45,19 +45,27 @@
     },
     {
       type: FieldType.TextArea,
-      name: "bio",
+      name: "description",
       label: {
-        se: "Biografi",
-        en: "Biography",
+        se: "Beskrivning",
+        en: "Description",
+      },
+      placeholder: {
+        se: "(max 300 ord)",
+        en: "(maximum 300 words)",
       },
       required: true,
     },
     {
       type: FieldType.TextArea,
-      name: "bio-english",
+      name: "description-english",
       label: {
-        se: "Biografi (engelska)",
-        en: "Biography (english)",
+        se: "Beskrivning (engelska)",
+        en: "Description (english)",
+      },
+      placeholder: {
+        se: "(max 300 ord)",
+        en: "(maximum 300 words)",
       },
       required: true,
     },

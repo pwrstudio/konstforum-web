@@ -131,11 +131,11 @@
 
             font-size: $FONT_SIZE_NORMAL;
             font-family: $REGULAR_STACK;
-            line-height: 1em;
             padding-left: 15px;
             overflow-y: auto;
             padding-bottom: 40px;
             padding-right: 35px;
+            line-height: 1.4em;
 
             @include screen-size("small") {
               padding-left: 10px;

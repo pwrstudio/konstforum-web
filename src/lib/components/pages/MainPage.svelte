@@ -53,7 +53,7 @@
 <div class="column left" in:fade={{ easing: quadOut, duration: 400 }}>
   <!-- TAGS -->
   <div class="tags">
-    {#each $activeTypeTags as tag}
+    {#each $activeTypeTags as tag (tag)}
       <Tag {tag} />
     {/each}
   </div>
@@ -140,6 +140,7 @@
       .post-list {
         width: 100%;
         font-family: $MONO_STACK;
+        padding-bottom: 60px;
 
         .counter {
           font-size: $FONT_SIZE_SMALL;

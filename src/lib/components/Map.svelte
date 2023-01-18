@@ -25,7 +25,6 @@
     return fetch(requestUrl)
       .then(response => response.json())
       .then(data => {
-        console.log("data", data)
         // Check if the request was successful
         if (data.status === "OK") {
           // Extract the coordinates from the response
@@ -46,41 +45,17 @@
     })
 
     $filteredPosts.forEach(p => {
-      console.log(p)
       if (p.locationText_sve) {
         geocodeAddress(p.locationText_sve, GOOGLE_API_KEY)
           .then(coordinates => {
             let el = document.createElement("div")
             el.className = "marker"
 
-            console.log(coordinates)
-
             new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map)
 
             el.addEventListener("click", function () {
               goto($urlPrefix + "post/" + p.slug?.current)
             })
-
-            // Create a new MapboxMarker object
-            // let marker: mapboxgl.Marker = new mapboxgl.Marker(el)
-
-            // marker.setLngLat(coordinates)
-
-            // // Set the marker's size
-            // marker.setPaintProperty("circle-radius", 10)
-
-            // // Set the marker's color
-            // marker.setPaintProperty("circle-color", "red")
-
-            // Attach a click event listener to the marker
-            // marker.on("click", function () {
-            //   window.alert(p.title)
-            //   // Do something when the marker is clicked
-            //   console.log("Marker clicked!")
-            // })
-
-            // Add the marker to the map
-            // marker.addTo(map)
           })
           .catch(error => {
             console.error(error)

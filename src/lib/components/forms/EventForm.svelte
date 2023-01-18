@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Field, TagsList } from "./types"
+  import type { Field } from "./types"
   import { FieldType } from "./types"
   import Form from "./Form.svelte"
 
@@ -35,28 +35,45 @@
     },
     {
       type: FieldType.DateTime,
-      name: "dateTime",
+      name: "startDateTime",
       label: {
-        se: "Datum och tid",
-        en: "Date and time",
+        se: "Start: datum och tid",
+        en: "Start: date and time",
+      },
+      required: true,
+    },
+    {
+      type: FieldType.DateTime,
+      name: "endDateTime",
+      label: {
+        se: "Slut: Datum och tid",
+        en: "End: date and time",
+      },
+      required: false,
+    },
+    {
+      type: FieldType.TextArea,
+      name: "description",
+      label: {
+        se: "Beskrivning",
+        en: "Description",
+      },
+      placeholder: {
+        se: "(max 300 ord)",
+        en: "(maximum 300 words)",
       },
       required: true,
     },
     {
       type: FieldType.TextArea,
-      name: "about",
+      name: "description-english",
       label: {
-        se: "Om evenemanget",
-        en: "About the event",
+        se: "Beskrivning (engelska)",
+        en: "Description (english)",
       },
-      required: true,
-    },
-    {
-      type: FieldType.TextArea,
-      name: "about-english",
-      label: {
-        se: "Om evenemanget (engelska)",
-        en: "About the event (English)",
+      placeholder: {
+        se: "(max 300 ord)",
+        en: "(maximum 300 words)",
       },
       required: true,
     },

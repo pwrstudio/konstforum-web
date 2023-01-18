@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { fade } from "svelte/transition"
-  import { quadOut } from "svelte/easing"
   import { urlPrefix, languageStore, focusedPost } from "$lib/stores"
   import { renderBlockText } from "$lib/modules/sanity"
   import { Language } from "$lib/types"
@@ -118,6 +116,7 @@
       .text {
         font-size: $FONT_SIZE_SMALL;
         width: 50%;
+        line-height: 1.6em;
 
         .read-more {
           div {

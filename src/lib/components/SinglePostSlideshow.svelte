@@ -10,7 +10,7 @@
 </script>
 
 <Swiper spaceBetween={50} slidesPerView={1} loop={true}>
-  {#each slides as slide}
+  {#each slides as slide (slide._key)}
     {@const caption =
       (language === Language.English
         ? slide.bildtext_eng
