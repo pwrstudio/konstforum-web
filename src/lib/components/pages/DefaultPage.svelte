@@ -48,7 +48,7 @@
 <div class="default-page">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>
     <div class="content">
-      {#each posts as post (post.id)}
+      {#each posts as post (post._id)}
         <!-- CENTER -->
         <div class="center" id={post._id}>
           <h2>

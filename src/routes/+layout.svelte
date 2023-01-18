@@ -128,7 +128,7 @@
     <!-- FILTER -->
     {#if !$searchInputActive}
       <div class="filter">
-        {#each aboutSubPages as subpage (subpage._id)}
+        {#each aboutSubPages as subpage (subpage.id)}
           <SubPageItem {subpage} />
         {/each}
       </div>
