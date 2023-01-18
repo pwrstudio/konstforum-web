@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Field, PostType } from "./types"
+  import type { Field, PostType, Title } from "./types"
   import { FieldType } from "./types"
   import Form from "./Form.svelte"
 
@@ -130,7 +130,10 @@
     },
   ]
 
-  const title = "Var med på konstforum?"
+  const title: Title = {
+    se: "Var med på konstforum?",
+    en: "Want to join Konstforum?",
+  }
 
   const maxImages = 5
 </script>

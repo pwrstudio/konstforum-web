@@ -1,12 +1,12 @@
 <script lang="ts">
   import { languageStore, categories } from "$lib/stores"
   import { Language } from "$lib/types"
-  import type { Field, PostType, Tag } from "./types"
+  import type { Field, PostType, Tag, Title } from "./types"
   import { FieldType } from "./types"
   export let formId: string
   export let postTypes: PostType[] = []
   export let fields: Field[]
-  export let title: string
+  export let title: Title
   export let maxImages = 5
   export let inverted = false
 
@@ -41,7 +41,7 @@
 <!-- <form on:submit|preventDefault={onSubmit}> -->
 <form action={FORMSPARK_ACTION_URL} class:inverted>
   <div class="title">
-    {title}
+    {$languageStore === Language.English ? title.en : title.se}
   </div>
   <!-------------------------------------->
   <div class="faq">

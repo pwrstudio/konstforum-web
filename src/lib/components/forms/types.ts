@@ -40,3 +40,8 @@ export type Tag = {
 export type TagsList = {
     [id: string]: Tag[];
 }
+
+export type Title = {
+    se: string
+    en: string
+}

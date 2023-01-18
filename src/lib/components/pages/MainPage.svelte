@@ -9,6 +9,7 @@
     filteredPosts,
     splitPosts,
     activeTypeTags,
+    languageStore,
     urlPrefix,
   } from "$lib/stores"
   import { onMount } from "svelte"
@@ -19,7 +20,7 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import X from "$lib/graphics/X.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import type { Language } from "$lib/types"
+  import { Language } from "$lib/types"
 
   export let language: Language
   export let isSearch = false
@@ -97,7 +98,11 @@
 {:else}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="post-form-banner" on:click={toggleForm}>
-    <div class="text">Var med på Konstforum?</div>
+    <div class="text">
+      {$languageStore === Language.English
+        ? "Want to join Konstforum?"
+        : "Var med på konstforum?"}
+    </div>
     <div class="arrow"><LargeArrowDown black={true} /></div>
   </div>
 {/if}

@@ -3,14 +3,14 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive, filteredEvents } from "$lib/stores"
+  import { menuActive, filteredEvents, languageStore } from "$lib/stores"
   import { onMount } from "svelte"
   import Calendar from "$lib/components/Calendar.svelte"
   import EventItem from "$lib/components/EventItem.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
   import X from "$lib/graphics/X.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import { type Language, UIColor } from "$lib/types"
+  import { Language, UIColor } from "$lib/types"
 
   export let language: Language
 
@@ -65,7 +65,9 @@
 {:else}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="event-form-banner" on:click={toggleForm}>
-    <div class="text">NYTT EVENEMANG?</div>
+    <div class="text">
+      {$languageStore === Language.English ? "Nytt evenemang?" : "New event?"}
+    </div>
     <div class="arrow"><LargeArrowDown /></div>
   </div>
 {/if}

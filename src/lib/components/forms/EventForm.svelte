@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Field } from "./types"
+  import type { Field, Title } from "./types"
   import { FieldType } from "./types"
   import Form from "./Form.svelte"
 
@@ -97,7 +97,10 @@
     },
   ]
 
-  const title = "Nytt evenemang?"
+  const title: Title = {
+    se: "Nytt evenemang?",
+    en: "New event?",
+  }
 
   const maxImages = 5
 
