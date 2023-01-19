@@ -26,11 +26,7 @@
   $: title = $languageStore === Language.English ? event.title_eng : event.title
 </script>
 
-<a
-  href={$urlPrefix + "evenemang/" + event.slug?.current}
-  data-sveltekit-preload-data
-  class="event-item"
->
+<a href={event.website} target="_blank" rel="noreferrer" class="event-item">
   <div class="event-item-header">
     <div class="left">
       <!-- TITLE -->
@@ -71,6 +67,7 @@
     user-select: none;
     padding-bottom: 10px;
     text-decoration: none;
+    display: block;
 
     @include screen-size("small") {
       width: 100%;

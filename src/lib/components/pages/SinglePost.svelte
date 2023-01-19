@@ -74,7 +74,7 @@
 
   .single-post {
     width: 100vw;
-    background: $white;
+    background: $grey;
     color: $black;
     height: 100vh;
     font-family: $REGULAR_STACK;
@@ -115,13 +115,11 @@
 
           &.left {
             width: 66.666666%;
-            border-right: 1px solid $white;
             overflow-y: auto;
             padding-left: 35px;
 
             @include screen-size("small") {
               border-right: unset;
-              border-bottom: 1px solid $white;
               padding-bottom: 0;
               margin-bottom: 0;
               padding-left: 10px;

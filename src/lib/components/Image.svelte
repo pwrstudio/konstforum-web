@@ -24,7 +24,7 @@
   }
 </script>
 
-<img src={url} alt={caption} />
+<img src={url} alt={caption} draggable="false" />
 
 <style lang="scss">
   img {

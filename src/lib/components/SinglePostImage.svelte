@@ -29,9 +29,12 @@
     align-items: center;
     text-decoration: none;
     color: $white;
+    user-select: none;
 
     img {
       max-width: 100%;
+      user-select: none;
+      mix-blend-mode: multiply;
     }
 
     .caption {

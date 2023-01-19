@@ -208,6 +208,7 @@
     padding: 0 70px 0 35px;
     font-family: $EXPANDED_STACK;
     font-size: $FONT_SIZE_NORMAL;
+    background: $white;
 
     @include screen-size("small") {
       flex-wrap: wrap;
@@ -216,6 +217,10 @@
 
     &.post {
       background: $lime;
+    }
+
+    &.event {
+      background: $grey;
     }
 
     .title {
@@ -252,6 +257,8 @@
       @include screen-size("small") {
         order: 2;
         width: 60%;
+        justify-content: flex-end;
+        padding-right: 10px;
       }
     }
   }
@@ -262,5 +269,14 @@
 
   :global(*) {
     scroll-behavior: smooth;
+    box-sizing: border-box;
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 </style>

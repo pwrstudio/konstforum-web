@@ -16,7 +16,7 @@
     {
       title: {
         sve: "Verksamma",
-        eng: "Participants",
+        eng: "Database",
       },
       link: "post",
     },

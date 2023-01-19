@@ -62,6 +62,7 @@
     @include screen-size("small") {
       font-size: $FONT_SIZE_XSMALL;
       padding: 5px;
+      display: none;
     }
 
     input[type="search"] {

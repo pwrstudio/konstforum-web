@@ -276,7 +276,7 @@
           -webkit-appearance: none;
           appearance: none;
           /* For iOS < 15 to remove gradient background */
-          background-color: #fff;
+          background-color: $grey;
           /* Not removed via appearance */
           margin: 0;
           font: inherit;
@@ -376,6 +376,7 @@
       border-radius: 10px;
       border: 1px solid currentColor;
       outline-color: currentColor;
+      background: $grey;
     }
 
     textarea {
@@ -388,6 +389,7 @@
       border: 1px solid currentColor;
       outline-color: currentColor;
       min-height: 200px;
+      background: $grey;
     }
 
     button[type="submit"] {
@@ -401,12 +403,12 @@
       cursor: pointer;
       margin-top: 20px;
       border: 1px solid $black;
-      background: $white;
+      background: $grey;
       color: $black;
 
       &:hover {
         background: $black;
-        color: $white;
+        color: $grey;
       }
     }
 
@@ -428,7 +430,7 @@
         padding: 10px 20px;
         border-radius: 10px;
         background: $black;
-        color: $white;
+        color: $grey;
         user-select: none;
         cursor: pointer;
         font-family: $COMPRESSED_STACK;
@@ -447,33 +449,33 @@
     }
 
     &.inverted {
-      color: $white;
+      color: $grey;
 
       input {
         background: $black;
-        color: $white;
+        color: $grey;
         color-scheme: dark;
       }
 
       button[type="submit"] {
-        border: 1px solid $white;
+        border: 1px solid $grey;
         background: $black;
-        color: $white;
+        color: $grey;
 
         &:hover {
-          background: $white;
+          background: $grey;
           color: $black;
         }
       }
 
       textarea {
         background: $black;
-        color: $white;
+        color: $grey;
       }
 
       .upload-controls {
         .control {
-          background: $white;
+          background: $grey;
           color: $black;
         }
       }
@@ -481,7 +483,7 @@
   }
 
   :global(.uploadcare--widget__button_type_open) {
-    background-color: $white;
+    background-color: $grey;
     color: $black;
     border: 1px solid $black;
     cursor: pointer;
@@ -491,20 +493,20 @@
 
   :global(.uploadcare--widget__button_type_open:hover) {
     background-color: $black;
-    color: $white;
+    color: $grey;
   }
 
   :global(.inverted .uploadcare--widget__button_type_open) {
     background-color: $black;
-    color: $white;
-    border: 1px solid $white;
+    color: $grey;
+    border: 1px solid $grey;
     cursor: pointer;
     transition: unset;
     font-family: $REGULAR_STACK;
   }
 
   :global(.inverted .uploadcare--widget__button_type_open:hover) {
-    background-color: $white;
+    background-color: $grey;
     color: $black;
   }
 </style>

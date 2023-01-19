@@ -106,17 +106,20 @@
           height: fit-content;
           margin-top: 40px;
           line-height: 1.4em;
+          padding-bottom: 40px;
 
           @include screen-size("small") {
-            width: 90%;
+            width: calc(100% - 20px);
             font-size: $FONT_SIZE_NORMAL;
+            margin-top: 0;
           }
 
           h2 {
             padding-top: 20px;
 
             @include screen-size("small") {
-              font-size: $FONT_SIZE_NORMAL;
+              font-size: 24px;
+              padding-top: 0;
             }
           }
         }

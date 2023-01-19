@@ -91,7 +91,7 @@
       padding: 10px;
       left: 0;
       width: 66.666666666%;
-      background: $white;
+      background: $grey;
       overflow-y: auto;
       color: $black;
       padding-left: 35px;
@@ -108,17 +108,6 @@
       .tags {
         margin-bottom: 20px;
       }
-
-      .post-list {
-        width: 100%;
-        font-family: $MONO_STACK;
-
-        .counter {
-          font-size: $FONT_SIZE_SMALL;
-          border-bottom: 1px solid $white;
-          padding-bottom: 10px;
-        }
-      }
     }
 
     &.right {
@@ -127,6 +116,7 @@
       display: flex;
       flex-direction: column;
       padding-top: 100px;
+      background: $grey;
 
       @include screen-size("small") {
         display: inline-flex;
@@ -137,6 +127,18 @@
         padding-top: 20px;
         padding-bottom: 100px;
         height: fit-content;
+      }
+
+      .post-list {
+        width: 100%;
+        font-family: $MONO_STACK;
+
+        .counter {
+          font-size: $FONT_SIZE_SMALL;
+          border-bottom: 1px solid $white;
+          padding-bottom: 10px;
+          user-select: none;
+        }
       }
     }
   }

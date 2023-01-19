@@ -211,7 +211,7 @@
         height: fit-content;
 
         @include screen-size("small") {
-          padding: 10px;
+          padding: 5px;
         }
 
         &.odds {
@@ -238,6 +238,7 @@
       font-size: $FONT_SIZE_SMALL;
       border-bottom: 1px solid $white;
       padding-bottom: 10px;
+      user-select: none;
     }
   }
 
@@ -249,7 +250,7 @@
     padding-bottom: 40px;
     top: 70px;
     z-index: 1000;
-    background: $white;
+    background: $grey;
     overflow-y: auto;
 
     @include screen-size("small") {
@@ -309,7 +310,7 @@
     height: 70px;
     top: 70px;
     z-index: 1000;
-    background: $white;
+    background: $grey;
     display: flex;
     justify-content: space-between;
     font-size: $FONT_SIZE_MEDIUM;

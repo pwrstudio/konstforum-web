@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Swiper, SwiperSlide } from "swiper/svelte"
+  import { Pagination } from "swiper"
   import "swiper/css"
+  import "swiper/css/pagination"
   import Image from "$lib/components/Image.svelte"
   import { Language } from "$lib/types"
   import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
@@ -9,7 +11,13 @@
   export let slides: any[]
 </script>
 
-<Swiper spaceBetween={50} slidesPerView={1} loop={true}>
+<Swiper
+  pagination={true}
+  modules={[Pagination]}
+  spaceBetween={50}
+  slidesPerView={1}
+  loop={true}
+>
   {#each slides as slide (slide._key)}
     {@const caption =
       (language === Language.English
@@ -44,6 +52,8 @@
     align-items: center;
     text-decoration: none;
     color: $white;
+    user-select: none;
+    cursor: grab;
 
     @include screen-size("small") {
       height: auto;
@@ -52,6 +62,12 @@
 
     img {
       max-width: 100%;
+      user-select: none;
+      mix-blend-mode: multiply;
+
+      @include screen-size("small") {
+        max-height: 400px;
+      }
     }
 
     .caption {
@@ -70,9 +86,15 @@
 
   :global(.swiper) {
     height: 100%;
+    --swiper-theme-color: black;
   }
 
   :global(.inner img) {
     max-width: 100%;
+    max-height: 80vh;
+
+    @include screen-size("small") {
+      max-height: 400px;
+    }
   }
 </style>
