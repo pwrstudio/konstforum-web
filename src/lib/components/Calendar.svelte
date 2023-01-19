@@ -229,6 +229,8 @@
 
             @include screen-size("small") {
               padding: 10px;
+              width: 30px;
+              height: 30px;
             }
           }
         }

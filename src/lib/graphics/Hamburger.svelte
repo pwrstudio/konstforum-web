@@ -31,6 +31,10 @@
 
   svg {
     width: 40px;
+
+    @include screen-size("small") {
+      width: 30px;
+    }
   }
 
   .cls-1,

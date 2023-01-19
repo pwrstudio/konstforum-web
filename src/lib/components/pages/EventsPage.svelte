@@ -68,7 +68,8 @@
     <div class="text">
       {$languageStore === Language.English ? "New event?" : "Nytt evenemang?"}
     </div>
-    <div class="arrow"><LargeArrowDown /></div>
+    <div class="arrow down"><LargeArrowDown /></div>
+    <div class="arrow up"><LargeArrowDown /></div>
   </div>
 {/if}
 
@@ -181,10 +182,27 @@
     @include screen-size("small") {
       left: 0;
       width: 100vw;
-      padding: 20px 20px;
-      height: 70px;
+      padding: 0px 20px;
       top: unset;
       bottom: 0;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+    }
+
+    .arrow {
+      &.down {
+        display: block;
+        @include screen-size("small") {
+          display: none;
+        }
+      }
+      &.up {
+        display: none;
+        @include screen-size("small") {
+          display: block;
+        }
+      }
     }
   }
 

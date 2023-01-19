@@ -20,7 +20,7 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import X from "$lib/graphics/X.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
-  import { Language } from "$lib/types"
+  import { Language, UIColor } from "$lib/types"
 
   export let language: Language
   export let isSearch = false
@@ -33,7 +33,18 @@
   }
 
   const toggleForm = () => {
-    formActive = !formActive
+    if (!formActive) {
+      formActive = true
+      listActive = false
+    } else {
+      formActive = false
+    }
+  }
+
+  let listActive = false
+
+  const toggleMobileList = () => {
+    listActive = !listActive
   }
 
   onMount(async () => {
@@ -103,7 +114,41 @@
         ? "Want to join Konstforum?"
         : "Var med på konstforum?"}
     </div>
-    <div class="arrow"><LargeArrowDown black={true} /></div>
+    <div class="arrow down"><LargeArrowDown black={true} /></div>
+    <div class="arrow up"><LargeArrowDown black={true} /></div>
+  </div>
+{/if}
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="list-banner" on:click={toggleMobileList}>
+  <div class="text">
+    {$languageStore === Language.English ? "LIST" : "LISTA"}
+  </div>
+  <div class="arrow up"><LargeArrowDown /></div>
+</div>
+
+{#if listActive}
+  <div class="mobile-list">
+    <!-- TAGS -->
+    <div class="tags">
+      {#each $activeTypeTags as tag (tag)}
+        <Tag {tag} />
+      {/each}
+    </div>
+    <!-- POST LIST  -->
+    <div class="post-list">
+      <div class="counter">
+        List of {isSearch ? data.posts.length : $filteredPosts.length}
+      </div>
+      {#each isSearch ? data.posts : $filteredPosts as post (post._id)}
+        <PostItem {post} />
+      {/each}
+    </div>
+  </div>
+
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="mobile-list-close" on:click={toggleMobileList}>
+    <X color={UIColor.White} />
   </div>
 {/if}
 
@@ -136,22 +181,6 @@
         left: unset;
         width: 100%;
         display: none;
-      }
-
-      .tags {
-        margin-bottom: 5px;
-      }
-
-      .post-list {
-        width: 100%;
-        font-family: $MONO_STACK;
-        padding-bottom: 60px;
-
-        .counter {
-          font-size: $FONT_SIZE_SMALL;
-          border-bottom: 1px solid $white;
-          padding-bottom: 10px;
-        }
       }
     }
 
@@ -190,6 +219,22 @@
     }
   }
 
+  .tags {
+    margin-bottom: 5px;
+  }
+
+  .post-list {
+    width: 100%;
+    font-family: $MONO_STACK;
+    padding-bottom: 60px;
+
+    .counter {
+      font-size: $FONT_SIZE_SMALL;
+      border-bottom: 1px solid $white;
+      padding-bottom: 10px;
+    }
+  }
+
   .post-form {
     position: fixed;
     left: 66.666666666%;
@@ -207,6 +252,44 @@
       padding: 10px 10px;
       height: calc(100vh - 70px);
       top: 70px;
+    }
+  }
+
+  .mobile-list {
+    position: fixed;
+    top: 70px;
+    width: 100vw;
+    left: 0;
+    padding: 10px 10px;
+    height: calc(100vh - 70px);
+    top: 70px;
+    background: $black;
+    color: $white;
+  }
+
+  .mobile-list-close {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    width: 30px;
+  }
+
+  .list-banner {
+    display: none;
+    @include screen-size("small") {
+      display: block;
+      position: fixed;
+      background: $black;
+      left: 0;
+      width: 100vw;
+      padding: 0px 20px;
+      top: unset;
+      bottom: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: $FONT_SIZE_NORMAL;
+      color: $white;
+      font-family: $MONO_STACK;
     }
   }
 
@@ -230,10 +313,27 @@
     @include screen-size("small") {
       left: 0;
       width: 100vw;
-      padding: 20px 20px;
-      height: 70px;
+      padding: 0px 20px;
       top: unset;
       bottom: 0;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+    }
+
+    .arrow {
+      &.down {
+        display: block;
+        @include screen-size("small") {
+          display: none;
+        }
+      }
+      &.up {
+        display: none;
+        @include screen-size("small") {
+          display: block;
+        }
+      }
     }
   }
 
