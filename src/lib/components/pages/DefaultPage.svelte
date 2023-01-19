@@ -85,7 +85,7 @@
     .inner {
       margin-left: auto;
       margin-right: auto;
-      padding-top: 60px;
+      padding-top: 70px;
 
       h2 {
         font-family: $COMPRESSED_STACK;

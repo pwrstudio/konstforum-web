@@ -10,6 +10,7 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import X from "$lib/graphics/X.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
+  import LargeArrowUp from "$lib/graphics/LargeArrowUp.svelte"
   import { Language, UIColor } from "$lib/types"
 
   export let language: Language
@@ -69,7 +70,7 @@
       {$languageStore === Language.English ? "New event?" : "Nytt evenemang?"}
     </div>
     <div class="arrow down"><LargeArrowDown /></div>
-    <div class="arrow up"><LargeArrowDown /></div>
+    <div class="arrow up"><LargeArrowUp /></div>
   </div>
 {/if}
 

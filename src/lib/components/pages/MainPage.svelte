@@ -20,6 +20,7 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import X from "$lib/graphics/X.svelte"
   import LargeArrowDown from "$lib/graphics/LargeArrowDown.svelte"
+  import LargeArrowUp from "$lib/graphics/LargeArrowUp.svelte"
   import { Language, UIColor } from "$lib/types"
 
   export let language: Language
@@ -45,6 +46,11 @@
 
   const toggleMobileList = () => {
     listActive = !listActive
+  }
+
+  $: if ($mapMode) {
+    formActive = false
+    listActive = false
   }
 
   onMount(async () => {
@@ -115,7 +121,7 @@
         : "Var med på konstforum?"}
     </div>
     <div class="arrow down"><LargeArrowDown black={true} /></div>
-    <div class="arrow up"><LargeArrowDown black={true} /></div>
+    <div class="arrow up"><LargeArrowUp black={true} /></div>
   </div>
 {/if}
 
@@ -124,7 +130,7 @@
   <div class="text">
     {$languageStore === Language.English ? "LIST" : "LISTA"}
   </div>
-  <div class="arrow up"><LargeArrowDown /></div>
+  <div class="arrow up"><LargeArrowUp /></div>
 </div>
 
 {#if listActive}
@@ -276,8 +282,10 @@
 
   .list-banner {
     display: none;
+
     @include screen-size("small") {
-      display: block;
+      display: flex;
+      justify-content: space-between;
       position: fixed;
       background: $black;
       left: 0;
