@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fade } from "svelte/transition"
   import { urlPrefix, languageStore, focusedPost } from "$lib/stores"
   import { renderBlockText } from "$lib/modules/sanity"
   import { Language } from "$lib/types"
@@ -61,6 +62,7 @@
       href={$urlPrefix + "post/" + post.slug?.current}
       data-sveltekit-preload-data
       class="post-item-body"
+      in:fade={{ duration: 300 }}
     >
       <div class="image">
         <Image imageDyad={post.mainImage} width={300} />

@@ -66,7 +66,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="event-form-banner" on:click={toggleForm}>
     <div class="text">
-      {$languageStore === Language.English ? "Nytt evenemang?" : "New event?"}
+      {$languageStore === Language.English ? "New event?" : "Nytt evenemang?"}
     </div>
     <div class="arrow"><LargeArrowDown /></div>
   </div>

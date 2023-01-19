@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { fade } from "svelte/transition"
-  import { quadOut } from "svelte/easing"
   import { urlPrefix, languageStore } from "$lib/stores"
-  import { renderBlockText } from "$lib/modules/sanity"
   import { format } from "date-fns"
   import { Language } from "$lib/types"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
@@ -29,8 +26,11 @@
   $: title = $languageStore === Language.English ? event.title_eng : event.title
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="event-item">
+<a
+  href={$urlPrefix + "evenemang/" + event.slug?.current}
+  data-sveltekit-preload-data
+  class="event-item"
+>
   <div class="event-item-header">
     <div class="left">
       <!-- TITLE -->
@@ -56,7 +56,7 @@
       <LargeArrowRight />
     </div>
   </div>
-</div>
+</a>
 
 <style lang="scss">
   @import "src/lib/style/variables.scss";
@@ -70,6 +70,7 @@
     cursor: pointer;
     user-select: none;
     padding-bottom: 10px;
+    text-decoration: none;
 
     @include screen-size("small") {
       width: 100%;

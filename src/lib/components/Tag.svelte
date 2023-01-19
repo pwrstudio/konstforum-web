@@ -37,5 +37,10 @@
       background: $white;
       color: $black;
     }
+
+    &:hover {
+      background: $white;
+      color: $black;
+    }
   }
 </style>

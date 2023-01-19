@@ -1,9 +1,11 @@
 <script lang="ts">
-  import ProjectsSinglePage from "$lib/components/pages/SinglePost.svelte"
-  import { Language, type ProjectType } from "$lib/types"
-  export let data: { project: ProjectType }
+  import { Language } from "$lib/types"
+  import SinglePost from "$lib/components/pages/SinglePost.svelte"
+  import { languageStore } from "$lib/stores"
+  languageStore.set(Language.Swedish)
+  export let data
 </script>
 
 {#key data}
-  <ProjectsSinglePage {data} language={Language.Swedish} />
+  <SinglePost {data} language={Language.Swedish} />
 {/key}

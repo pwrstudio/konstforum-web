@@ -36,7 +36,11 @@
 
 <Metadata {title} {description} />
 
-<a href={$urlPrefix} class="close" data-sveltekit-preload-data>
+<a
+  href={post._type == "event" ? $urlPrefix + "evenemang/" : $urlPrefix}
+  class="close"
+  data-sveltekit-preload-data
+>
   <X />
 </a>
 

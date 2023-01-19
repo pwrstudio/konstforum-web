@@ -211,7 +211,9 @@
   <div class="divider" />
   <!-- SUBMIT -->
   <div class="form-section">
-    <button type="submit">Skicka in</button>
+    <button type="submit">
+      {$languageStore === Language.English ? "Submit " : "Skicka in"}
+    </button>
   </div>
 </form>
 
