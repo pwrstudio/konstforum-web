@@ -59,9 +59,9 @@ export const allTags: Readable<string[]> = derived([rawPosts], ([$rawPosts]) => 
     // Get all tags from posts, filter out undefined, make unique
     return Array.from(new Set($rawPosts.flatMap(p => p.tags_sve).filter(t => t !== undefined)));
 });
-export const activeTypeTags: Readable<string[]> = derived([activeTypePosts], ([$activeTypePosts]) => {
+export const activeTypeTags: Readable<string[]> = derived([activeTypePosts, languageStore], ([$activeTypePosts, $languageStore]) => {
     // Get all tags from posts of the active type, filter out undefined, make unique
-    return Array.from(new Set($activeTypePosts.flatMap(p => p.tags_sve).filter(t => t !== undefined)));
+    return Array.from(new Set($activeTypePosts.flatMap(p => $languageStore === Language.English ? p.tags_eng : p.tags_sve).filter(t => t !== undefined)));
 });
 
 // --- DERIVED: EVENT

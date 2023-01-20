@@ -77,7 +77,7 @@
     },
     {
       title: "Verksamma",
-      englishTitle: "Participant",
+      englishTitle: "Professional",
       type: "participant",
     },
     {

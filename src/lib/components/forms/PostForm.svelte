@@ -47,8 +47,8 @@
       type: FieldType.TextArea,
       name: "description",
       label: {
-        se: "Beskrivning",
-        en: "Description",
+        se: "Beskrivning (svenska)",
+        en: "Description (swedish)",
       },
       placeholder: {
         se: "(max 300 ord)",
@@ -92,8 +92,8 @@
       type: FieldType.Text,
       name: "socialMedia",
       label: {
-        se: "Sociala media (Instagram, Twitter, etc...)",
-        en: "Social media (Instagram, Twitter, etc...)",
+        se: "Sociala media länkar (Instagram, Twitter, etc...)",
+        en: "Social media links (Instagram, Twitter, etc...)",
       },
       required: false,
     },
@@ -118,7 +118,7 @@
       name: "participant",
       label: {
         se: "Verksam",
-        en: "Participant",
+        en: "Professional",
       },
     },
     {

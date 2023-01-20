@@ -46,9 +46,9 @@
   <!-------------------------------------->
   <div class="faq">
     {#if $languageStore === Language.English}
-      For questions see <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
+      For questions, see <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
     {:else}
-      Vid frågor se <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
+      Vid frågor, se <a href="/om#faq" data-sveltekit-preload-data>FAQ</a>
     {/if}
   </div>
   <!-------------------------------------->
@@ -174,6 +174,11 @@
           role="uploadcare-uploader"
           data-public-key="cc687b96511581c9f7b5"
         />
+        <div class="form-section max-file-size">
+          {$languageStore === Language.English
+            ? "(Max file size: 5MB)"
+            : "(Max filstorlek: 5MB)"}
+        </div>
         <div class="form-section">
           <label for={`upload-${upload}-caption`}>
             {$languageStore === Language.English
@@ -365,6 +370,11 @@
 
     .form-section {
       margin-top: 15px;
+
+      &.max-file-size {
+        font-family: $MONO_STACK;
+        font-size: $FONT_SIZE_NORMAL;
+      }
     }
 
     input {
