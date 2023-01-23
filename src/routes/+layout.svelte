@@ -77,12 +77,12 @@
     },
     {
       title: "Verksamma",
-      englishTitle: "Professional",
+      englishTitle: "Professionals",
       type: "participant",
     },
     {
       title: "Projekt",
-      englishTitle: "Project",
+      englishTitle: "Projects",
       type: "project",
     },
   ]

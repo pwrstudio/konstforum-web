@@ -118,7 +118,7 @@
       name: "participant",
       label: {
         se: "Verksam",
-        en: "Professional",
+        en: "Professionals",
       },
     },
     {
