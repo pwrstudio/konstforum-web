@@ -161,6 +161,9 @@
     min-height: 600px;
 
     @include screen-size("small") {
+      margin-right: auto;
+      margin-left: auto;
+      width: 80%;
       margin-top: 75px;
       min-height: unset;
     }
@@ -261,8 +264,10 @@
     cursor: pointer;
 
     @include screen-size("small") {
-      height: 10px;
-      width: 10px;
+      position: fixed;
+      top: 27%;
+      height: 30px;
+      width: 30px;
     }
 
     &.left {

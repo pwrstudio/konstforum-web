@@ -8,6 +8,7 @@
   data-name="Layer 2"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 22.01 42.96"
 >
   <polyline class="cls-2" points=".27 42.69 21.48 21.48 .27 .27" />
 </svg>
@@ -17,6 +18,9 @@
 
   svg {
     height: 100%;
+    @include screen-size("small") {
+      float: right;
+    }
   }
 
   .cls-2 {
