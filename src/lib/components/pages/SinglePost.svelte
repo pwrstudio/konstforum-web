@@ -13,6 +13,8 @@
   export let data
   const { post } = data
 
+  console.log(post)
+
   let title: string
   let content: string
   let description: string
@@ -61,9 +63,16 @@
         {#if content}
           <div>{@html renderBlockText(content)}</div>
         {/if}
-        <div class="contact">
-          {$languageStore === Language.English ? "CONTACT" : "KONTAKTA"}
-        </div>
+        {#if post.emailAddress}
+          <a
+            href={"mailto:" +
+              post.emailAddress +
+              "?subject=Mail from Konstform"}
+            class="contact"
+          >
+            {$languageStore === Language.English ? "CONTACT" : "KONTAKTA"}
+          </a>
+        {/if}
       </div>
     </div>
   </div>
@@ -153,6 +162,7 @@
               font-size: $FONT_SIZE_XSMALL;
               display: inline-block;
               cursor: pointer;
+              text-decoration: none;
             }
           }
         }
