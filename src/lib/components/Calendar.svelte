@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { onDestroy } from "svelte"
   import LargeArrowLeft from "$lib/graphics/LargeArrowLeft.svelte"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
-  import { filteredEvents } from "$lib/stores"
+  import { filteredEvents, activeEventSlug } from "$lib/stores"
   import {
     format,
     getYear,
@@ -34,13 +35,14 @@
     day: number
     date: number
     event: boolean
+    eventPost?: any
     weekend: boolean
     past: boolean
     today: boolean
   }
 
   interface Month {
-    index: Number
+    index: number
     name: String
     year: number
     numberOfDays: number
@@ -72,12 +74,18 @@
         event: false,
         weekend: false,
         past: false,
+        today: false,
       }
       newDay.weekend = isWeekend(newDay.date)
       newDay.past = isPast(newDay.date)
       newDay.event = $filteredEvents.some(e =>
         isSameDay(Date.parse(e.time), newDay.date)
       )
+      if (newDay.event) {
+        newDay.eventPost = $filteredEvents.find(e =>
+          isSameDay(Date.parse(e.time), newDay.date)
+        )
+      }
       newDay.today = isSameDay(new Date(), newDay.date)
       monthObject.days.push(newDay)
     }
@@ -90,6 +98,17 @@
   const months = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6].map(i =>
     makeMonth(addMonths(currentDate, i))
   )
+
+  function goToEvent(event: any) {
+    activeEventSlug.set(event.slug?.current)
+    if (event.website) {
+      window.open(event.website, "_blank").focus()
+    }
+  }
+
+  onDestroy(() => {
+    activeEventSlug.set("")
+  })
 </script>
 
 <div class="calendar">
@@ -137,6 +156,9 @@
           class:weekend={day.weekend}
           class:past={day.past}
           class:today={day.today}
+          on:click={() => {
+            goToEvent(day.eventPost)
+          }}
         >
           <div class="number">{day.day}</div>
           {#if day.event}

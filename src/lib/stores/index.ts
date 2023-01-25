@@ -8,6 +8,7 @@ export const mapMode = writable(false);
 export const searchInputActive = writable(false);
 export const isSearch = writable(false);
 export const searchTerm = writable("");
+export const activeEventSlug = writable("");
 export const categories = writable({})
 
 // --- LANGUAGE

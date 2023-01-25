@@ -3,7 +3,12 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
-  import { menuActive, filteredEvents, languageStore } from "$lib/stores"
+  import {
+    menuActive,
+    filteredEvents,
+    languageStore,
+    activeEventSlug,
+  } from "$lib/stores"
   import { onMount } from "svelte"
   import Calendar from "$lib/components/Calendar.svelte"
   import EventItem from "$lib/components/EventItem.svelte"
@@ -17,6 +22,8 @@
 
   let formActive = false
 
+  let postListEl: HTMLElement
+
   const toggleForm = () => {
     formActive = !formActive
   }
@@ -27,6 +34,12 @@
 
   onMount(async () => {
     menuActive.set(false)
+  })
+
+  onMount(async () => {
+    activeEventSlug.subscribe(update => {
+      document.getElementById($activeEventSlug)?.scrollIntoView()
+    })
   })
 </script>
 
@@ -47,7 +60,7 @@
 <!-- RIGHT -->
 <div class="column right" in:fade={{ easing: quadOut, duration: 400 }}>
   <!-- EVENT LIST  -->
-  <div class="post-list">
+  <div class="post-list" bind:this={postListEl}>
     <div class="counter">List of {$filteredEvents.length}</div>
     {#each $filteredEvents as event (event._id)}
       <EventItem {event} />

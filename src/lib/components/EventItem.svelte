@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { urlPrefix, languageStore } from "$lib/stores"
+  import { languageStore, activeEventSlug } from "$lib/stores"
   import { format } from "date-fns"
   import { Language } from "$lib/types"
   import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
@@ -26,7 +26,14 @@
   $: title = $languageStore === Language.English ? event.title_eng : event.title
 </script>
 
-<a href={event.website} target="_blank" rel="noreferrer" class="event-item">
+<a
+  href={event.website}
+  target="_blank"
+  rel="noreferrer"
+  class="event-item"
+  class:selected={$activeEventSlug == event.slug?.current}
+  id={event.slug?.current}
+>
   <div class="event-item-header">
     <div class="left">
       <!-- TITLE -->
@@ -68,6 +75,10 @@
     padding-bottom: 10px;
     text-decoration: none;
     display: block;
+
+    &.selected {
+      text-decoration: underline;
+    }
 
     @include screen-size("small") {
       width: 100%;
@@ -113,5 +124,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
+  }
+
+  :global(.image) {
+    height: fit-content;
   }
 </style>
