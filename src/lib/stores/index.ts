@@ -70,6 +70,6 @@ export const activeTypeEvents = derived([rawEvents, activeEventTypes], ([$rawEve
     return $rawEvents.filter(e => $activeEventTypes.includes(e.type))
 })
 
-export const filteredEvents = derived([rawEvents, activeEventTypes], ([$rawEvents, $activeEventTypes]) => {
-    return $rawEvents
+export const filteredEvents = derived([rawEvents, activeTypeEvents], ([$rawEvents, $activeTypeEvents]) => {
+    return $activeTypeEvents
 })

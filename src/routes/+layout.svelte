@@ -10,6 +10,7 @@
   import {
     menuActive,
     activeTypes,
+    activeEventTypes,
     rawPosts,
     rawEvents,
     searchInputActive,
@@ -28,6 +29,7 @@
   rawPosts.set(posts)
   rawEvents.set(events)
   activeTypes.set(["artist", "organization", "participant", "project"])
+  activeEventTypes.set(["event", "festival", "open-call"])
   categories.set({
     event: categoriesEvent.categories.map(c => {
       return { label: { eng: c.label_eng, sve: c.label_sve }, id: c.label_sve }
@@ -91,7 +93,7 @@
     {
       title: "Evenemang",
       englishTitle: "Event",
-      type: "evenemang",
+      type: "event",
     },
     {
       title: "Festival",

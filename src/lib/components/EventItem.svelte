@@ -46,7 +46,9 @@
       </div>
       <!-- TIME -->
       <div class="event-date">
-        {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
+        {#if event.time}
+          {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
+        {/if}
       </div>
       <!-- IMAGE -->
       {#if event.mainImage}
