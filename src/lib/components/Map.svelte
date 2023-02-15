@@ -175,6 +175,23 @@
         },
       })
 
+      // inspect a cluster on click
+      map.on("click", "clusters", e => {
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: ["clusters"],
+        })
+        const clusterId = features[0].properties.cluster_id
+        map
+          .getSource("points")
+          .getClusterExpansionZoom(clusterId, (err, zoom) => {
+            if (err) return
+            map.easeTo({
+              center: features[0].geometry.coordinates,
+              zoom: zoom,
+            })
+          })
+      })
+
       map.on("click", "unclustered-point", e => {
         const slug = e.features[0].properties.slug
         goto($urlPrefix + "post/" + slug)
