@@ -70,6 +70,8 @@
     padding-bottom: 10px;
     text-decoration: none;
     display: block;
+    // font-size: $FONT_SIZE_SMALL;
+    // width: 50%;
 
     &.selected {
       text-decoration: underline;
@@ -93,20 +95,20 @@
       }
     }
 
+    .image {
+      width: 50%;
+      padding-right: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .text {
+      font-size: $FONT_SIZE_SMALL;
+      width: 50%;
+    }
+
     .event-item-body {
       padding-bottom: 20px;
-
-      .image {
-        width: 50%;
-        padding-right: 10px;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      .text {
-        font-size: $FONT_SIZE_SMALL;
-        width: 50%;
-      }
     }
   }
 
