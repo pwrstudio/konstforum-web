@@ -145,6 +145,8 @@
       .post-list {
         width: 100%;
         font-family: $MONO_STACK;
+        overflow-y: auto;
+        padding-bottom: 60px;
 
         .counter {
           font-size: $FONT_SIZE_SMALL;

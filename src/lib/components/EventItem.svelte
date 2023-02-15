@@ -34,33 +34,26 @@
   class:selected={$activeEventSlug == event.slug?.current}
   id={event.slug?.current}
 >
-  <div class="event-item-header">
-    <div class="left">
-      <!-- TITLE -->
-      <div class="event-title">
-        {title}
-      </div>
-      <!-- LOCATION -->
-      <div class="event-location">
-        {location}
-      </div>
-      <!-- TIME -->
-      <div class="event-date">
-        {#if event.time}
-          {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
-        {/if}
-      </div>
-      <!-- IMAGE -->
-      {#if event.mainImage}
-        <div class="image">
-          <Image imageDyad={event.mainImage} width={300} />
-        </div>
-      {/if}
-    </div>
-    <div class="right">
-      <LargeArrowRight />
-    </div>
+  <!-- TITLE -->
+  <div class="event-title">
+    {title}
   </div>
+  <!-- LOCATION -->
+  <div class="event-location">
+    {location}
+  </div>
+  <!-- TIME -->
+  <div class="event-date">
+    {#if event.time}
+      {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
+    {/if}
+  </div>
+  <!-- IMAGE -->
+  {#if event.mainImage}
+    <div class="image">
+      <Image imageDyad={event.mainImage} width={300} />
+    </div>
+  {/if}
 </a>
 
 <style lang="scss">
@@ -101,7 +94,6 @@
     }
 
     .event-item-body {
-      display: flex;
       padding-bottom: 20px;
 
       .image {

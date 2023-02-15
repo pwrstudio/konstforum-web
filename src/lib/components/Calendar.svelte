@@ -150,6 +150,7 @@
         <div class="calendar-item spacer" />
       {/each}
       {#each months[calendarIndex].days as day}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="calendar-item day"
           class:event={day.event}
