@@ -28,8 +28,8 @@
       type: FieldType.Text,
       name: "location",
       label: {
-        se: "Bor och är verksam i (postnummer, ort):",
-        en: "Based in (postcode, city):",
+        se: "Bor och är verksam i (adress):",
+        en: "Based in (address):",
       },
       required: true,
     },

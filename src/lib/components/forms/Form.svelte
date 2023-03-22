@@ -214,6 +214,31 @@
   </div>
   <!-------------------------------------->
   <div class="divider" />
+  <!-- NEWSLETTER -->
+  <fieldset>
+    <div class="newsletter">
+      {$languageStore === Language.English
+        ? "Do you want to receive the newsletter?"
+        : "Vill du prenumerera på vårt nyhetsbrev?"}
+    </div>
+    <div class="radio-container">
+      <input
+        type="radio"
+        name="newsletter"
+        id="newsletter-yes"
+        value="yes"
+        checked={true}
+      />
+      <label for="newsletter-yes">
+        {$languageStore === Language.English ? "Yes" : "Ja"}
+      </label>
+      <input type="radio" name="newsletter" id="newsletter-no" value="no" />
+      <label for="newsletter-no">
+        {$languageStore === Language.English ? "No" : "Nej"}
+      </label>
+    </div>
+  </fieldset>
+  <div class="divider" />
   <!-- SUBMIT -->
   <div class="form-section">
     <button type="submit">
@@ -264,6 +289,13 @@
       font-family: $COMPRESSED_STACK;
       font-size: $FONT_SIZE_MEDIUM;
       padding-bottom: 10px;
+    }
+
+    .newsletter {
+      font-family: $COMPRESSED_STACK;
+      font-size: $FONT_SIZE_MEDIUM;
+      padding-bottom: 10px;
+      padding-top: 10px;
     }
 
     fieldset {
