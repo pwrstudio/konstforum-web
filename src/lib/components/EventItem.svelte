@@ -2,7 +2,6 @@
   import { languageStore, activeEventSlug } from "$lib/stores"
   import { format } from "date-fns"
   import { Language } from "$lib/types"
-  import LargeArrowRight from "$lib/graphics/LargeArrowRight.svelte"
   import Image from "$lib/components/Image.svelte"
 
   export let event
@@ -45,7 +44,7 @@
   <!-- TIME -->
   <div class="event-date">
     {#if event.time}
-      {format(Date.parse(event.time), "d MMMM yyyy, hh:mm")}
+      {format(Date.parse(event.time), "d MMMM yyyy, HH:mm")}
     {/if}
   </div>
   <!-- IMAGE -->
