@@ -51,32 +51,32 @@
       },
       required: false,
     },
-    {
-      type: FieldType.TextArea,
-      name: "description",
-      label: {
-        se: "Beskrivning (svenska)",
-        en: "Description (swedish)",
-      },
-      placeholder: {
-        se: "(max 300 ord)",
-        en: "(maximum 300 words)",
-      },
-      required: true,
-    },
-    {
-      type: FieldType.TextArea,
-      name: "description-english",
-      label: {
-        se: "Beskrivning (engelska)",
-        en: "Description (english)",
-      },
-      placeholder: {
-        se: "(max 300 ord)",
-        en: "(maximum 300 words)",
-      },
-      required: true,
-    },
+    // {
+    //   type: FieldType.TextArea,
+    //   name: "description",
+    //   label: {
+    //     se: "Beskrivning (svenska)",
+    //     en: "Description (swedish)",
+    //   },
+    //   placeholder: {
+    //     se: "(max 300 ord)",
+    //     en: "(maximum 300 words)",
+    //   },
+    //   required: true,
+    // },
+    // {
+    //   type: FieldType.TextArea,
+    //   name: "description-english",
+    //   label: {
+    //     se: "Beskrivning (engelska)",
+    //     en: "Description (english)",
+    //   },
+    //   placeholder: {
+    //     se: "(max 300 ord)",
+    //     en: "(maximum 300 words)",
+    //   },
+    //   required: true,
+    // },
     {
       type: FieldType.Url,
       name: "website",
