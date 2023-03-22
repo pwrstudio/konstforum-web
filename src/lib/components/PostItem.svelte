@@ -93,9 +93,13 @@
     user-select: none;
 
     .post-item-header {
-      height: 55px;
+      padding-bottom: 1em;
       display: flex;
       justify-content: space-between;
+
+      .left {
+        max-width: 90%;
+      }
 
       .right {
         display: flex;

@@ -272,6 +272,7 @@
     top: 70px;
     background: $black;
     color: $white;
+    overflow: scroll;
   }
 
   .mobile-list-close {
