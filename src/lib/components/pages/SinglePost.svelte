@@ -63,6 +63,30 @@
         {#if content}
           <div>{@html renderBlockText(content)}</div>
         {/if}
+
+        <div class="section">
+          <!-- WEBSITE -->
+          {#if post.website}
+            <a
+              class="link"
+              href={post.website}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {$languageStore === Language.English ? "WEBSITE" : "HEMSIDA"}
+            </a>
+          {/if}
+          <!-- SOCIAL MEDIA -->
+
+          {#if post.socialMediaLinks?.length > 0}
+            {#each post.socialMediaLinks as link}
+              <a class="link" href={link.url} target="_blank" rel="noreferrer">
+                {link.title}
+              </a>
+            {/each}
+          {/if}
+        </div>
+
         {#if post.emailAddress}
           <a
             href={"mailto:" +
@@ -105,7 +129,7 @@
       }
 
       .content {
-        height: calc(100vh - 85px);
+        height: calc(100vh - 60px);
         overflow-y: auto;
 
         @include screen-size("small") {
@@ -114,7 +138,7 @@
 
         .column {
           float: left;
-          height: calc(100vh - 85px);
+          height: calc(100vh - 60px);
           padding-right: 15px;
 
           @include screen-size("small") {
@@ -154,6 +178,29 @@
               width: 100%;
             }
 
+            .section {
+              margin-top: 20px;
+              margin-bottom: 20px;
+
+              .link {
+                padding: 5px 10px;
+                border: 1px solid $black;
+                border-radius: 10px;
+                font-family: $EXPANDED_STACK;
+                font-size: $FONT_SIZE_XSMALL;
+                display: inline-block;
+                cursor: pointer;
+                text-decoration: none;
+                text-transform: uppercase;
+                user-select: none;
+                margin-right: 5px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
             .contact {
               padding: 5px 10px;
               border: 1px solid $black;
@@ -163,6 +210,11 @@
               display: inline-block;
               cursor: pointer;
               text-decoration: none;
+              user-select: none;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }
