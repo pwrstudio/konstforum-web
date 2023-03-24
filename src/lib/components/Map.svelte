@@ -1,13 +1,16 @@
 <script lang="ts">
   // import { PUBLIC_GOOGLE } from "$env/static/public"
   import { goto } from "$app/navigation"
-  import { filteredPosts, urlPrefix } from "$lib/stores"
+  import { filteredPosts, rawPosts, urlPrefix } from "$lib/stores"
   import { onMount } from "svelte"
   import mapboxgl from "mapbox-gl"
   import "mapbox-gl/dist/mapbox-gl.css"
+  import SinglePost from "./pages/SinglePost.svelte"
 
   const center = { lat: 55.8725675, lon: 13.5645621 }
   let map: mapboxgl.Map
+
+  let activePost = {}
 
   const GOOGLE_API_KEY = "AIzaSyDSzr2hrtfnGyoMrSVk8g7ReY6-t8_1mk8"
 
@@ -194,7 +197,8 @@
 
       map.on("click", "unclustered-point", e => {
         const slug = e.features[0].properties.slug
-        goto($urlPrefix + "post/" + slug)
+        // goto($urlPrefix + "post/" + slug)
+        activePost = $rawPosts.find(p => p.slug.current === slug)
       })
 
       map.on("mouseenter", "unclustered-point", () => {
@@ -207,6 +211,18 @@
     })
   })
 </script>
+
+{#if activePost._id}
+  <div class="post-pop-up">
+    <SinglePost
+      popUp={true}
+      data={{ post: activePost }}
+      on:close={() => {
+        activePost = {}
+      }}
+    />
+  </div>
+{/if}
 
 <div class="map" id="map" />
 
@@ -233,5 +249,19 @@
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  .post-pop-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
   }
 </style>

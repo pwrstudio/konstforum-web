@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte"
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { menuActive, urlPrefix, languageStore } from "$lib/stores"
@@ -9,9 +10,16 @@
   import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
   import { Language } from "$lib/types"
-  export let language: Language
   export let data
+  export let language = $languageStore
+  export let popUp = false
   const { post } = data
+
+  const dispatch = createEventDispatcher()
+
+  const close = () => {
+    dispatch("close")
+  }
 
   console.log(post)
 
@@ -38,13 +46,20 @@
 
 <Metadata {title} {description} />
 
-<a
-  href={post._type == "event" ? $urlPrefix + "evenemang/" : $urlPrefix}
-  class="close"
-  data-sveltekit-preload-data
->
-  <X />
-</a>
+{#if popUp}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div on:click={close} class="close">
+    <X />
+  </div>
+{:else}
+  <a
+    href={post._type == "event" ? $urlPrefix + "evenemang/" : $urlPrefix}
+    class="close"
+    data-sveltekit-preload-data
+  >
+    <X />
+  </a>
+{/if}
 
 <div class="single-post">
   <div class="inner" in:fade={{ easing: quadOut, duration: 400 }}>

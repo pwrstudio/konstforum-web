@@ -8,6 +8,13 @@
   const menuItems: MenuItem[] = [
     {
       title: {
+        sve: "Nyheter",
+        eng: "News",
+      },
+      link: "nyheter",
+    },
+    {
+      title: {
         sve: "Evenemang",
         eng: "Events",
       },

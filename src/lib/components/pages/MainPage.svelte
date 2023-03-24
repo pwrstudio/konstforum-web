@@ -163,7 +163,7 @@
 
   .column {
     height: calc(100vh - 60px);
-    position: fixed;
+    position: absolute;
     top: 70px;
 
     @include screen-size("small") {
