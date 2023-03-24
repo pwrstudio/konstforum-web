@@ -61,6 +61,79 @@
                 : post.content_sve.content
             )}
           </div>
+          {#if post._id === "kontakt"}
+            <!-- Begin Mailchimp Signup Form -->
+            <form
+              action="https://konstforumiskane.us21.list-manage.com/subscribe/post?u=0a06fef657ef359d9d17194a1&amp;id=3cccc613d4&amp;f_id=0051f5e1f0"
+              method="post"
+              id="mc-embedded-subscribe-form"
+              name="mc-embedded-subscribe-form"
+              class="validate"
+              target="_blank"
+              novalidate
+            >
+              <div id="mc_embed_signup_scroll">
+                <h2>
+                  {$languageStore === Language.English
+                    ? "Newsletter"
+                    : "Nyhetsbrev"}
+                </h2>
+                <div class="mc-field-group">
+                  <label for="mce-EMAIL">
+                    {$languageStore === Language.English
+                      ? "Email address"
+                      : "Emailadress"}
+                  </label>
+                  <input
+                    type="email"
+                    value=""
+                    name="EMAIL"
+                    class="required email"
+                    id="mce-EMAIL"
+                    required
+                  />
+                  <span id="mce-EMAIL-HELPERTEXT" class="helper_text" />
+                </div>
+                <div id="mce-responses" class="clear foot">
+                  <div
+                    class="response"
+                    id="mce-error-response"
+                    style="display:none"
+                  />
+                  <div
+                    class="response"
+                    id="mce-success-response"
+                    style="display:none"
+                  />
+                </div>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div
+                  style="position: absolute; left: -5000px;"
+                  aria-hidden="true"
+                >
+                  <input
+                    type="text"
+                    name="b_0a06fef657ef359d9d17194a1_3cccc613d4"
+                    tabindex="-1"
+                    value=""
+                  />
+                </div>
+                <div class="optionalParent">
+                  <div class="clear foot">
+                    <input
+                      type="submit"
+                      value={$languageStore === Language.English
+                        ? "Subscribe"
+                        : "Prenumerera"}
+                      name="subscribe"
+                      id="mc-embedded-subscribe"
+                      class="button"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          {/if}
         </div>
       {/each}
     </div>
@@ -96,6 +169,44 @@
       .content {
         height: calc(100vh - 60px);
         overflow-y: auto;
+
+        .button {
+          padding: 10px 10px;
+          border: 1px solid $black;
+          border-radius: 10px;
+          font-family: $EXPANDED_STACK;
+          font-size: $FONT_SIZE_SMALL;
+          display: inline-block;
+          cursor: pointer;
+          text-decoration: none;
+          text-transform: uppercase;
+          user-select: none;
+          margin-right: 5px;
+          background: transparent;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        .email {
+          display: block;
+          padding: 10px 10px;
+          border: 1px solid $black;
+          font-size: $FONT_SIZE_MEDIUM;
+          border-radius: 10px;
+          display: inline-block;
+          cursor: pointer;
+          user-select: none;
+          margin-right: 5px;
+          background: transparent;
+          margin-bottom: 20px;
+        }
 
         .center {
           font-family: $REGULAR_STACK;
