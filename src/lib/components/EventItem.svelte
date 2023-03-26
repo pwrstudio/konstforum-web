@@ -34,6 +34,18 @@
   id={event.slug?.current}
 >
   <!-- TITLE -->
+  <div class="tags">
+    {#if $languageStore === Language.English}
+      {#each event.tags_eng as tag}
+        <span class="tag">{tag}</span>
+      {/each}
+    {:else}
+      {#each event.tags_sve as tag}
+        <span class="tag">{tag}</span>
+      {/each}
+    {/if}
+  </div>
+  <!-- TITLE -->
   <div class="event-title">
     {title}
   </div>
@@ -124,5 +136,18 @@
 
   :global(.image) {
     height: fit-content;
+  }
+
+  .tags {
+    margin-top: 2px;
+    margin-bottom: 5px;
+
+    .tag {
+      font-size: $FONT_SIZE_SMALL;
+      padding: 3px 8px;
+      border: 1px solid $black;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
   }
 </style>

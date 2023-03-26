@@ -31,6 +31,8 @@
         if (data.status === "OK") {
           return data.results[0].geometry.location
         } else {
+          console.log(address)
+          console.log(data)
           throw new Error(data.error_message)
         }
       })
@@ -113,6 +115,7 @@
     })
 
     const pointsGeoJson = await generateGeoJson()
+    console.log(pointsGeoJson)
 
     map.on("load", () => {
       map.addSource("points", {
