@@ -26,22 +26,20 @@ export const activeTags = writable([] as string[]);
 // --- POSTS
 export const rawPosts = writable([]);
 
-
 // --- EVENT TYPES
 export const activeEventTypes = writable([] as string[]);
 
 // --- POSTS
 export const rawEvents = writable([]);
 
-
 // --- DERIVED: POST
 export const activeTypePosts = derived([rawPosts, activeTypes], ([$rawPosts, $activeTypes]) => {
     return $rawPosts.filter(p => $activeTypes.includes(p.type))
 })
-export const filteredPosts = derived([activeTypePosts, activeTags], ([$activeTypePosts, $activeTags]) => {
+export const filteredPosts = derived([activeTypePosts, activeTags, languageStore], ([$activeTypePosts, $activeTags, $languageStore]) => {
     const intersection = (arr1: string[], arr2: string[]) => arr1.some(r => arr2.includes(r))
     if ($activeTags.length === 0) return $activeTypePosts
-    return $activeTypePosts.filter(p => intersection($activeTags, p.tags_sve))
+    return $activeTypePosts.filter(p => intersection($activeTags, $languageStore === Language.English ? p.tags_eng : p.tags_sve))
 })
 export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
     let splitPosts = { evens: [], odds: [] }
@@ -56,9 +54,9 @@ export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
 })
 
 // --- DERIVED: TAG
-export const allTags: Readable<string[]> = derived([rawPosts], ([$rawPosts]) => {
+export const allTags: Readable<string[]> = derived([rawPosts, languageStore], ([$rawPosts, $languageStore]) => {
     // Get all tags from posts, filter out undefined, make unique
-    return Array.from(new Set($rawPosts.flatMap(p => p.tags_sve).filter(t => t !== undefined)));
+    return Array.from(new Set($rawPosts.flatMap(p => $languageStore === Language.English ? p.tags_eng : p.tags_sve).filter(t => t !== undefined)));
 });
 export const activeTypeTags: Readable<string[]> = derived([activeTypePosts, languageStore], ([$activeTypePosts, $languageStore]) => {
     // Get all tags from posts of the active type, filter out undefined, make unique

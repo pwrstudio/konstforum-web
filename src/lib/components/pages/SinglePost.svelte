@@ -92,7 +92,6 @@
             </a>
           {/if}
           <!-- SOCIAL MEDIA -->
-
           {#if post.socialMediaLinks?.length > 0}
             {#each post.socialMediaLinks as link}
               <a class="link" href={link.url} target="_blank" rel="noreferrer">
