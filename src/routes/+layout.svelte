@@ -119,7 +119,26 @@
     "/en/search/[slug]",
   ]
   const eventPages = ["/evenemang", "/en/evenemang"]
+  const newsPages = ["/nyheter", "/en/nyheter"]
 </script>
+
+{#if newsPages.includes($page.route?.id)}
+  <nav class="top-bar news">
+    <!-- TITLE -->
+    <div class="title">
+      <a href="/" data-sveltekit-preload-data>Konstforum i Skåne</a>
+    </div>
+    <!-- FILTER -->
+    {#if !$searchInputActive}
+      <div class="filter">NYHETER</div>
+    {/if}
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <Search />
+      <LanguageSwitch />
+    </div>
+  </nav>
+{/if}
 
 {#if aboutPages.includes($page.route?.id)}
   <nav class="top-bar about">

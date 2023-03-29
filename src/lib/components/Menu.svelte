@@ -6,13 +6,13 @@
   import { Language, type MenuItem, UIColor } from "$lib/types"
 
   const menuItems: MenuItem[] = [
-    {
-      title: {
-        sve: "Nyheter",
-        eng: "News",
-      },
-      link: "nyheter",
-    },
+    // {
+    //   title: {
+    //     sve: "Nyheter",
+    //     eng: "News",
+    //   },
+    //   link: "nyheter",
+    // },
     {
       title: {
         sve: "Evenemang",
