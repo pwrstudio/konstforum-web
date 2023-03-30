@@ -10,6 +10,7 @@ export async function load({ params }) {
     const categoriesOrganisation = await loadData("*[_id == 'categories-organisation'][0]")
     const categoriesParticipant = await loadData("*[_id == 'categories-participant'][0]")
     const categoriesProject = await loadData("*[_id == 'categoeries-project'][0]")
+    const settings = await loadData("*[_id == 'settings'][0]")
 
     return {
         posts,
@@ -18,6 +19,7 @@ export async function load({ params }) {
         categoriesArtist,
         categoriesOrganisation,
         categoriesParticipant,
-        categoriesProject
+        categoriesProject,
+        settings
     };
 }

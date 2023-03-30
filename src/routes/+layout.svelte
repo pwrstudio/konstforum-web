@@ -25,6 +25,7 @@
     categoriesOrganisation,
     categoriesParticipant,
     categoriesProject,
+    settings,
   } = data
   rawPosts.set(posts)
   rawEvents.set(events)
@@ -130,7 +131,12 @@
     </div>
     <!-- FILTER -->
     {#if !$searchInputActive}
-      <div class="filter">NYHETER</div>
+      <div class="filter">
+        <div class="news-head ">
+          <div class="bullet active" />
+          NYHETER
+        </div>
+      </div>
     {/if}
     <!-- TOOLBAR -->
     <div class="toolbar">
@@ -208,7 +214,7 @@
 {/if}
 
 {#if $menuActive}
-  <Menu />
+  <Menu {settings} />
 {/if}
 
 <slot />
@@ -299,5 +305,43 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+
+  .news-head {
+    text-transform: uppercase;
+    border: 1px solid $black;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+
+    @include screen-size("small") {
+      font-size: $FONT_SIZE_XSMALL;
+      padding: 6px 8px;
+      margin-right: 5px;
+      display: none;
+    }
+
+    .bullet {
+      height: 13px;
+      width: 13px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid $black;
+      margin-right: 5px;
+
+      @include screen-size("small") {
+        height: 7px;
+        width: 7px;
+      }
+
+      &.active {
+        background: $black;
+      }
+    }
   }
 </style>

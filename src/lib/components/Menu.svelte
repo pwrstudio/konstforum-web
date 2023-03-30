@@ -5,14 +5,9 @@
   import { languageStore, menuActive, urlPrefix } from "$lib/stores"
   import { Language, type MenuItem, UIColor } from "$lib/types"
 
+  export let settings: any
+
   const menuItems: MenuItem[] = [
-    // {
-    //   title: {
-    //     sve: "Nyheter",
-    //     eng: "News",
-    //   },
-    //   link: "nyheter",
-    // },
     {
       title: {
         sve: "Evenemang",
@@ -51,6 +46,15 @@
   in:fade={{ easing: quadOut, duration: 400 }}
 >
   <div class="inner">
+    {#if settings.showNewsInMenu}
+      <div>
+        <a href={$urlPrefix + "nyheter"} data-sveltekit-preload-data>
+          {$languageStore === Language.English
+            ? settings.menuText_eng
+            : settings.menuText_sve}
+        </a>
+      </div>
+    {/if}
     {#each menuItems as item (item.link)}
       <div>
         <a href={$urlPrefix + item.link} data-sveltekit-preload-data>

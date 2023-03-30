@@ -120,14 +120,23 @@
       margin-left: auto;
       margin-right: auto;
       width: 800px;
-      max-width: 90%;
       padding-top: 70px;
       padding-bottom: 50px;
+
+      @include screen-size("small") {
+        width: calc(100% - 20px);
+        font-size: $FONT_SIZE_NORMAL;
+        margin-top: 0;
+      }
 
       .header {
         font-family: $COMPRESSED_STACK;
         font-size: $FONT_SIZE_SEMI;
         text-transform: uppercase;
+
+        @include screen-size("small") {
+          font-size: $FONT_SIZE_NORMAL;
+        }
       }
 
       .news-item {
@@ -139,12 +148,21 @@
           font-size: $FONT_SIZE_SEMI_XLARGE;
           line-height: 1em;
           margin-top: 0;
+
+          @include screen-size("small") {
+            font-size: 24px;
+            padding-top: 0;
+          }
         }
 
         .intro {
           font-size: $FONT_SIZE_ALMOST_MEDIUM;
           font-family: $REGULAR_STACK;
           margin-bottom: 20px;
+
+          @include screen-size("small") {
+            font-size: $FONT_SIZE_NORMAL;
+          }
         }
 
         .image {
@@ -153,9 +171,15 @@
 
         .content {
           font-size: $FONT_SIZE_MEDIUM;
+
+          @include screen-size("small") {
+            font-size: $FONT_SIZE_NORMAL;
+          }
         }
 
         .list {
+          margin-top: 40px;
+
           .list-item {
             padding-bottom: 10px;
             padding-top: 10px;
@@ -164,10 +188,14 @@
             .text {
               font-size: $FONT_SIZE_MEDIUM;
               font-family: $REGULAR_STACK;
+
+              @include screen-size("small") {
+                font-size: $FONT_SIZE_NORMAL;
+              }
             }
 
             .time {
-              font-size: $FONT_SIZE_NORMAL;
+              font-size: $FONT_SIZE_SMALL;
               font-family: $REGULAR_STACK;
             }
           }
