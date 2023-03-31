@@ -250,6 +250,10 @@
       background: $grey;
     }
 
+    &.news {
+      background: $grey;
+    }
+
     .title {
       a {
         text-decoration: none;

@@ -106,9 +106,8 @@
 
   .news-page {
     width: 100vw;
-    background: $white;
+    background: $grey;
     color: $black;
-    height: 100vh;
     font-family: $REGULAR_STACK;
     font-size: $FONT_SIZE_LARGE;
 
@@ -148,6 +147,7 @@
           font-size: $FONT_SIZE_SEMI_XLARGE;
           line-height: 1em;
           margin-top: 0;
+          margin-bottom: 20px;
 
           @include screen-size("small") {
             font-size: 24px;
