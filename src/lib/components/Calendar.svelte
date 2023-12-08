@@ -20,7 +20,7 @@
   let calendarIndex = 5
   const weekdays = ["M", "T", "O", "T", "F", "L", "S"]
 
-  const pad = (n: Number) => (n < 10 ? "0" + String(n) : String(n))
+  const pad = (n: number) => (n < 10 ? "0" + String(n) : String(n))
 
   const makeSpacers = n => {
     n = n == 0 ? 6 : n - 1
@@ -53,7 +53,7 @@
 
   const makeDate = (monthObject: Month, day: number) => {
     return Date.parse(
-      `${monthObject.year}-${pad(monthObject.index + 1)}-${day}`
+      `${monthObject.year}-${pad(monthObject.index + 1)}-${day}`,
     )
   }
 
@@ -79,11 +79,11 @@
       newDay.weekend = isWeekend(newDay.date)
       newDay.past = isPast(newDay.date)
       newDay.event = $filteredEvents.some(e =>
-        isSameDay(Date.parse(e.time), newDay.date)
+        isSameDay(Date.parse(e.time), newDay.date),
       )
       if (newDay.event) {
         newDay.eventPost = $filteredEvents.find(e =>
-          isSameDay(Date.parse(e.time), newDay.date)
+          isSameDay(Date.parse(e.time), newDay.date),
         )
       }
       newDay.today = isSameDay(new Date(), newDay.date)
@@ -96,7 +96,7 @@
   const currentDate = new Date()
   // 2. Render: current month, five months back & six months forward
   const months = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6].map(i =>
-    makeMonth(addMonths(currentDate, i))
+    makeMonth(addMonths(currentDate, i)),
   )
 
   function goToEvent(event: any) {

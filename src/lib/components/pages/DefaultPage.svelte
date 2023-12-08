@@ -58,7 +58,7 @@
             {@html renderBlockText(
               $languageStore === Language.English
                 ? post.content_eng.content
-                : post.content_sve.content
+                : post.content_sve.content,
             )}
           </div>
           {#if post._id === "kontakt"}

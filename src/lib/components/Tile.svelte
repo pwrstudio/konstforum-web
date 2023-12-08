@@ -2,11 +2,11 @@
   import { fade } from "svelte/transition"
   import { quadOut } from "svelte/easing"
   import { urlPrefix, focusedPost } from "$lib/stores"
-  import type { Language } from "$lib/types"
+  import type { Language, Post } from "$lib/types"
   import Image from "$lib/components/Image.svelte"
 
   export let language: Language
-  export let post
+  export let post: Post
 </script>
 
 <a

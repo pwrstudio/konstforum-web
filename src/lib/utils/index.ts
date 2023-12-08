@@ -45,3 +45,7 @@ export function shuffleArray<T>(array: T[], seed: number): T[] {
 
     return array;
 }
+
+export const intersection = (arr1: string[], arr2: string[]) => {
+    return arr1.some(r => arr2.includes(r))
+}

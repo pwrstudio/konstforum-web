@@ -19,7 +19,7 @@ const SANITY_PROJECT_ID = "80e68670"
 export const client = createClient({
     projectId: SANITY_PROJECT_ID,
     dataset: "production",
-    apiVersion: '2022-12-12', // use a UTC date string
+    apiVersion: '2023-12-01', // use a UTC date string
     useCdn: true,
 })
 

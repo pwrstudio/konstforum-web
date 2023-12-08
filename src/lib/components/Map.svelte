@@ -6,11 +6,12 @@
   import mapboxgl from "mapbox-gl"
   import "mapbox-gl/dist/mapbox-gl.css"
   import SinglePost from "./pages/SinglePost.svelte"
+  import type { Post } from "$lib/types"
 
   const center = { lat: 55.8725675, lon: 13.5645621 }
   let map: mapboxgl.Map
 
-  let activePost = {}
+  let activePost: Post = {}
 
   const GOOGLE_API_KEY = "AIzaSyDSzr2hrtfnGyoMrSVk8g7ReY6-t8_1mk8"
 
@@ -19,11 +20,11 @@
 
   function geocodeAddress(
     address: string,
-    apiKey: string
+    apiKey: string,
   ): Promise<{ lat: number; lng: number }> {
     // Make a request to the Geocoding API to convert the address to coordinates
     const requestUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-      address
+      address,
     )}&key=${apiKey}`
     return fetch(requestUrl)
       .then(response => response.json())
@@ -57,7 +58,7 @@
 
   function randomShiftCoordinate(
     coordinate: [number, number],
-    shiftAmount: number
+    shiftAmount: number,
   ): [number, number] {
     // Generate random values for the latitude and longitude shift
     const latShift = (Math.random() * 2 - 1) * shiftAmount
@@ -92,7 +93,7 @@
                 type: "Point",
                 coordinates: randomShiftCoordinate(
                   [coordinates.lng, coordinates.lat],
-                  0.0008
+                  0.0008,
                 ),
               },
             })

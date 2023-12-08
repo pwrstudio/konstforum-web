@@ -4,11 +4,11 @@
   import "swiper/css"
   import "swiper/css/pagination"
   import Image from "$lib/components/Image.svelte"
-  import { Language } from "$lib/types"
+  import { Language, type ImageDyad } from "$lib/types"
   import SmallArrowLeft from "$lib/graphics/SmallArrowLeft.svelte"
   import SmallArrowRight from "$lib/graphics/SmallArrowRight.svelte"
   export let language: Language
-  export let slides: any[]
+  export let slides: ImageDyad[]
 </script>
 
 <Swiper

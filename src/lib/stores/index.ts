@@ -1,6 +1,6 @@
 import { writable, derived, type Readable } from "svelte/store";
-import { Language } from "$lib/types";
-import { shuffleArray } from "$lib/utils";
+import { Language, type Post } from "$lib/types";
+import { shuffleArray, intersection } from "$lib/utils";
 
 // --- UI
 export const menuActive = writable(false);
@@ -25,7 +25,7 @@ export const activeTypes = writable([] as string[]);
 export const activeTags = writable([] as string[]);
 
 // --- POSTS
-export const rawPosts = writable([]);
+export const rawPosts = writable([] as Post[]);
 
 // --- EVENT TYPES
 export const activeEventTypes = writable([] as string[]);
@@ -39,13 +39,12 @@ export const activeTypePosts = derived([rawPosts, activeTypes], ([$rawPosts, $ac
 })
 
 export const filteredPosts = derived([activeTypePosts, activeTags, languageStore], ([$activeTypePosts, $activeTags, $languageStore]) => {
-    const intersection = (arr1: string[], arr2: string[]) => arr1.some(r => arr2.includes(r))
     if ($activeTags.length === 0) return $activeTypePosts
-    return $activeTypePosts.filter(p => intersection($activeTags, $languageStore === Language.English ? p.tags_eng : p.tags_sve))
+    return $activeTypePosts.filter(p => intersection($activeTags, $languageStore === Language.English ? p.tags_eng ?? [] : p.tags_sve ?? []))
 })
 
 export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
-    let splitPosts = { evens: [], odds: [] }
+    let splitPosts = { evens: [] as Post[], odds: [] as Post[] }
     for (let i = 0; i < $filteredPosts.length; i++) {
         if (i % 2 === 0) {
             splitPosts.evens.push($filteredPosts[i]);
@@ -53,7 +52,6 @@ export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
             splitPosts.odds.push($filteredPosts[i]);
         }
     }
-
 
     const seed = new Date().getMinutes();
     splitPosts.evens = shuffleArray(splitPosts.evens, seed)

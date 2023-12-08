@@ -74,3 +74,81 @@ export interface MenuItem {
     title: { sve: string, eng: string }
     link: string
 }
+
+type Span = {
+    _key: string;
+    _type: 'span';
+    marks: any[];
+    text: string;
+};
+
+export type Block = {
+    _type: 'block';
+    style: string;
+    _key: string;
+    markDefs: any[];
+    children: Span[];
+};
+
+type LimitedEditor = {
+    _type: 'limitedEditor';
+    content: Block[];
+};
+
+type Link = {
+    url: string;
+    _type: 'link';
+    _key: string;
+    title: string;
+};
+
+type ImageAsset = {
+    _ref: string;
+    _type: 'reference';
+};
+
+export type Image = {
+    _key?: string
+    _type: 'image';
+    asset: ImageAsset;
+    bildtext_sve?: string;
+    bildtext_eng?: string;
+};
+
+export type ImageDyad = {
+    _key?: string
+    _type: 'imageDyad';
+    bild: Image;
+    dither: Image;
+};
+
+type Slug = {
+    current: string;
+    _type: 'slug';
+};
+
+export type Post = {
+    content_sve: LimitedEditor;
+    emailAddress: string;
+    tags_sve: string[];
+    socialMediaLinks: Link[];
+    locationText_eng: string;
+    locationText_sve: string;
+    _id: string;
+    _updatedAt: string;
+    slug: Slug;
+    shortText_sve: LimitedEditor;
+    title_eng: string;
+    website: string;
+    _rev: string;
+    type: string;
+    tags_eng: string[];
+    mainImage: ImageDyad;
+    _createdAt: string;
+    shortText_eng: LimitedEditor;
+    visibility: 'public' | 'private';
+    _type: 'post';
+    content_eng: LimitedEditor;
+    title: string;
+};
+

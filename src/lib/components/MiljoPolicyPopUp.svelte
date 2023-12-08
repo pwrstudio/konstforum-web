@@ -22,6 +22,7 @@
 </script>
 
 <div class="miljopolicy" transition:fade>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="inner" on:click={close}>
     <div class="close">{buttonText}</div>
     {@html renderBlockText(content)}

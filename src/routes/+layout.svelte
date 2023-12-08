@@ -132,7 +132,7 @@
     <!-- FILTER -->
     {#if !$searchInputActive}
       <div class="filter">
-        <div class="news-head ">
+        <div class="news-head">
           <div class="bullet active" />
           NYHETER
         </div>
@@ -301,7 +301,9 @@
   :global(*) {
     scroll-behavior: smooth;
     box-sizing: border-box;
-    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-feature-settings:
+      "liga" on,
+      "calt" on;
     -webkit-font-smoothing: antialiased;
     text-rendering: geometricPrecision;
 

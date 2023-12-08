@@ -1,8 +1,8 @@
 <script lang="ts">
   import Image from "$lib/components/Image.svelte"
-  import { Language } from "$lib/types"
+  import { Language, type Post } from "$lib/types"
   export let language: Language
-  export let post: any
+  export let post: Post
   const caption = Language.English ? post.title_eng : post.title
 </script>
 

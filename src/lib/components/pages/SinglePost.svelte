@@ -21,8 +21,6 @@
     dispatch("close")
   }
 
-  console.log(post)
-
   let title: string
   let content: string
   let description: string

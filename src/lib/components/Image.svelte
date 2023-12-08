@@ -1,12 +1,13 @@
 <script lang="ts">
   import { urlFor } from "$lib/modules/sanity"
-  export let imageDyad: any = {}
+  import type { Image, ImageDyad } from "$lib/types"
+  export let imageDyad: ImageDyad
   export let caption: string = ""
   export let width: number = 0
   export let height: number = 0
 
   let url = ""
-  let imageObj = imageDyad.dither ? imageDyad.dither : imageDyad.bild
+  let imageObj: Image = imageDyad.dither ? imageDyad.dither : imageDyad.bild
 
   if (width > 0 && height > 0) {
     url = urlFor(imageObj)

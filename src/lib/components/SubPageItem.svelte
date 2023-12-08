@@ -1,7 +1,7 @@
 <script lang="ts">
   import { languageStore } from "$lib/stores"
   import { Language } from "$lib/types"
-  export let subpage
+  export let subpage: any
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

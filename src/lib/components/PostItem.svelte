@@ -2,12 +2,12 @@
   import { fade } from "svelte/transition"
   import { urlPrefix, languageStore, focusedPost } from "$lib/stores"
   import { renderBlockText } from "$lib/modules/sanity"
-  import { Language } from "$lib/types"
+  import { Language, type Post, type Block } from "$lib/types"
   import MidArrowRight from "$lib/graphics/MidArrowRight.svelte"
   import MidArrowLeft from "$lib/graphics/MidArrowLeft.svelte"
   import Image from "$lib/components/Image.svelte"
 
-  export let post
+  export let post: Post
 
   let extended = false
   const toggleExtended = () => {
@@ -15,7 +15,7 @@
   }
 
   let title: string
-  let content: string
+  let content: Block[]
   let tags: string[]
 
   $: tags =
