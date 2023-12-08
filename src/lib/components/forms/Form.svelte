@@ -173,7 +173,15 @@
           name={`upload[${upload}].file`}
           role="uploadcare-uploader"
           data-public-key="cc687b96511581c9f7b5"
+          required={i === 0}
         />
+        {#if i === 0}
+          <div class="form-section required">
+            {$languageStore === Language.English
+              ? "* Upload at least one image"
+              : "* Ladda upp minst en bild"}
+          </div>
+        {/if}
         <div class="form-section max-file-size">
           {$languageStore === Language.English
             ? "(Max file size: 5MB)"
