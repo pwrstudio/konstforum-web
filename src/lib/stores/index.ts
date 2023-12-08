@@ -1,5 +1,6 @@
 import { writable, derived, type Readable } from "svelte/store";
 import { Language } from "$lib/types";
+import { shuffleArray } from "$lib/utils";
 
 // --- UI
 export const menuActive = writable(false);
@@ -36,11 +37,13 @@ export const rawEvents = writable([]);
 export const activeTypePosts = derived([rawPosts, activeTypes], ([$rawPosts, $activeTypes]) => {
     return $rawPosts.filter(p => $activeTypes.includes(p.type))
 })
+
 export const filteredPosts = derived([activeTypePosts, activeTags, languageStore], ([$activeTypePosts, $activeTags, $languageStore]) => {
     const intersection = (arr1: string[], arr2: string[]) => arr1.some(r => arr2.includes(r))
     if ($activeTags.length === 0) return $activeTypePosts
     return $activeTypePosts.filter(p => intersection($activeTags, $languageStore === Language.English ? p.tags_eng : p.tags_sve))
 })
+
 export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
     let splitPosts = { evens: [], odds: [] }
     for (let i = 0; i < $filteredPosts.length; i++) {
@@ -50,6 +53,12 @@ export const splitPosts = derived([filteredPosts], ([$filteredPosts]) => {
             splitPosts.odds.push($filteredPosts[i]);
         }
     }
+
+
+    const seed = new Date().getMinutes();
+    splitPosts.evens = shuffleArray(splitPosts.evens, seed)
+    splitPosts.odds = shuffleArray(splitPosts.odds, seed)
+
     return splitPosts;
 })
 
@@ -58,6 +67,7 @@ export const allTags: Readable<string[]> = derived([rawPosts, languageStore], ([
     // Get all tags from posts, filter out undefined, make unique
     return Array.from(new Set($rawPosts.flatMap(p => $languageStore === Language.English ? p.tags_eng : p.tags_sve).filter(t => t !== undefined)));
 });
+
 export const activeTypeTags: Readable<string[]> = derived([activeTypePosts, languageStore], ([$activeTypePosts, $languageStore]) => {
     // Get all tags from posts of the active type, filter out undefined, make unique
     return Array.from(new Set($activeTypePosts.flatMap(p => $languageStore === Language.English ? p.tags_eng : p.tags_sve).filter(t => t !== undefined)));

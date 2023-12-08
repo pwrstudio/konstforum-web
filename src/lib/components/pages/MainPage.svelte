@@ -25,7 +25,7 @@
 
   export let language: Language
   export let isSearch = false
-  export let data
+  export let data: any = {}
 
   let formActive = false
 
