@@ -128,6 +128,7 @@ type Slug = {
 };
 
 export type Post = {
+    _type: 'post' | 'event';
     content_sve: LimitedEditor;
     emailAddress: string;
     tags_sve: string[];
@@ -142,12 +143,13 @@ export type Post = {
     website: string;
     _rev: string;
     type: string;
+    time: string;
     tags_eng: string[];
     mainImage: ImageDyad;
+    bildspel: ImageDyad[];
     _createdAt: string;
     shortText_eng: LimitedEditor;
     visibility: 'public' | 'private';
-    _type: 'post';
     content_eng: LimitedEditor;
     title: string;
 };

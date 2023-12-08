@@ -21,8 +21,8 @@
   {#each slides as slide (slide._key)}
     {@const caption =
       (language === Language.English
-        ? slide.bildtext_eng
-        : slide.bildtext_sve) || ""}
+        ? slide.bild?.bildtext_eng
+        : slide.bild?.bildtext_sve) ?? ""}
     <SwiperSlide>
       <div class="inner">
         <div class="image">
@@ -71,12 +71,14 @@
     }
 
     .caption {
-      margin-top: 20px;
+      margin-bottom: 30px;
       width: 100%;
       text-align: center;
       padding: 0 10px;
       display: flex;
       justify-content: space-between;
+      color: $black;
+
       .arrow {
         height: 8px;
         width: 8px;

@@ -4,11 +4,11 @@
   import Metadata from "$lib/components/Metadata.svelte"
   import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
-  import { Language } from "$lib/types"
+  import { Language, type Post } from "$lib/types"
   import Hamburger from "$lib/components/Hamburger.svelte"
   export let data
   export let language = $languageStore
-  const { posts } = data
+  const { posts }: { posts: Post[] } = data
 
   const openMenu = () => {
     menuActive.set(true)

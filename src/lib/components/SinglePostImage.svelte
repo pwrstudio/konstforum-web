@@ -1,9 +1,17 @@
 <script lang="ts">
   import Image from "$lib/components/Image.svelte"
   import { Language, type Post } from "$lib/types"
+  import get from "lodash/get"
   export let language: Language
   export let post: Post
-  const caption = Language.English ? post.title_eng : post.title
+
+  const getCaption = (post: Post) => {
+    let caption = Language.English
+      ? get(post, "mainImage.bild.bildtext_eng", "")
+      : get(post, "mainImage.bild.bildtext_sve", "")
+    return caption
+  }
+  const caption = getCaption(post)
 </script>
 
 <div class="inner">
@@ -41,8 +49,10 @@
       width: 100%;
       text-align: center;
       padding: 0 10px;
+      margin-bottom: 30px;
       display: flex;
       justify-content: center;
+      color: $black;
       .arrow {
         height: 8px;
         width: 8px;

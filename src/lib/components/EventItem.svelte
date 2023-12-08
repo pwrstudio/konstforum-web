@@ -1,10 +1,10 @@
 <script lang="ts">
   import { languageStore, activeEventSlug } from "$lib/stores"
   import { format } from "date-fns"
-  import { Language } from "$lib/types"
+  import { Language, type Post } from "$lib/types"
   import Image from "$lib/components/Image.svelte"
 
-  export let event
+  export let event: Post
 
   let extended = false
   const toggleExtended = () => {

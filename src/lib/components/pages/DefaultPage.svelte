@@ -6,9 +6,9 @@
   import Hamburger from "$lib/components/Hamburger.svelte"
   import Metadata from "$lib/components/Metadata.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language } from "$lib/types"
+  import { Language, type Post } from "$lib/types"
   export let data
-  const { posts } = data
+  const { posts }: { posts: Post[] } = data
 
   let title: string
   let content: string

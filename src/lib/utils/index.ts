@@ -46,6 +46,14 @@ export function shuffleArray<T>(array: T[], seed: number): T[] {
     return array;
 }
 
+/**
+ * Determines if there is an intersection between two arrays of strings.
+ * It checks if at least one element from the first array exists in the second array.
+ * 
+ * @param {string[]} arr1 - The first array of strings.
+ * @param {string[]} arr2 - The second array of strings.
+ * @returns {boolean} Returns `true` if there is at least one common element between the two arrays, otherwise returns `false`.
+ */
 export const intersection = (arr1: string[], arr2: string[]) => {
     return arr1.some(r => arr2.includes(r))
 }

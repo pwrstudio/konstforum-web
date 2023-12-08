@@ -9,11 +9,13 @@
   import SinglePostSlideshow from "$lib/components/SinglePostSlideshow.svelte"
   import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText, toPlainText } from "$lib/modules/sanity.js"
-  import { Language } from "$lib/types"
+  import { Language, type Block, type Post } from "$lib/types"
   export let data
   export let language = $languageStore
   export let popUp = false
-  const { post } = data
+  const { post }: { post: Post } = data
+
+  console.log(post)
 
   const dispatch = createEventDispatcher()
 
@@ -22,7 +24,7 @@
   }
 
   let title: string
-  let content: string
+  let content: Block[]
   let description: string
 
   $: title = $languageStore === Language.English ? post.title_eng : post.title

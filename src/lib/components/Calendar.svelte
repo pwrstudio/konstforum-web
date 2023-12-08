@@ -22,7 +22,7 @@
 
   const pad = (n: number) => (n < 10 ? "0" + String(n) : String(n))
 
-  const makeSpacers = n => {
+  const makeSpacers = (n: number) => {
     n = n == 0 ? 6 : n - 1
     let retArray = []
     for (let i = 0; i < n; i++) {
