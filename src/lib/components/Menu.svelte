@@ -10,6 +10,20 @@
   const menuItems: MenuItem[] = [
     {
       title: {
+        sve: "Nyheter",
+        eng: "News",
+      },
+      link: "nyheter",
+    },
+    // {
+    //   title: {
+    //     sve: "Anslagstavla",
+    //     eng: "Bulletin Board",
+    //   },
+    //   link: "anslagstavla",
+    // },
+    {
+      title: {
         sve: "Evenemang",
         eng: "Events",
       },
@@ -37,24 +51,24 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="close" on:click={closeMenu}><X color={UIColor.White} /></div>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="menu"
   on:click={closeMenu}
   in:fade={{ easing: quadOut, duration: 400 }}
 >
   <div class="inner">
-    {#if settings.showNewsInMenu}
+    <!-- {#if settings.showNewsInMenu}
       <div>
         <a href={$urlPrefix + "nyheter"} data-sveltekit-preload-data>
-          {$languageStore === Language.English
-            ? settings.menuText_eng
-            : settings.menuText_sve}
+          {$languageStore === Language.English ? "News" : "Nyheter"}
         </a>
       </div>
-    {/if}
+    {/if} -->
     {#each menuItems as item (item.link)}
       <div>
         <a href={$urlPrefix + item.link} data-sveltekit-preload-data>
@@ -124,6 +138,10 @@
         @include screen-size("small") {
           font-size: $FONT_SIZE_LARGE;
           border-bottom: 7px solid $white;
+        }
+
+        &:hover {
+          border-bottom: 10px solid transparent;
         }
 
         // @include screen-size("small") {

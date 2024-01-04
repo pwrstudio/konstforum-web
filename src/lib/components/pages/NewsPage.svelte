@@ -1,11 +1,14 @@
 <script lang="ts">
   import { menuActive, languageStore } from "$lib/stores"
   import { onMount } from "svelte"
-  import Metadata from "$lib/components/Metadata.svelte"
-  import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import { renderBlockText } from "$lib/modules/sanity.js"
   import { Language, type Post } from "$lib/types"
+
+  import Metadata from "$lib/components/Metadata.svelte"
+  import SinglePostImage from "$lib/components/SinglePostImage.svelte"
   import Hamburger from "$lib/components/Hamburger.svelte"
+  import BlockText from "$lib/components/BlockText.svelte"
+
   export let data
   export let language = $languageStore
   const { posts }: { posts: Post[] } = data
@@ -23,6 +26,7 @@
 
 {#if !$menuActive}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <span on:click={openMenu}>
     <Hamburger />
   </span>
@@ -69,14 +73,10 @@
         <!-- MAIN CONTENT -->
         <div class="content">
           {#if $languageStore === Language.English}
-            {#if post.content_eng?.content}
-              {@html renderBlockText(post.content_eng?.content)}
-            {/if}
+            <BlockText content={post.content_eng?.content ?? []} />
           {/if}
           {#if $languageStore === Language.Swedish}
-            {#if post.content_sve?.content}
-              {@html renderBlockText(post.content_sve?.content)}
-            {/if}
+            <BlockText content={post.content_sve?.content ?? []} />
           {/if}
         </div>
         <!-- LIST -->

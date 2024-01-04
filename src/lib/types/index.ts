@@ -83,11 +83,13 @@ type Span = {
 };
 
 export type Block = {
-    _type: 'block';
+    _type: 'block' | 'video' | 'image';
     style: string;
     _key: string;
     markDefs: any[];
     children: Span[];
+    url?: string;
+    posterImage?: ImageAsset;
 };
 
 type LimitedEditor = {
