@@ -10,23 +10,24 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-netlify": "^2.0.8",
-		"@sveltejs/kit": "^1.27.7",
+		"@sveltejs/adapter-netlify": "^3.0.1",
+		"@sveltejs/kit": "^2.0.6",
+		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@types/mapbox-gl": "^2.7.19",
-		"sass": "^1.69.5",
+		"sass": "^1.69.7",
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.6.2",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.7"
+		"vite": "^5.0.10"
 	},
 	"type": "module",
 	"dependencies": {
 		"@sanity/block-content-to-html": "^2.0.0",
-		"@sanity/client": "^6.9.3",
+		"@sanity/client": "^6.10.0",
 		"@sanity/image-url": "^1.0.2",
 		"@types/lodash": "^4.14.202",
-		"date-fns": "^2.30.0",
+		"date-fns": "^3.0.6",
 		"get-video-id": "^3.6.5",
 		"lodash": "^4.17.21",
 		"mapbox-gl": "^2.12.0",
