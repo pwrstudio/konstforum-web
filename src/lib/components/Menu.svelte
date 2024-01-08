@@ -15,13 +15,13 @@
       },
       link: "nyheter",
     },
-    // {
-    //   title: {
-    //     sve: "Anslagstavla",
-    //     eng: "Bulletin Board",
-    //   },
-    //   link: "anslagstavla",
-    // },
+    {
+      title: {
+        sve: "Anslagstavla",
+        eng: "Bulletin Board",
+      },
+      link: "anslagstavla",
+    },
     {
       title: {
         sve: "Evenemang",

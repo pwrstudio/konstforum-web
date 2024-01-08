@@ -47,6 +47,7 @@
 
 {#if !$menuActive}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <span on:click={openMenu}>
     <Hamburger />
   </span>
@@ -70,6 +71,7 @@
 
 {#if formActive}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="close-form" on:click={toggleForm}>
     <X color={UIColor.White} />
   </div>
@@ -78,6 +80,7 @@
   </div>
 {:else}
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="event-form-banner" on:click={toggleForm}>
     <div class="text">
       {$languageStore === Language.English ? "New event?" : "Nytt evenemang?"}

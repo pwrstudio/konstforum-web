@@ -9,6 +9,7 @@
   export let title: Title
   export let maxImages = 5
   export let inverted = false
+  export let simple = false
 
   let visibleImages = 1
   let activePostType = "artist"
@@ -139,114 +140,116 @@
   <!-------------------------------------->
   <div class="divider" />
   <!-- TAGS-->
-  {#if tags && tags.length > 0}
-    <div class="form-section">
-      <fieldset>
-        {#each tags as tag, i (tag.id)}
-          <div class="checkbox-container">
-            <input type="checkbox" name={tag.id} value={tag.id} />
-            <label for={tag.id}>
+  {#if !simple}
+    {#if tags && tags.length > 0}
+      <div class="form-section">
+        <fieldset>
+          {#each tags as tag, i (tag.id)}
+            <div class="checkbox-container">
+              <input type="checkbox" name={tag.id} value={tag.id} />
+              <label for={tag.id}>
+                {$languageStore === Language.English
+                  ? tag.label.eng
+                  : tag.label.sve}
+              </label>
+            </div>
+          {/each}
+        </fieldset>
+      </div>
+      <!-------------------------------------->
+      <div class="divider" />
+    {/if}
+    <!-- UPLOADS -->
+    {#each uploads as upload, i (upload)}
+      <div class="upload-container" class:visible={i < visibleImages}>
+        <div class="form-section">
+          <label for={`upload-${upload}-file`}>
+            {$languageStore === Language.English
+              ? "Image " + (i + 1)
+              : "Bild " + (i + 1)}
+          </label>
+          <!-- svelte-ignore a11y-unknown-role -->
+          <input
+            type="hidden"
+            id={`upload-${upload}-file`}
+            name={`upload[${upload}].file`}
+            role="uploadcare-uploader"
+            data-public-key="cc687b96511581c9f7b5"
+            required={i === 0}
+          />
+          {#if i === 0}
+            <div class="form-section required">
               {$languageStore === Language.English
-                ? tag.label.eng
-                : tag.label.sve}
-            </label>
+                ? "* Upload at least one image"
+                : "* Ladda upp minst en bild"}
+            </div>
+          {/if}
+          <div class="form-section max-file-size">
+            {$languageStore === Language.English
+              ? "(Max file size: 5MB)"
+              : "(Max filstorlek: 5MB)"}
           </div>
-        {/each}
-      </fieldset>
+          <div class="form-section">
+            <label for={`upload-${upload}-caption`}>
+              {$languageStore === Language.English
+                ? "Caption for image " + (i + 1)
+                : "Bildtext för bild " + (i + 1)}
+            </label>
+            <input
+              type="text"
+              id={`upload-${upload}-caption`}
+              name={`upload[${upload}].caption`}
+            />
+          </div>
+        </div>
+      </div>
+    {/each}
+    <div class="upload-controls">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="control remove-image"
+        class:disabled={visibleImages === 1}
+        on:click={removeUploadField}
+      >
+        {$languageStore === Language.English ? "- Image " : "- Bild "}
+      </div>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="control add-image"
+        class:disabled={visibleImages === maxImages}
+        on:click={addUploadField}
+      >
+        {$languageStore === Language.English ? "+ Image " : "+ Bild "}
+      </div>
     </div>
     <!-------------------------------------->
     <div class="divider" />
-  {/if}
-  <!-- UPLOADS -->
-  {#each uploads as upload, i (upload)}
-    <div class="upload-container" class:visible={i < visibleImages}>
-      <div class="form-section">
-        <label for={`upload-${upload}-file`}>
-          {$languageStore === Language.English
-            ? "Image " + (i + 1)
-            : "Bild " + (i + 1)}
-        </label>
-        <!-- svelte-ignore a11y-unknown-role -->
-        <input
-          type="hidden"
-          id={`upload-${upload}-file`}
-          name={`upload[${upload}].file`}
-          role="uploadcare-uploader"
-          data-public-key="cc687b96511581c9f7b5"
-          required={i === 0}
-        />
-        {#if i === 0}
-          <div class="form-section required">
-            {$languageStore === Language.English
-              ? "* Upload at least one image"
-              : "* Ladda upp minst en bild"}
-          </div>
-        {/if}
-        <div class="form-section max-file-size">
-          {$languageStore === Language.English
-            ? "(Max file size: 5MB)"
-            : "(Max filstorlek: 5MB)"}
-        </div>
-        <div class="form-section">
-          <label for={`upload-${upload}-caption`}>
-            {$languageStore === Language.English
-              ? "Caption for image " + (i + 1)
-              : "Bildtext för bild " + (i + 1)}
-          </label>
-          <input
-            type="text"
-            id={`upload-${upload}-caption`}
-            name={`upload[${upload}].caption`}
-          />
-        </div>
+    <!-- NEWSLETTER -->
+    <fieldset>
+      <div class="newsletter">
+        {$languageStore === Language.English
+          ? "Do you want to receive the newsletter?"
+          : "Vill du prenumerera på vårt nyhetsbrev?"}
       </div>
-    </div>
-  {/each}
-  <div class="upload-controls">
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="control remove-image"
-      class:disabled={visibleImages === 1}
-      on:click={removeUploadField}
-    >
-      {$languageStore === Language.English ? "- Image " : "- Bild "}
-    </div>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="control add-image"
-      class:disabled={visibleImages === maxImages}
-      on:click={addUploadField}
-    >
-      {$languageStore === Language.English ? "+ Image " : "+ Bild "}
-    </div>
-  </div>
-  <!-------------------------------------->
-  <div class="divider" />
-  <!-- NEWSLETTER -->
-  <fieldset>
-    <div class="newsletter">
-      {$languageStore === Language.English
-        ? "Do you want to receive the newsletter?"
-        : "Vill du prenumerera på vårt nyhetsbrev?"}
-    </div>
-    <div class="radio-container">
-      <input
-        type="radio"
-        name="newsletter"
-        id="newsletter-yes"
-        value="yes"
-        checked={true}
-      />
-      <label for="newsletter-yes">
-        {$languageStore === Language.English ? "Yes" : "Ja"}
-      </label>
-      <input type="radio" name="newsletter" id="newsletter-no" value="no" />
-      <label for="newsletter-no">
-        {$languageStore === Language.English ? "No" : "Nej"}
-      </label>
-    </div>
-  </fieldset>
-  <div class="divider" />
+      <div class="radio-container">
+        <input
+          type="radio"
+          name="newsletter"
+          id="newsletter-yes"
+          value="yes"
+          checked={true}
+        />
+        <label for="newsletter-yes">
+          {$languageStore === Language.English ? "Yes" : "Ja"}
+        </label>
+        <input type="radio" name="newsletter" id="newsletter-no" value="no" />
+        <label for="newsletter-no">
+          {$languageStore === Language.English ? "No" : "Nej"}
+        </label>
+      </div>
+    </fieldset>
+    <div class="divider" />
+  {/if}
   <!-- SUBMIT -->
   <div class="form-section">
     <button type="submit">

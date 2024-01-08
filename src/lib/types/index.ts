@@ -154,5 +154,6 @@ export type Post = {
     visibility: 'public' | 'private';
     content_eng: LimitedEditor;
     title: string;
+    name?: string;
 };
 
