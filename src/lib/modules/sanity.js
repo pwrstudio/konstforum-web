@@ -98,7 +98,7 @@ const serializers = {
                 ...prepareTextElements(props),
             ])
         },
-        embedBlock: props => {
+        video: props => {
             // YOUTUBE
             if (get(props, "node.url", "").includes("youtube")) {
                 return h("figure", { className: "youtube" }, [

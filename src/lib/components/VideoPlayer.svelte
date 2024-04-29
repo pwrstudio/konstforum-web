@@ -5,12 +5,16 @@
 
   export let block: Block
 
-  let active = false
-  let imageURL = urlFor(block.posterImage)
-    .height(800)
-    .auto("format")
-    .saturation(-100)
-    .url()
+  let hasPosterImage = !!block.posterImage
+  let imageURL = hasPosterImage
+    ? urlFor(block.posterImage)
+        .height(800)
+        .auto("format")
+        .saturation(-100)
+        .url()
+    : ""
+  let active = hasPosterImage ? false : true
+  let postfix = hasPosterImage ? "?autoplay=1" : ""
 
   function generateEmbedCode(url: string): string {
     const { id, service } = getVideoId(url)
@@ -21,9 +25,9 @@
 
     switch (service) {
       case "youtube":
-        return `<iframe width="100%"" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        return `<iframe width="100%"" height="100%" src="https://www.youtube.com/embed/${id}${postfix}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
       case "vimeo":
-        return `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+        return `<iframe src="https://player.vimeo.com/video/${id}${postfix}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
       default:
         return "Unsupported video service"
     }
