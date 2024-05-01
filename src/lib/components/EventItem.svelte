@@ -36,13 +36,19 @@
   <!-- TITLE -->
   <div class="tags">
     {#if $languageStore === Language.English}
-      {#each event.tags_eng as tag}
-        <span class="tag">{tag}</span>
-      {/each}
+      <!-- ENGLISH -->
+      {#if Array.isArray(event.tags_eng)}
+        {#each event.tags_eng as tag}
+          <span class="tag">{tag}</span>
+        {/each}
+      {/if}
     {:else}
-      {#each event.tags_sve as tag}
-        <span class="tag">{tag}</span>
-      {/each}
+      <!-- SWEDISH -->
+      {#if Array.isArray(event.tags_sve)}
+        {#each event.tags_sve as tag}
+          <span class="tag">{tag}</span>
+        {/each}
+      {/if}
     {/if}
   </div>
   <!-- TITLE -->
